@@ -111,22 +111,16 @@
 
 /* 1 - Green */
 #define LED1_BV           BV(0)
-#define LED1_SBIT         P1_0
-#define LED1_DDR          P1DIR
+#define LED1_SBIT         P0_0
+#define LED1_DDR          P0DIR
 #define LED1_POLARITY     ACTIVE_HIGH
 
 #if defined (HAL_BOARD_CC2530EB_REV17)
   /* 2 - Red */
-  #define LED2_BV           BV(1)
-  #define LED2_SBIT         P1_1
-  #define LED2_DDR          P1DIR
+  #define LED2_BV           BV(0)
+  #define LED2_SBIT         P2_0    //PUSH2_SBIT
+  #define LED2_DDR          P2DIR
   #define LED2_POLARITY     ACTIVE_HIGH
-
-  /* 3 - Yellow */
-  #define LED3_BV           BV(4)
-  #define LED3_SBIT         P1_4
-  #define LED3_DDR          P1DIR
-  #define LED3_POLARITY     ACTIVE_HIGH
 #endif
 
 /* ------------------------------------------------------------------------------------------------
@@ -134,12 +128,12 @@
  * ------------------------------------------------------------------------------------------------
  */
 
-#define ACTIVE_LOW        !
-#define ACTIVE_HIGH       !!    /* double negation forces result to be '1' */
+#define ACTIVE_LOW        !!    /*******chang********/
+#define ACTIVE_HIGH       !    /* double negation forces result to be '1' */
 
 /* S1 */
 #define PUSH1_BV          BV(1)
-#define PUSH1_SBIT        P0_1
+#define PUSH1_SBIT        P0_4
 
 #if defined (HAL_BOARD_CC2530EB_REV17)
   #define PUSH1_POLARITY    ACTIVE_HIGH
@@ -235,8 +229,7 @@ extern void MAC_RfFrontendSetup(void);
   uint16 i;                                                      \
                                                                  \
   SLEEPCMD &= ~OSC_PD;                       /* turn on 16MHz RC and 32MHz XOSC */                \
-  while (!(SLEEPSTA & XOSC_STB));            /* wait for 32MHz XOSC stable */
-  //CLKCONSTA & XOSC_STB才是正确的
+  while (!(SLEEPSTA & XOSC_STB));            /* wait for 32MHz XOSC stable */                     \
   asm("NOP");                                /* chip bug workaround */                            \
   for (i=0; i<504; i++) asm("NOP");          /* Require 63us delay for all revs */                \
   CLKCONCMD = (CLKCONCMD_32MHZ | OSC_32KHZ); /* Select 32MHz XOSC and the source for 32K clock */ \
@@ -250,8 +243,6 @@ extern void MAC_RfFrontendSetup(void);
   LED1_DDR |= LED1_BV;                                           \
   HAL_TURN_OFF_LED2();                                           \
   LED2_DDR |= LED2_BV;                                           \
-  HAL_TURN_OFF_LED3();                                           \
-  LED3_DDR |= LED3_BV;                                           \
                                                                  \
   /* configure tristates */                                      \
   P0INP |= PUSH2_BV;                                             \
@@ -305,22 +296,22 @@ extern void MAC_RfFrontendSetup(void);
 
   #define HAL_TURN_OFF_LED1()       st( LED1_SBIT = LED1_POLARITY (0); )
   #define HAL_TURN_OFF_LED2()       st( LED2_SBIT = LED2_POLARITY (0); )
-  #define HAL_TURN_OFF_LED3()       st( LED3_SBIT = LED3_POLARITY (0); )
+  #define HAL_TURN_OFF_LED3()       HAL_TURN_OFF_LED2()
   #define HAL_TURN_OFF_LED4()       HAL_TURN_OFF_LED1()
 
   #define HAL_TURN_ON_LED1()        st( LED1_SBIT = LED1_POLARITY (1); )
   #define HAL_TURN_ON_LED2()        st( LED2_SBIT = LED2_POLARITY (1); )
-  #define HAL_TURN_ON_LED3()        st( LED3_SBIT = LED3_POLARITY (1); )
+  #define HAL_TURN_ON_LED3()        HAL_TURN_ON_LED2()
   #define HAL_TURN_ON_LED4()        HAL_TURN_ON_LED1()
 
   #define HAL_TOGGLE_LED1()         st( if (LED1_SBIT) { LED1_SBIT = 0; } else { LED1_SBIT = 1;} )
   #define HAL_TOGGLE_LED2()         st( if (LED2_SBIT) { LED2_SBIT = 0; } else { LED2_SBIT = 1;} )
-  #define HAL_TOGGLE_LED3()         st( if (LED3_SBIT) { LED3_SBIT = 0; } else { LED3_SBIT = 1;} )
+  #define HAL_TOGGLE_LED3()         HAL_TOGGLE_LED2()
   #define HAL_TOGGLE_LED4()         HAL_TOGGLE_LED1()
 
   #define HAL_STATE_LED1()          (LED1_POLARITY (LED1_SBIT))
   #define HAL_STATE_LED2()          (LED2_POLARITY (LED2_SBIT))
-  #define HAL_STATE_LED3()          (LED3_POLARITY (LED3_SBIT))
+  #define HAL_STATE_LED3()          HAL_STATE_LED2()
   #define HAL_STATE_LED4()          HAL_STATE_LED1()
 
 #elif defined (HAL_BOARD_CC2530EB_REV13) || defined (HAL_PA_LNA) || defined (HAL_PA_LNA_CC2590)
@@ -341,7 +332,7 @@ extern void MAC_RfFrontendSetup(void);
   #define HAL_TOGGLE_LED4()         HAL_TOGGLE_LED1()
 
   #define HAL_STATE_LED1()          (LED1_POLARITY (LED1_SBIT))
-  #define HAL_STATE_LED2()          HAL_STATE_LED1()
+ // #define HAL_STATE_LED2()          HAL_STATE_LED1()
   #define HAL_STATE_LED3()          HAL_STATE_LED1()
   #define HAL_STATE_LED4()          HAL_STATE_LED1()
 
@@ -375,7 +366,7 @@ st( \
   /* P1.1,2,3: reset, LCD CS, XNV CS. */\
   P1SEL &= ~0x0E; \
   P1 |= 0x0E; \
-  P1_1 = 0; \
+  //P1_1 = 0; \
   P1DIR |= 0x0E; \
   \
   /* Give UART1 priority over Timer3. */\
@@ -433,7 +424,7 @@ st( \
 
 /* Set to TRUE enable LCD usage, FALSE disable it */
 #ifndef HAL_LCD
-#define HAL_LCD TRUE
+#define HAL_LCD FALSE
 #endif
 
 /* Set to TRUE enable LED usage, FALSE disable it */

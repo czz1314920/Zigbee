@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        16/Sep/2018  15:21:12 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        05/Oct/2018  11:11:42 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -9,24 +9,18 @@
 //    Calling convention =  xdata reentrant                                   /
 //    Constant location  =  data_rom                                          /
 //    Dptr setup         =  1,16                                              /
-//    Source file        =  C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Components\hal\t /
-//                          arget\CC2530EB\hal_led.c                          /
-//    Command line       =  -f "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior       /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530D /
-//                          B\f8wCoord.cfg" (-DCPU32MHZ -DROOT=__near_func    /
-//                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                  /
-//                          -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8        /
+//    Source file        =  D:\github_storehouse\Zigbee\ZStack_CC2530\Compone /
+//                          nts\hal\target\CC2530EB\hal_led.c                 /
+//    Command line       =  -f D:\github_storehouse\Zigbee\ZStack_CC2530\Proj /
+//                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T /
+//                          ools\CC2530DB\f8wCoord.cfg (-DCPU32MHZ            /
+//                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TR /
+//                          UE -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8     /
 //                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)   /
-//                          -f "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior       /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530D /
-//                          B\f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0          /
-//                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
+//                          -f D:\github_storehouse\Zigbee\ZStack_CC2530\Proj /
+//                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\T /
+//                          ools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO          /
+//                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR      /
 //                          -DDEFAULT_CHANLIST=0x00000800                     /
 //                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
@@ -48,126 +42,84 @@
 //                          __code" -DGENERIC=__generic                       /
 //                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000       /
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
-//                          -DREJOIN_POLL_RATE=440 "C:\Users\1314\Desktop\¹ãÖ /
-//                          ÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas /
-//                           Instruments\ZStack-CC2530-2.5.1a\Components\hal\ /
-//                          target\CC2530EB\hal_led.c" -D ZTOOL_P1 -D         /
-//                          MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D          /
-//                          LCD_SUPPORTED=DEBUG -lC                           /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\CoordinatorEB\List\"   /
-//                          -lA "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior      /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\CoordinatorEB\List\"   /
-//                          --diag_suppress Pe001,Pa010 -o                    /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\CoordinatorEB\Obj\"    /
-//                          -e --no_code_motion --debug --core=plain          /
+//                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbe /
+//                          e\ZStack_CC2530\Components\hal\target\CC2530EB\ha /
+//                          l_led.c -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D  /
+//                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC            /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
+//                          \List\ -lA D:\github_storehouse\Zigbee\ZStack_CC2 /
+//                          530\Projects\zstack\Samples\SampleApp\CC2530DB\Co /
+//                          ordinatorEB\List\ --diag_suppress Pe001,Pa010 -o  /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
+//                          \Obj\ -e --no_code_motion --debug --core=plain    /
 //                          --dptr=16,1 --data_model=large                    /
 //                          --code_model=banked --calling_convention=xdata_re /
 //                          entrant --place_constants=data_rom                /
 //                          --nr_virtual_regs 16 -I                           /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\" -I                   /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\Source\" -I         /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\ZMain\TI2530D /
-//                          B\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior   /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\hal\include\" -I "C:\Users\1314\Desktop\¹ãÖÝÉ /
-//                          ÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas   /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\hal\target\CC2530EB\" -I                      /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\mac\include\" -I "C:\Users\1314\Desktop\¹ãÖÝÉ /
-//                          ÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas   /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\mac\high_level\" -I                           /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\mac\low_level\srf04\" -I                      /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\mac\low_level\srf04\single_chip\" -I          /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\mt\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Jun /
-//                          ior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas            /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\osal\include\" -I "C:\Users\1314\Desktop\¹ãÖÝ /
-//                          ÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas  /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\services\saddr\" -I                           /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\services\sdata\" -I                           /
-//                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior          /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\stack\af\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§ /
-//                          Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas      /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\stack\nwk\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ /
-//                          §Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas     /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\stack\sapi\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌ /
-//                          Ñ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas    /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\stack\sec\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ /
-//                          §Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas     /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\stack\sys\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ /
-//                          §Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas     /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\stack\zdo\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ /
-//                          §Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas     /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\zmac\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\J /
-//                          unior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas          /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\..\..\..\..\..\Compone /
-//                          nts\zmac\f8w\" -Ohz --require_prototypes          /
-//    List file          =  C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           /
-//                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                /
-//                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\ /
-//                          Samples\SampleApp\CC2530DB\CoordinatorEB\List\hal /
-//                          _led.s51                                          /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\ -I           /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\Source\    /
+//                          -I D:\github_storehouse\Zigbee\ZStack_CC2530\Proj /
+//                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Z /
+//                          Main\TI2530DB\ -I D:\github_storehouse\Zigbee\ZSt /
+//                          ack_CC2530\Projects\zstack\Samples\SampleApp\CC25 /
+//                          30DB\..\..\..\..\..\Components\hal\include\ -I    /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\hal\target\CC2530EB\ -I              /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\mac\include\ -I                      /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\mac\high_level\ -I                   /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\mac\low_level\srf04\ -I              /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\mac\low_level\srf04\single_chip\ -I  /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\mt\ -I D:\github_storehouse\Zigbee\Z /
+//                          Stack_CC2530\Projects\zstack\Samples\SampleApp\CC /
+//                          2530DB\..\..\..\..\..\Components\osal\include\    /
+//                          -I D:\github_storehouse\Zigbee\ZStack_CC2530\Proj /
+//                          ects\zstack\Samples\SampleApp\CC2530DB\..\..\..\. /
+//                          .\..\Components\services\saddr\ -I                /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\services\sdata\ -I                   /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\stack\af\ -I                         /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\stack\nwk\ -I                        /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\stack\sapi\ -I                       /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\stack\sec\ -I                        /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\stack\sys\ -I                        /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\stack\zdo\ -I                        /
+//                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\. /
+//                          .\Components\zmac\ -I D:\github_storehouse\Zigbee /
+//                          \ZStack_CC2530\Projects\zstack\Samples\SampleApp\ /
+//                          CC2530DB\..\..\..\..\..\Components\zmac\f8w\      /
+//                          -Ohz --require_prototypes                         /
+//    List file          =  D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
+//                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
+//                          \List\hal_led.s51                                 /
 //                                                                            /
 //                                                                            /
 ///////////////////////////////////////////////////////////////////////////////
@@ -266,7 +218,8 @@
         ARGFRAME DOVERLAY, 0, STATIC
         LOCFRAME ISTACK, 1, STACK
         LOCFRAME XSTACK, 25, STACK
-        PUBWEAK _A_P1
+        PUBWEAK _A_P0
+        PUBWEAK _A_P2
         PUBWEAK __Constant_64
         
         CFI Names cfiNames0
@@ -487,7 +440,7 @@ HalLedUpdate        SYMBOL "HalLedUpdate"
         FUNCTION ??osal_stop_timerEx?relay,00H
         EXTERN Hal_TaskID
 
-// C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instruments\ZStack-CC2530-2.5.1a\Components\hal\target\CC2530EB\hal_led.c
+// D:\github_storehouse\Zigbee\ZStack_CC2530\Components\hal\target\CC2530EB\hal_led.c
 //    1 /**************************************************************************************************
 //    2   Filename:       hal_led.c
 //    3   Revised:        $Date: 2012-02-14 12:43:32 -0800 (Tue, 14 Feb 2012) $
@@ -532,9 +485,15 @@ HalLedUpdate        SYMBOL "HalLedUpdate"
 //   42  ***************************************************************************************************/
 //   43 #include "hal_mcu.h"
 
-        ASEGN SFR_AN:DATA:NOROOT,090H
-// union <unnamed> volatile __sfr _A_P1
-_A_P1:
+        ASEGN SFR_AN:DATA:NOROOT,080H
+// union <unnamed> volatile __sfr _A_P0
+_A_P0:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0a0H
+// union <unnamed> volatile __sfr _A_P2
+_A_P2:
         DATA8
         DS 1
 //   44 #include "hal_defs.h"
@@ -665,7 +624,7 @@ HalLedInit:
 //  120   HalLedSet (HAL_LED_ALL, HAL_LED_MODE_OFF);
         ; Setup parameters for call to function HalLedSet
         MOV     R2,#0x0
-        MOV     R1,#0xf
+        MOV     R1,#0x3
         LCALL   ??HalLedSet?relay
 //  121 #endif /* HAL_LED */
 //  122 #ifdef BLINK_LEDS
@@ -837,7 +796,7 @@ HalLedSet:
         SJMP    ??HalLedSet_4
 ??HalLedSet_0:
         MOV     ?V0 + 1,#0x1
-        ANL     ?V0 + 0,#0xf
+        ANL     ?V0 + 0,#0x3
         MOV     R6,#HalLedStatusControl & 0xff
         MOV     R7,#(HalLedStatusControl >> 8) & 0xff
         SJMP    ??HalLedSet_5
@@ -1009,7 +968,7 @@ HalLedBlink:
 //  223       led = HAL_LED_1;
         MOV     ?V0 + 5,#0x1
 //  224       leds &= HAL_LED_ALL;
-        ANL     ?V0 + 2,#0xf
+        ANL     ?V0 + 2,#0x3
 //  225       sts = HalLedStatusControl.HalLedControlTable;
         MOV     ?V0 + 0,#HalLedStatusControl & 0xff
         MOV     ?V0 + 1,#(HalLedStatusControl >> 8) & 0xff
@@ -1336,7 +1295,7 @@ HalLedUpdate:
 //  293   led  = HAL_LED_1;
         MOV     ?V0 + 14,#0x1
 //  294   leds = HAL_LED_ALL;
-        MOV     ?V0 + 15,#0xf
+        MOV     ?V0 + 15,#0x3
 //  295   sts = HalLedStatusControl.HalLedControlTable;
         MOV     R6,#HalLedStatusControl & 0xff
         MOV     R7,#(HalLedStatusControl >> 8) & 0xff
@@ -1697,14 +1656,14 @@ HalLedOnOff:
         JNZ     ??HalLedOnOff_1
 //  383     {
 //  384       HAL_TURN_ON_LED1();
-        SETB    0x90.0
+        CLR     0x80.0
         SJMP    ??HalLedOnOff_0
 //  385     }
 //  386     else
 //  387     {
 //  388       HAL_TURN_OFF_LED1();
 ??HalLedOnOff_1:
-        CLR     0x90.0
+        SETB    0x80.0
 //  389     }
 //  390   }
 //  391 
@@ -1720,14 +1679,14 @@ HalLedOnOff:
         JNZ     ??HalLedOnOff_3
 //  395     {
 //  396       HAL_TURN_ON_LED2();
-        SETB    0x90.1
+        CLR     0xa0.0
         SJMP    ??HalLedOnOff_2
 //  397     }
 //  398     else
 //  399     {
 //  400       HAL_TURN_OFF_LED2();
 ??HalLedOnOff_3:
-        CLR     0x90.1
+        SETB    0xa0.0
 //  401     }
 //  402   }
 //  403 
@@ -1743,14 +1702,14 @@ HalLedOnOff:
         JNZ     ??HalLedOnOff_5
 //  407     {
 //  408       HAL_TURN_ON_LED3();
-        SETB    0x90.4
+        CLR     0xa0.0
         SJMP    ??HalLedOnOff_4
 //  409     }
 //  410     else
 //  411     {
 //  412       HAL_TURN_OFF_LED3();
 ??HalLedOnOff_5:
-        CLR     0x90.4
+        SETB    0xa0.0
 //  413     }
 //  414   }
 //  415 
@@ -1766,14 +1725,14 @@ HalLedOnOff:
         JNZ     ??HalLedOnOff_7
 //  419     {
 //  420       HAL_TURN_ON_LED4();
-        SETB    0x90.0
+        CLR     0x80.0
         SJMP    ??HalLedOnOff_8
 //  421     }
 //  422     else
 //  423     {
 //  424       HAL_TURN_OFF_LED4();
 ??HalLedOnOff_7:
-        CLR     0x90.0
+        SETB    0x80.0
 //  425     }
 //  426   }
 //  427 
@@ -1804,7 +1763,8 @@ HalLedOnOff:
 ??HalLedOnOff_10:
         SJMP    ??Subroutine2_0
         CFI EndBlock cfiBlock7
-        REQUIRE _A_P1
+        REQUIRE _A_P0
+        REQUIRE _A_P2
 //  437 }
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
@@ -1934,54 +1894,50 @@ HalLedEnterSleep:
 //  475   /* Save the state of each led */
 //  476   HalSleepLedState = 0;
 //  477   HalSleepLedState |= HAL_STATE_LED1();
-        MOV     A,0x90
+        MOV     A,0x80
         MOV     R3,A
 //  478   HalSleepLedState |= HAL_STATE_LED2() << 1;
-        MOV     A,0x90
+        MOV     A,0xa0
         MOV     R0,A
 //  479   HalSleepLedState |= HAL_STATE_LED3() << 2;
-        MOV     A,0x90
+        MOV     A,0xa0
         MOV     R1,A
 //  480   HalSleepLedState |= HAL_STATE_LED4() << 3;
-        MOV     A,0x90
-        MOV     R2,A
-        MOV     A,R0
-        MOV     C,0xE0 /* A   */.1
-        JNC     ??HalLedEnterSleep_0
         SETB    B.0
-        SJMP    ??HalLedEnterSleep_1
+        MOV     C,0x80.0
+        JNB     B.0,??HalLedEnterSleep_0
+        CPL     C
 ??HalLedEnterSleep_0:
-        CLR     B.0
-??HalLedEnterSleep_1:
-        MOV     A,R1
-        MOV     C,0xE0 /* A   */.4
-        JNC     ??HalLedEnterSleep_2
-        SETB    B.1
-        SJMP    ??HalLedEnterSleep_3
-??HalLedEnterSleep_2:
-        CLR     B.1
-??HalLedEnterSleep_3:
-        MOV     A,R2
-        MOV     C,0xE0 /* A   */.0
         CLR     A
         RLC     A
         RLC     A
         RLC     A
         RLC     A
         MOV     R2,A
-        MOV     C,B.1
+        MOV     A,R1
+        MOV     C,0xE0 /* A   */.0
+        JNB     B.0,??HalLedEnterSleep_1
+        CPL     C
+??HalLedEnterSleep_1:
         CLR     A
         RLC     A
         RLC     A
         RLC     A
         MOV     R1,A
-        MOV     C,B.0
+        MOV     A,R0
+        MOV     C,0xE0 /* A   */.0
+        JNB     B.0,??HalLedEnterSleep_2
+        CPL     C
+??HalLedEnterSleep_2:
         CLR     A
         RLC     A
         RLC     A
         MOV     R0,A
         MOV     A,R3
         MOV     C,0xE0 /* A   */.0
+        JNB     B.0,??HalLedEnterSleep_3
+        CPL     C
+??HalLedEnterSleep_3:
         CLR     A
         RLC     A
         ORL     A,R0
@@ -1994,14 +1950,15 @@ HalLedEnterSleep:
 //  483   HalLedOnOff (HAL_LED_ALL, HAL_LED_MODE_OFF);
         ; Setup parameters for call to function HalLedOnOff
         MOV     R2,#0x0
-        MOV     R1,#0xf
+        MOV     R1,#0x3
         LCALL   ??HalLedOnOff?relay
 //  484 #endif /* HAL_LED */
 //  485 
 //  486 }
         SJMP    ??Subroutine3_0
         CFI EndBlock cfiBlock12
-        REQUIRE _A_P1
+        REQUIRE _A_P0
+        REQUIRE _A_P2
 //  487 
 //  488 /***************************************************************************************************
 //  489  * @fn      HalLedExitSleep
@@ -2069,7 +2026,7 @@ HalLedExitSleep:
 //  507 #ifdef BLINK_LEDS
 //  508   /* Sleep OFF */
 //  509   HalLedStatusControl.sleepActive = FALSE;
-        LJMP    ?Subroutine0 & 0xFFFF
+        SJMP    ?Subroutine0
         CFI EndBlock cfiBlock13
 //  510 #endif /* BLINK_LEDS */
 //  511 }
@@ -2136,15 +2093,15 @@ __Constant_64:
 //  517 
 //  518 
 // 
-// 1 024 bytes in segment BANKED_CODE
+// 1 017 bytes in segment BANKED_CODE
 //    48 bytes in segment BANK_RELAYS
-//     1 byte  in segment SFR_AN
+//     2 bytes in segment SFR_AN
 //     4 bytes in segment XDATA_ROM_C
 //    40 bytes in segment XDATA_Z
 // 
-// 1 072 bytes of CODE  memory
+// 1 065 bytes of CODE  memory
 //     0 bytes of CONST memory (+ 4 bytes shared)
-//     0 bytes of DATA  memory (+ 1 byte  shared)
+//     0 bytes of DATA  memory (+ 2 bytes shared)
 //    40 bytes of XDATA memory
 //
 //Errors: none

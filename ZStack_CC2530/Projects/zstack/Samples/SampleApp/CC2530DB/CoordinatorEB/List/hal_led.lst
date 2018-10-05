@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         16/Sep/2018  15:21:12 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:11:42 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -9,23 +9,17 @@
 #    Calling convention =  xdata reentrant                                    #
 #    Constant location  =  data_rom                                           #
 #    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior            #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Components\hal\ta #
-#                          rget\CC2530EB\hal_led.c                            #
-#    Command line       =  -f "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior        #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\ #
-#                          f8wCoord.cfg" (-DCPU32MHZ -DROOT=__near_func       #
-#                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                   #
-#                          -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8         #
+#    Source file        =  D:\github_storehouse\Zigbee\ZStack_CC2530\Componen #
+#                          ts\hal\target\CC2530EB\hal_led.c                   #
+#    Command line       =  -f D:\github_storehouse\Zigbee\ZStack_CC2530\Proje #
+#                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\Too #
+#                          ls\CC2530DB\f8wCoord.cfg (-DCPU32MHZ               #
+#                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
+#                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
 #                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior        #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\ #
-#                          f8wConfig.cfg" (-DZIGBEEPRO -DSECURE=0             #
+#                          -f D:\github_storehouse\Zigbee\ZStack_CC2530\Proje #
+#                          cts\zstack\Samples\SampleApp\CC2530DB\..\..\..\Too #
+#                          ls\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO -DSECURE=0  #
 #                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
 #                          -DDEFAULT_CHANLIST=0x00000800                      #
 #                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
@@ -48,131 +42,91 @@
 #                          __code" -DGENERIC=__generic                        #
 #                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
-#                          -DREJOIN_POLL_RATE=440 "C:\Users\1314\Desktop\¹ãÖÝ #
-#                          ÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas   #
-#                          Instruments\ZStack-CC2530-2.5.1a\Components\hal\ta #
-#                          rget\CC2530EB\hal_led.c" -D ZTOOL_P1 -D MT_TASK    #
-#                          -D MT_SYS_FUNC -D MT_ZDO_FUNC -D                   #
-#                          LCD_SUPPORTED=DEBUG -lC "C:\Users\1314\Desktop\¹ãÖ #
-#                          ÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas  #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\CoordinatorEB\List\"     #
-#                          -lA "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior       #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\CoordinatorEB\List\"     #
-#                          --diag_suppress Pe001,Pa010 -o                     #
-#                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\CoordinatorEB\Obj\" -e   #
-#                          --no_code_motion --debug --core=plain --dptr=16,1  #
-#                          --data_model=large --code_model=banked             #
-#                          --calling_convention=xdata_reentrant               #
-#                          --place_constants=data_rom --nr_virtual_regs 16    #
-#                          -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior        #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\" -I                     #
-#                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\Source\" -I           #
-#                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\ZMain\TI2530DB\ #
-#                          " -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior      #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\hal\include\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§ #
-#                          Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas       #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\hal\target\CC2530EB\" -I                         #
-#                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\mac\include\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§ #
-#                          Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas       #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\mac\high_level\" -I "C:\Users\1314\Desktop\¹ãÖÝÉ #
-#                          ÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas    #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\mac\low_level\srf04\" -I                         #
-#                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\mac\low_level\srf04\single_chip\" -I             #
-#                          "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior           #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\mt\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior #
-#                           College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\osal\include\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ #
-#                          §Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas      #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\services\saddr\" -I "C:\Users\1314\Desktop\¹ãÖÝÉ #
-#                          ÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas    #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\services\sdata\" -I "C:\Users\1314\Desktop\¹ãÖÝÉ #
-#                          ÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas    #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\stack\af\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\ #
-#                          Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas          #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\stack\nwk\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº #
-#                          \Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas         #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\stack\sapi\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ô #
-#                          º\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas        #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\stack\sec\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº #
-#                          \Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas         #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\stack\sys\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº #
-#                          \Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas         #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\stack\zdo\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº #
-#                          \Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas         #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\zmac\" -I "C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Juni #
-#                          or College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas              #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\..\..\..\..\..\Component #
-#                          s\zmac\f8w\" -Ohz --require_prototypes             #
-#    List file          =  C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior            #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\CoordinatorEB\List\hal_l #
-#                          ed.lst                                             #
-#    Object file        =  C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior            #
-#                          College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas                 #
-#                          Instruments\ZStack-CC2530-2.5.1a\Projects\zstack\S #
-#                          amples\SampleApp\CC2530DB\CoordinatorEB\Obj\hal_le #
-#                          d.r51                                              #
+#                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
+#                          \ZStack_CC2530\Components\hal\target\CC2530EB\hal_ #
+#                          led.c -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D     #
+#                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC             #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
+#                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #
+#                          \Projects\zstack\Samples\SampleApp\CC2530DB\Coordi #
+#                          natorEB\List\ --diag_suppress Pe001,Pa010 -o       #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\O #
+#                          bj\ -e --no_code_motion --debug --core=plain       #
+#                          --dptr=16,1 --data_model=large                     #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data_rom                  #
+#                          --nr_virtual_regs 16 -I D:\github_storehouse\Zigbe #
+#                          e\ZStack_CC2530\Projects\zstack\Samples\SampleApp\ #
+#                          CC2530DB\ -I D:\github_storehouse\Zigbee\ZStack_CC #
+#                          2530\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
+#                          \Source\ -I D:\github_storehouse\Zigbee\ZStack_CC2 #
+#                          530\Projects\zstack\Samples\SampleApp\CC2530DB\..\ #
+#                          ..\..\ZMain\TI2530DB\ -I                           #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\hal\include\ -I                         #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\hal\target\CC2530EB\ -I                 #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\mac\include\ -I                         #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\mac\high_level\ -I                      #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\mac\low_level\srf04\ -I                 #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\mac\low_level\srf04\single_chip\ -I     #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\mt\ -I D:\github_storehouse\Zigbee\ZSta #
+#                          ck_CC2530\Projects\zstack\Samples\SampleApp\CC2530 #
+#                          DB\..\..\..\..\..\Components\osal\include\ -I      #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\services\saddr\ -I                      #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\services\sdata\ -I                      #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\stack\af\ -I D:\github_storehouse\Zigbe #
+#                          e\ZStack_CC2530\Projects\zstack\Samples\SampleApp\ #
+#                          CC2530DB\..\..\..\..\..\Components\stack\nwk\ -I   #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\stack\sapi\ -I                          #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\stack\sec\ -I                           #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\stack\sys\ -I                           #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\stack\zdo\ -I                           #
+#                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\ #
+#                          Components\zmac\ -I D:\github_storehouse\Zigbee\ZS #
+#                          tack_CC2530\Projects\zstack\Samples\SampleApp\CC25 #
+#                          30DB\..\..\..\..\..\Components\zmac\f8w\ -Ohz      #
+#                          --require_prototypes                               #
+#    List file          =  D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
+#                          ist\hal_led.lst                                    #
+#    Object file        =  D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
+#                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\O #
+#                          bj\hal_led.r51                                     #
 #                                                                             #
 #                                                                             #
 ###############################################################################
 
-C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instruments\ZStack-CC2530-2.5.1a\Components\hal\target\CC2530EB\hal_led.c
+D:\github_storehouse\Zigbee\ZStack_CC2530\Components\hal\target\CC2530EB\hal_led.c
       1          /**************************************************************************************************
       2            Filename:       hal_led.c
       3            Revised:        $Date: 2012-02-14 12:43:32 -0800 (Tue, 14 Feb 2012) $
@@ -217,9 +171,14 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
      42           ***************************************************************************************************/
      43          #include "hal_mcu.h"
 
-   \                                 In  segment SFR_AN, at 0x90
-   \   union <unnamed> volatile __sfr _A_P1
-   \                     _A_P1:
+   \                                 In  segment SFR_AN, at 0x80
+   \   union <unnamed> volatile __sfr _A_P0
+   \                     _A_P0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa0
+   \   union <unnamed> volatile __sfr _A_P2
+   \                     _A_P2:
    \   000000                DS 1
      44          #include "hal_defs.h"
      45          #include "hal_types.h"
@@ -327,7 +286,7 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
     120            HalLedSet (HAL_LED_ALL, HAL_LED_MODE_OFF);
    \   000004                ; Setup parameters for call to function HalLedSet
    \   000004   7A00         MOV     R2,#0x0
-   \   000006   790F         MOV     R1,#0xf
+   \   000006   7903         MOV     R1,#0x3
    \   000008   12....       LCALL   ??HalLedSet?relay
     121          #endif /* HAL_LED */
     122          #ifdef BLINK_LEDS
@@ -468,7 +427,7 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
    \   000039   80E9         SJMP    ??HalLedSet_4
    \                     ??HalLedSet_0:
    \   00003B   75..01       MOV     ?V0 + 1,#0x1
-   \   00003E   53..0F       ANL     ?V0 + 0,#0xf
+   \   00003E   53..03       ANL     ?V0 + 0,#0x3
    \   000041   7E..         MOV     R6,#HalLedStatusControl & 0xff
    \   000043   7F..         MOV     R7,#(HalLedStatusControl >> 8) & 0xff
    \   000045   801D         SJMP    ??HalLedSet_5
@@ -565,7 +524,7 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
     223                led = HAL_LED_1;
    \   00002B   75..01       MOV     ?V0 + 5,#0x1
     224                leds &= HAL_LED_ALL;
-   \   00002E   53..0F       ANL     ?V0 + 2,#0xf
+   \   00002E   53..03       ANL     ?V0 + 2,#0x3
     225                sts = HalLedStatusControl.HalLedControlTable;
    \   000031   75....       MOV     ?V0 + 0,#HalLedStatusControl & 0xff
    \   000034   75....       MOV     ?V0 + 1,#(HalLedStatusControl >> 8) & 0xff
@@ -762,7 +721,7 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
     293            led  = HAL_LED_1;
    \   000010   75..01       MOV     ?V0 + 14,#0x1
     294            leds = HAL_LED_ALL;
-   \   000013   75..0F       MOV     ?V0 + 15,#0xf
+   \   000013   75..03       MOV     ?V0 + 15,#0x3
     295            sts = HalLedStatusControl.HalLedControlTable;
    \   000016   7E..         MOV     R6,#HalLedStatusControl & 0xff
    \   000018   7F..         MOV     R7,#(HalLedStatusControl >> 8) & 0xff
@@ -1114,14 +1073,14 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
    \   00000C   7004         JNZ     ??HalLedOnOff_1
     383              {
     384                HAL_TURN_ON_LED1();
-   \   00000E   D290         SETB    0x90.0
+   \   00000E   C280         CLR     0x80.0
    \   000010   8002         SJMP    ??HalLedOnOff_0
     385              }
     386              else
     387              {
     388                HAL_TURN_OFF_LED1();
    \                     ??HalLedOnOff_1:
-   \   000012   C290         CLR     0x90.0
+   \   000012   D280         SETB    0x80.0
     389              }
     390            }
     391          
@@ -1137,14 +1096,14 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
    \   00001C   7004         JNZ     ??HalLedOnOff_3
     395              {
     396                HAL_TURN_ON_LED2();
-   \   00001E   D291         SETB    0x90.1
+   \   00001E   C2A0         CLR     0xa0.0
    \   000020   8002         SJMP    ??HalLedOnOff_2
     397              }
     398              else
     399              {
     400                HAL_TURN_OFF_LED2();
    \                     ??HalLedOnOff_3:
-   \   000022   C291         CLR     0x90.1
+   \   000022   D2A0         SETB    0xa0.0
     401              }
     402            }
     403          
@@ -1160,14 +1119,14 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
    \   00002C   7004         JNZ     ??HalLedOnOff_5
     407              {
     408                HAL_TURN_ON_LED3();
-   \   00002E   D294         SETB    0x90.4
+   \   00002E   C2A0         CLR     0xa0.0
    \   000030   8002         SJMP    ??HalLedOnOff_4
     409              }
     410              else
     411              {
     412                HAL_TURN_OFF_LED3();
    \                     ??HalLedOnOff_5:
-   \   000032   C294         CLR     0x90.4
+   \   000032   D2A0         SETB    0xa0.0
     413              }
     414            }
     415          
@@ -1183,14 +1142,14 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
    \   00003C   7004         JNZ     ??HalLedOnOff_7
     419              {
     420                HAL_TURN_ON_LED4();
-   \   00003E   D290         SETB    0x90.0
+   \   00003E   C280         CLR     0x80.0
    \   000040   8005         SJMP    ??HalLedOnOff_8
     421              }
     422              else
     423              {
     424                HAL_TURN_OFF_LED4();
    \                     ??HalLedOnOff_7:
-   \   000042   C290         CLR     0x90.0
+   \   000042   D280         SETB    0x80.0
     425              }
     426            }
     427          
@@ -1220,7 +1179,8 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
     436            }
    \                     ??HalLedOnOff_10:
    \   000057   80..         SJMP    ??Subroutine2_0
-   \   000059                REQUIRE _A_P1
+   \   000059                REQUIRE _A_P0
+   \   000059                REQUIRE _A_P2
     437          }
     438          #endif /* HAL_LED */
     439          
@@ -1283,73 +1243,70 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
     475            /* Save the state of each led */
     476            HalSleepLedState = 0;
     477            HalSleepLedState |= HAL_STATE_LED1();
-   \   00000A   E590         MOV     A,0x90
+   \   00000A   E580         MOV     A,0x80
    \   00000C   FB           MOV     R3,A
     478            HalSleepLedState |= HAL_STATE_LED2() << 1;
-   \   00000D   E590         MOV     A,0x90
+   \   00000D   E5A0         MOV     A,0xa0
    \   00000F   F8           MOV     R0,A
     479            HalSleepLedState |= HAL_STATE_LED3() << 2;
-   \   000010   E590         MOV     A,0x90
+   \   000010   E5A0         MOV     A,0xa0
    \   000012   F9           MOV     R1,A
     480            HalSleepLedState |= HAL_STATE_LED4() << 3;
-   \   000013   E590         MOV     A,0x90
-   \   000015   FA           MOV     R2,A
-   \   000016   E8           MOV     A,R0
-   \   000017   A2E1         MOV     C,0xE0 /* A   */.1
-   \   000019   5004         JNC     ??HalLedEnterSleep_0
-   \   00001B   D2F0         SETB    B.0
-   \   00001D   8002         SJMP    ??HalLedEnterSleep_1
+   \   000013   D2F0         SETB    B.0
+   \   000015   A280         MOV     C,0x80.0
+   \   000017   30F001       JNB     B.0,??HalLedEnterSleep_0
+   \   00001A   B3           CPL     C
    \                     ??HalLedEnterSleep_0:
-   \   00001F   C2F0         CLR     B.0
-   \                     ??HalLedEnterSleep_1:
+   \   00001B   E4           CLR     A
+   \   00001C   33           RLC     A
+   \   00001D   33           RLC     A
+   \   00001E   33           RLC     A
+   \   00001F   33           RLC     A
+   \   000020   FA           MOV     R2,A
    \   000021   E9           MOV     A,R1
-   \   000022   A2E4         MOV     C,0xE0 /* A   */.4
-   \   000024   5004         JNC     ??HalLedEnterSleep_2
-   \   000026   D2F1         SETB    B.1
-   \   000028   8002         SJMP    ??HalLedEnterSleep_3
+   \   000022   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000024   30F001       JNB     B.0,??HalLedEnterSleep_1
+   \   000027   B3           CPL     C
+   \                     ??HalLedEnterSleep_1:
+   \   000028   E4           CLR     A
+   \   000029   33           RLC     A
+   \   00002A   33           RLC     A
+   \   00002B   33           RLC     A
+   \   00002C   F9           MOV     R1,A
+   \   00002D   E8           MOV     A,R0
+   \   00002E   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000030   30F001       JNB     B.0,??HalLedEnterSleep_2
+   \   000033   B3           CPL     C
    \                     ??HalLedEnterSleep_2:
-   \   00002A   C2F1         CLR     B.1
+   \   000034   E4           CLR     A
+   \   000035   33           RLC     A
+   \   000036   33           RLC     A
+   \   000037   F8           MOV     R0,A
+   \   000038   EB           MOV     A,R3
+   \   000039   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00003B   30F001       JNB     B.0,??HalLedEnterSleep_3
+   \   00003E   B3           CPL     C
    \                     ??HalLedEnterSleep_3:
-   \   00002C   EA           MOV     A,R2
-   \   00002D   A2E0         MOV     C,0xE0 /* A   */.0
-   \   00002F   E4           CLR     A
-   \   000030   33           RLC     A
-   \   000031   33           RLC     A
-   \   000032   33           RLC     A
-   \   000033   33           RLC     A
-   \   000034   FA           MOV     R2,A
-   \   000035   A2F1         MOV     C,B.1
-   \   000037   E4           CLR     A
-   \   000038   33           RLC     A
-   \   000039   33           RLC     A
-   \   00003A   33           RLC     A
-   \   00003B   F9           MOV     R1,A
-   \   00003C   A2F0         MOV     C,B.0
-   \   00003E   E4           CLR     A
-   \   00003F   33           RLC     A
+   \   00003F   E4           CLR     A
    \   000040   33           RLC     A
-   \   000041   F8           MOV     R0,A
-   \   000042   EB           MOV     A,R3
-   \   000043   A2E0         MOV     C,0xE0 /* A   */.0
-   \   000045   E4           CLR     A
-   \   000046   33           RLC     A
-   \   000047   48           ORL     A,R0
-   \   000048   49           ORL     A,R1
-   \   000049   4A           ORL     A,R2
-   \   00004A   90....       MOV     DPTR,#HalSleepLedState
-   \   00004D   F0           MOVX    @DPTR,A
+   \   000041   48           ORL     A,R0
+   \   000042   49           ORL     A,R1
+   \   000043   4A           ORL     A,R2
+   \   000044   90....       MOV     DPTR,#HalSleepLedState
+   \   000047   F0           MOVX    @DPTR,A
     481          
     482            /* TURN OFF all LEDs to save power */
     483            HalLedOnOff (HAL_LED_ALL, HAL_LED_MODE_OFF);
-   \   00004E                ; Setup parameters for call to function HalLedOnOff
-   \   00004E   7A00         MOV     R2,#0x0
-   \   000050   790F         MOV     R1,#0xf
-   \   000052   12....       LCALL   ??HalLedOnOff?relay
+   \   000048                ; Setup parameters for call to function HalLedOnOff
+   \   000048   7A00         MOV     R2,#0x0
+   \   00004A   7903         MOV     R1,#0x3
+   \   00004C   12....       LCALL   ??HalLedOnOff?relay
     484          #endif /* HAL_LED */
     485          
     486          }
-   \   000055   80..         SJMP    ??Subroutine3_0
-   \   000057                REQUIRE _A_P1
+   \   00004F   80..         SJMP    ??Subroutine3_0
+   \   000051                REQUIRE _A_P0
+   \   000051                REQUIRE _A_P2
     487          
     488          /***************************************************************************************************
     489           * @fn      HalLedExitSleep
@@ -1388,7 +1345,7 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
     507          #ifdef BLINK_LEDS
     508            /* Sleep OFF */
     509            HalLedStatusControl.sleepActive = FALSE;
-   \   000011   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   000011   80..         SJMP    ?Subroutine0
     510          #endif /* BLINK_LEDS */
     511          }
 
@@ -1478,7 +1435,8 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
 
      Function/Label           Bytes
      --------------           -----
-     _A_P1                       1
+     _A_P0                       1
+     _A_P2                       1
      HalLedState                 1
      HalSleepLedState            1
      preBlinkState               1
@@ -1493,8 +1451,8 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
      HalLedUpdate              441
      HalLedOnOff                89
      HalLedGetState             11
-     HalLedEnterSleep           87
-     HalLedExitSleep            20
+     HalLedEnterSleep           81
+     HalLedExitSleep            19
      __Constant_64               4
      ??HalLedInit?relay          6
      ??HalLedSet?relay           6
@@ -1506,15 +1464,15 @@ C:\Users\1314\Desktop\¹ãÖÝÉÌÑ§Ôº\Junior College\Zigbee¿ª·¢¼¼Êõ¼°Êµ¼ù\Texas Instr
      ??HalLedExitSleep?relay     6
 
  
- 1 024 bytes in segment BANKED_CODE
+ 1 017 bytes in segment BANKED_CODE
     48 bytes in segment BANK_RELAYS
-     1 byte  in segment SFR_AN
+     2 bytes in segment SFR_AN
      4 bytes in segment XDATA_ROM_C
     40 bytes in segment XDATA_Z
  
- 1 072 bytes of CODE  memory
+ 1 065 bytes of CODE  memory
      0 bytes of CONST memory (+ 4 bytes shared)
-     0 bytes of DATA  memory (+ 1 byte  shared)
+     0 bytes of DATA  memory (+ 2 bytes shared)
     40 bytes of XDATA memory
 
 Errors: none
