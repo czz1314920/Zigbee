@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:11:45 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:56:10 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,8 +44,8 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
 #                          \ZStack_CC2530\Components\mt\MT_UART.c -D          #
-#                          ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC  #
-#                          -D LCD_SUPPORTED=DEBUG -lC                         #
+#                          ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D            #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
 #                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #
@@ -150,7 +150,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_UART.c
      21            its documentation for any purpose.
      22          
      23            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-     24            PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+     24            PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
      25            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
      26            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
      27            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -287,13 +287,14 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_UART.c
    \   000015   F0           MOVX    @DPTR,A
     108            uartConfig.baudRate             = MT_UART_DEFAULT_BAUDRATE;
    \   000016   12....       LCALL   ?XSTACK_DISP0_8
-   \   000019   7402         MOV     A,#0x2
+   \   000019   7403         MOV     A,#0x3
    \   00001B   F0           MOVX    @DPTR,A
     109            uartConfig.flowControl          = MT_UART_DEFAULT_OVERFLOW;
-   \   00001C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00001F   7401         MOV     A,#0x1
+   \   00001C   14           DEC     A
+   \   00001D   12....       LCALL   ?XSTACK_DISP0_8
+   \   000020   E4           CLR     A
    \   000021   F0           MOVX    @DPTR,A
-    110            uartConfig.flowControlThreshold = MT_UART_DEFAULT_THRESHOLD;
+    110            uartConfig.flowControlThreshold = MT_UART_DEFAULT_THRESHOLD;  //128/2
    \   000022   7403         MOV     A,#0x3
    \   000024   12....       LCALL   ?XSTACK_DISP0_8
    \   000027   7440         MOV     A,#0x40
@@ -301,7 +302,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_UART.c
    \   00002A   A3           INC     DPTR
    \   00002B   E4           CLR     A
    \   00002C   F0           MOVX    @DPTR,A
-    111            uartConfig.rx.maxBufSize        = MT_UART_DEFAULT_MAX_RX_BUFF;
+    111            uartConfig.rx.maxBufSize        = MT_UART_DEFAULT_MAX_RX_BUFF; //128
    \   00002D   740A         MOV     A,#0xa
    \   00002F   12....       LCALL   ?XSTACK_DISP0_8
    \   000032   7480         MOV     A,#-0x80
@@ -309,7 +310,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_UART.c
    \   000035   A3           INC     DPTR
    \   000036   E4           CLR     A
    \   000037   F0           MOVX    @DPTR,A
-    112            uartConfig.tx.maxBufSize        = MT_UART_DEFAULT_MAX_TX_BUFF;
+    112            uartConfig.tx.maxBufSize        = MT_UART_DEFAULT_MAX_TX_BUFF; //128
    \   000038   7412         MOV     A,#0x12
    \   00003A   12....       LCALL   ?XSTACK_DISP0_8
    \   00003D   7480         MOV     A,#-0x80
@@ -317,7 +318,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_UART.c
    \   000040   A3           INC     DPTR
    \   000041   E4           CLR     A
    \   000042   F0           MOVX    @DPTR,A
-    113            uartConfig.idleTimeout          = MT_UART_DEFAULT_IDLE_TIMEOUT;
+    113            uartConfig.idleTimeout          = MT_UART_DEFAULT_IDLE_TIMEOUT; //6
    \   000043   7405         MOV     A,#0x5
    \   000045   12....       LCALL   ?XSTACK_DISP0_8
    \   000048   7406         MOV     A,#0x6
@@ -486,13 +487,13 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_UART.c
    \   00000B   FE           MOV     R6,A
     197            uint8  ch;
     198            uint8  bytesInRxBuffer;
-    199            
+    199          
     200            (void)event;  // Intentionally unreferenced parameter
    \   00000C   802D         SJMP    ??MT_UartProcessZToolData_0
     201          
-    202            while (Hal_UART_RxBufLen(port))
+    202            while (Hal_UART_RxBufLen(port)) //ÕâÀïÅÐ¶Ï»¹ÓÐÊý¾Ý¶ÁÈ¡
     203            {
-    204              HalUARTRead (port, &ch, 1);
+    204              HalUARTRead (port, &ch, 1);   //¶ÁÈ¡Ò»¸ö×Ö½Ú
     205          
     206              switch (state)
     207              {

@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:12:00 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:23:23 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,8 +44,8 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
 #                          \ZStack_CC2530\Components\hal\common\hal_drivers.c #
-#                           -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D          #
-#                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC             #
+#                           -D ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D        #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
 #                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #

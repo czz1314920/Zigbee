@@ -22,7 +22,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -248,7 +248,7 @@ static void HalUARTInitISR(void)
   // Set P2 priority - USART0 over USART1 if both are defined.
   P2DIR &= ~P2DIR_PRIPO;
   P2DIR |= HAL_UART_PRIPO;
-
+  UxCSR = CSR_MODE;                  // Mode is UART Mode.ÏÈÄ£Ê½ºóÖÃÎ»
 #if (HAL_UART_ISR == 1)
   PERCFG &= ~HAL_UART_PERCFG_BIT;    // Set UART0 I/O location to P0.
 #else
@@ -256,7 +256,7 @@ static void HalUARTInitISR(void)
 #endif
   PxSEL  |= HAL_UART_Px_RX_TX;       // Enable Tx and Rx on P1.
   ADCCFG &= ~HAL_UART_Px_RX_TX;      // Make sure ADC doesnt use this.
-  UxCSR = CSR_MODE;                  // Mode is UART Mode.
+  //UxCSR = CSR_MODE;                  // Mode is UART Mode.
   UxUCR = UCR_FLUSH;                 // Flush it.
 }
 
@@ -274,7 +274,7 @@ static void HalUARTUnInitISR(void)
   UxCSR = 0;
   URXxIE = 0;
   URXxIF = 0;
-  IEN2 &= ~UTXxIE;  
+  IEN2 &= ~UTXxIE;
   UTXxIF = 0;
 }
 
@@ -296,7 +296,7 @@ static void HalUARTOpenISR(halUARTCfg_t *config)
                   (config->baudRate == HAL_UART_BR_38400) ||
                   (config->baudRate == HAL_UART_BR_57600) ||
                   (config->baudRate == HAL_UART_BR_115200));
-  
+
   if (config->baudRate == HAL_UART_BR_57600 ||
       config->baudRate == HAL_UART_BR_115200)
   {
@@ -306,7 +306,7 @@ static void HalUARTOpenISR(halUARTCfg_t *config)
   {
     UxBAUD = 59;
   }
-  
+
   switch (config->baudRate)
   {
     case HAL_UART_BR_9600:
@@ -402,7 +402,7 @@ uint16 HalUARTWriteISR(uint8 *buf, uint16 len)
     }
 
     // Keep re-enabling ISR as it might be keeping up with this loop due to other ints.
-    IEN2 |= UTXxIE;  
+    IEN2 |= UTXxIE;    //0x04
   }
 
   return cnt;
@@ -539,7 +539,7 @@ HAL_ISR_FUNCTION( halUart1RxIsr, URX1_VECTOR )
     isrCfg.rxTail = 0;
   }
 
-  isrCfg.rxTick = HAL_UART_ISR_IDLE;
+  isrCfg.rxTick = HAL_UART_ISR_IDLE;   //6*33: 6ms
 }
 
 /***************************************************************************************************

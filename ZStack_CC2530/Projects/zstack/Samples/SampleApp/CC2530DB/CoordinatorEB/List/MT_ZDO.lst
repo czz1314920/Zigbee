@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:12:00 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:23:23 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,13 +44,13 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
 #                          \ZStack_CC2530\Components\mt\MT_ZDO.c -D ZTOOL_P1  #
-#                          -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D        #
-#                          LCD_SUPPORTED=DEBUG -lC D:\github_storehouse\Zigbe #
-#                          e\ZStack_CC2530\Projects\zstack\Samples\SampleApp\ #
-#                          CC2530DB\CoordinatorEB\List\ -lA                   #
+#                          -D xMT_TASK -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D     #
+#                          xLCD_SUPPORTED=DEBUG -lC                           #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
-#                          ist\ --diag_suppress Pe001,Pa010 -o                #
+#                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #
+#                          \Projects\zstack\Samples\SampleApp\CC2530DB\Coordi #
+#                          natorEB\List\ --diag_suppress Pe001,Pa010 -o       #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\O #
 #                          bj\ -e --no_code_motion --debug --core=plain       #
@@ -219,18 +219,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
      90          /**************************************************************************************************
      91           * GLOBAL VARIABLES
      92           **************************************************************************************************/
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
      93          uint32 _zdoCallbackSub;
-   \                     _zdoCallbackSub:
-   \   000000                DS 4
-   \   000004                REQUIRE __INIT_XDATA_Z
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
      94          uint8 *pBeaconIndBuf = NULL;
-   \                     pBeaconIndBuf:
-   \   000000                DS 2
-   \   000002                REQUIRE __INIT_XDATA_Z
      95          
      96          /**************************************************************************************************
      97           * LOCAL VARIABLES
@@ -301,13 +291,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     162           *
     163           * @return  none
     164           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     165          void MT_ZdoInit(void)
-   \                     MT_ZdoInit:
     166          {
-   \   000000                ; Saved register size: 0
-   \   000000                ; Auto size: 0
     167          #ifdef MT_ZDO_CB_FUNC
     168            /* Register with ZDO for indication callbacks */
     169            ZDO_RegisterForZdoCB(ZDO_SRC_RTG_IND_CBID, &MT_ZdoSrcRtgCB);
@@ -315,7 +300,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     171            ZDO_RegisterForZdoCB(ZDO_LEAVE_IND_CBID, &MT_ZdoLeaveInd);
     172          #endif
     173          }
-   \   000000   02....       LJMP    ?BRET
     174          
     175          /***************************************************************************************************
     176           * @fn      MT_ZdoCommandProcessing
@@ -331,213 +315,100 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     186           *
     187           * @return  status
     188           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     189          uint8 MT_ZdoCommandProcessing(uint8* pBuf)
-   \                     MT_ZdoCommandProcessing:
     190          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
     191            uint8 status = MT_RPC_SUCCESS;
-   \   000005   7E00         MOV     R6,#0x0
     192          
     193            switch (pBuf[MT_RPC_POS_CMD1])
-   \   000007   8A82         MOV     DPL,R2
-   \   000009   8B83         MOV     DPH,R3
-   \   00000B   A3           INC     DPTR
-   \   00000C   A3           INC     DPTR
-   \   00000D   E0           MOVX    A,@DPTR
-   \   00000E   603F         JZ      ??MT_ZdoCommandProcessing_0
-   \   000010   14           DEC     A
-   \   000011   6041         JZ      ??MT_ZdoCommandProcessing_1
-   \   000013   14           DEC     A
-   \   000014   6043         JZ      ??MT_ZdoCommandProcessing_2
-   \   000016   14           DEC     A
-   \   000017   6045         JZ      ??MT_ZdoCommandProcessing_3
-   \   000019   14           DEC     A
-   \   00001A   6047         JZ      ??MT_ZdoCommandProcessing_4
-   \   00001C   14           DEC     A
-   \   00001D   6049         JZ      ??MT_ZdoCommandProcessing_5
-   \   00001F   14           DEC     A
-   \   000020   604B         JZ      ??MT_ZdoCommandProcessing_6
-   \   000022   14           DEC     A
-   \   000023   604D         JZ      ??MT_ZdoCommandProcessing_7
-   \   000025   14           DEC     A
-   \   000026   604F         JZ      ??MT_ZdoCommandProcessing_8
-   \   000028   24FE         ADD     A,#-0x2
-   \   00002A   6050         JZ      ??MT_ZdoCommandProcessing_9
-   \   00002C   14           DEC     A
-   \   00002D   6052         JZ      ??MT_ZdoCommandProcessing_10
-   \   00002F   14           DEC     A
-   \   000030   6054         JZ      ??MT_ZdoCommandProcessing_11
-   \   000032   24EC         ADD     A,#-0x14
-   \   000034   6055         JZ      ??MT_ZdoCommandProcessing_12
-   \   000036   14           DEC     A
-   \   000037   6057         JZ      ??MT_ZdoCommandProcessing_13
-   \   000039   14           DEC     A
-   \   00003A   6059         JZ      ??MT_ZdoCommandProcessing_14
-   \   00003C   24FC         ADD     A,#-0x4
-   \   00003E   605A         JZ      ??MT_ZdoCommandProcessing_15
-   \   000040   14           DEC     A
-   \   000041   605C         JZ      ??MT_ZdoCommandProcessing_16
-   \   000043   24E9         ADD     A,#-0x17
-   \   000045   6062         JZ      ??MT_ZdoCommandProcessing_17
-   \   000047   14           DEC     A
-   \   000048   6064         JZ      ??MT_ZdoCommandProcessing_18
-   \   00004A   14           DEC     A
-   \   00004B   6057         JZ      ??MT_ZdoCommandProcessing_19
-   \   00004D   8064         SJMP    ??MT_ZdoCommandProcessing_20
     194            {
     195          #if defined ( ZDO_NWKADDR_REQUEST )
     196              case MT_ZDO_NWK_ADDR_REQ:
     197                MT_ZdoNWKAddressRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_0:
-   \   00004F                ; Setup parameters for call to function MT_ZdoNWKAddressRequest
-   \   00004F   12....       LCALL   ??MT_ZdoNWKAddressRequest?relay
     198                break;
-   \   000052   8061         SJMP    ??MT_ZdoCommandProcessing_21
     199          #endif
     200          
     201          #if defined ( ZDO_IEEEADDR_REQUEST )
     202              case MT_ZDO_IEEE_ADDR_REQ:
     203                MT_ZdoIEEEAddrRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_1:
-   \   000054                ; Setup parameters for call to function MT_ZdoIEEEAddrRequest
-   \   000054   12....       LCALL   ??MT_ZdoIEEEAddrRequest?relay
     204                break;
-   \   000057   805C         SJMP    ??MT_ZdoCommandProcessing_21
     205          #endif
     206          
     207          #if defined ( ZDO_NODEDESC_REQUEST )
     208              case MT_ZDO_NODE_DESC_REQ:
     209                MT_ZdoNodeDescRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_2:
-   \   000059                ; Setup parameters for call to function MT_ZdoNodeDescRequest
-   \   000059   12....       LCALL   ??MT_ZdoNodeDescRequest?relay
     210                break;
-   \   00005C   8057         SJMP    ??MT_ZdoCommandProcessing_21
     211          #endif
     212          
     213          #if defined ( ZDO_POWERDESC_REQUEST )
     214              case MT_ZDO_POWER_DESC_REQ:
     215                MT_ZdoPowerDescRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_3:
-   \   00005E                ; Setup parameters for call to function MT_ZdoPowerDescRequest
-   \   00005E   12....       LCALL   ??MT_ZdoPowerDescRequest?relay
     216                break;
-   \   000061   8052         SJMP    ??MT_ZdoCommandProcessing_21
     217          #endif
     218          
     219          #if defined ( ZDO_SIMPLEDESC_REQUEST )
     220              case MT_ZDO_SIMPLE_DESC_REQ:
     221                MT_ZdoSimpleDescRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_4:
-   \   000063                ; Setup parameters for call to function MT_ZdoSimpleDescRequest
-   \   000063   12....       LCALL   ??MT_ZdoSimpleDescRequest?relay
     222                break;
-   \   000066   804D         SJMP    ??MT_ZdoCommandProcessing_21
     223          #endif
     224          
     225          #if defined ( ZDO_ACTIVEEP_REQUEST )
     226              case MT_ZDO_ACTIVE_EP_REQ:
     227                MT_ZdoActiveEpRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_5:
-   \   000068                ; Setup parameters for call to function MT_ZdoActiveEpRequest
-   \   000068   12....       LCALL   ??MT_ZdoActiveEpRequest?relay
     228                break;
-   \   00006B   8048         SJMP    ??MT_ZdoCommandProcessing_21
     229          #endif
     230          
     231          #if defined ( ZDO_MATCH_REQUEST )
     232              case MT_ZDO_MATCH_DESC_REQ:
     233                MT_ZdoMatchDescRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_6:
-   \   00006D                ; Setup parameters for call to function MT_ZdoMatchDescRequest
-   \   00006D   12....       LCALL   ??MT_ZdoMatchDescRequest?relay
     234                break;
-   \   000070   8043         SJMP    ??MT_ZdoCommandProcessing_21
     235          #endif
     236          
     237          #if defined ( ZDO_COMPLEXDESC_REQUEST )
     238              case MT_ZDO_COMPLEX_DESC_REQ:
     239                MT_ZdoComplexDescRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_7:
-   \   000072                ; Setup parameters for call to function MT_ZdoComplexDescRequest
-   \   000072   12....       LCALL   ??MT_ZdoComplexDescRequest?relay
     240                break;
-   \   000075   803E         SJMP    ??MT_ZdoCommandProcessing_21
     241          #endif
     242          
     243          #if defined ( ZDO_USERDESC_REQUEST )
     244              case MT_ZDO_USER_DESC_REQ:
     245                MT_ZdoUserDescRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_8:
-   \   000077                ; Setup parameters for call to function MT_ZdoUserDescRequest
-   \   000077   12....       LCALL   ??MT_ZdoUserDescRequest?relay
     246                break;
-   \   00007A   8039         SJMP    ??MT_ZdoCommandProcessing_21
     247          #endif
     248          
     249          #if defined ( ZDO_ENDDEVICE_ANNCE )
     250              case MT_ZDO_END_DEV_ANNCE:
     251                MT_ZdoEndDevAnnce(pBuf);
-   \                     ??MT_ZdoCommandProcessing_9:
-   \   00007C                ; Setup parameters for call to function MT_ZdoEndDevAnnce
-   \   00007C   12....       LCALL   ??MT_ZdoEndDevAnnce?relay
     252                break;
-   \   00007F   8034         SJMP    ??MT_ZdoCommandProcessing_21
     253          #endif
     254          
     255          #if defined ( ZDO_USERDESCSET_REQUEST )
     256              case MT_ZDO_USER_DESC_SET:
     257                MT_ZdoUserDescSet(pBuf);
-   \                     ??MT_ZdoCommandProcessing_10:
-   \   000081                ; Setup parameters for call to function MT_ZdoUserDescSet
-   \   000081   12....       LCALL   ??MT_ZdoUserDescSet?relay
     258                break;
-   \   000084   802F         SJMP    ??MT_ZdoCommandProcessing_21
     259          #endif
     260          
     261          #if defined ( ZDO_SERVERDISC_REQUEST )
     262              case MT_ZDO_SERVICE_DISC_REQ:
     263                MT_ZdoServiceDiscRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_11:
-   \   000086                ; Setup parameters for call to function MT_ZdoServiceDiscRequest
-   \   000086   12....       LCALL   ??MT_ZdoServiceDiscRequest?relay
     264                break;
-   \   000089   802A         SJMP    ??MT_ZdoCommandProcessing_21
     265          #endif
     266          
     267          #if defined ( ZDO_ENDDEVICEBIND_REQUEST )
     268              case MT_ZDO_END_DEV_BIND_REQ:
     269                MT_ZdoEndDevBindRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_12:
-   \   00008B                ; Setup parameters for call to function MT_ZdoEndDevBindRequest
-   \   00008B   12....       LCALL   ??MT_ZdoEndDevBindRequest?relay
     270                break;
-   \   00008E   8025         SJMP    ??MT_ZdoCommandProcessing_21
     271          #endif
     272          
     273          #if defined ( ZDO_BIND_UNBIND_REQUEST )
     274              case MT_ZDO_BIND_REQ:
     275                MT_ZdoBindRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_13:
-   \   000090                ; Setup parameters for call to function MT_ZdoBindRequest
-   \   000090   12....       LCALL   ??MT_ZdoBindRequest?relay
     276                break;
-   \   000093   8020         SJMP    ??MT_ZdoCommandProcessing_21
     277          #endif
     278          
     279          #if defined ( ZDO_BIND_UNBIND_REQUEST )
     280              case MT_ZDO_UNBIND_REQ:
     281                MT_ZdoUnbindRequest(pBuf);
-   \                     ??MT_ZdoCommandProcessing_14:
-   \   000095                ; Setup parameters for call to function MT_ZdoUnbindRequest
-   \   000095   12....       LCALL   ??MT_ZdoUnbindRequest?relay
     282                break;
-   \   000098   801B         SJMP    ??MT_ZdoCommandProcessing_21
     283          #endif
     284          
     285          #if defined ( MT_SYS_KEY_MANAGEMENT )
@@ -557,19 +428,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     299          #if defined ( ZDO_MANUAL_JOIN )
     300              case MT_ZDO_NWK_DISCOVERY_REQ:
     301                MT_ZdoNetworkDiscoveryReq(pBuf);
-   \                     ??MT_ZdoCommandProcessing_15:
-   \   00009A                ; Setup parameters for call to function MT_ZdoNetworkDiscoveryReq
-   \   00009A   12....       LCALL   ??MT_ZdoNetworkDiscoveryReq?relay
     302                break;
-   \   00009D   8016         SJMP    ??MT_ZdoCommandProcessing_21
     303          
     304              case MT_ZDO_JOIN_REQ:
     305                MT_ZdoJoinReq(pBuf);
-   \                     ??MT_ZdoCommandProcessing_16:
-   \   00009F                ; Setup parameters for call to function MT_ZdoJoinReq
-   \   00009F   12....       LCALL   ??MT_ZdoJoinReq?relay
     306                break;
-   \   0000A2   8011         SJMP    ??MT_ZdoCommandProcessing_21
     307          #endif
     308          
     309          #if defined ( ZDO_MGMT_NWKDISC_REQUEST )
@@ -623,48 +486,24 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     357          #if defined ( ZDO_NETWORKSTART_REQUEST )
     358              case MT_ZDO_STARTUP_FROM_APP:
     359                MT_ZdoStartupFromApp(pBuf);
-   \                     ??MT_ZdoCommandProcessing_19:
-   \   0000A4                ; Setup parameters for call to function MT_ZdoStartupFromApp
-   \   0000A4   12....       LCALL   ??MT_ZdoStartupFromApp?relay
     360                break;
-   \   0000A7   800C         SJMP    ??MT_ZdoCommandProcessing_21
     361          #endif
     362          
     363              case MT_ZDO_MSG_CB_REGISTER:
     364                MT_ZdoRegisterForZDOMsg(pBuf);
-   \                     ??MT_ZdoCommandProcessing_17:
-   \   0000A9                ; Setup parameters for call to function MT_ZdoRegisterForZDOMsg
-   \   0000A9   12....       LCALL   ??MT_ZdoRegisterForZDOMsg?relay
     365                break;
-   \   0000AC   8007         SJMP    ??MT_ZdoCommandProcessing_21
     366          
     367              case MT_ZDO_MSG_CB_REMOVE:
     368                MT_ZdoRemoveRegisteredCB(pBuf);
-   \                     ??MT_ZdoCommandProcessing_18:
-   \   0000AE                ; Setup parameters for call to function MT_ZdoRemoveRegisteredCB
-   \   0000AE   12....       LCALL   ??MT_ZdoRemoveRegisteredCB?relay
     369                break;
-   \   0000B1   8002         SJMP    ??MT_ZdoCommandProcessing_21
     370          
     371              default:
     372                status = MT_RPC_ERR_COMMAND_ID;
-   \                     ??MT_ZdoCommandProcessing_20:
-   \   0000B3   0E           INC     R6
-   \   0000B4   0E           INC     R6
     373                break;
     374            }
     375          
     376            return status;
-   \                     ??MT_ZdoCommandProcessing_21:
-   \   0000B5   EE           MOV     A,R6
-   \   0000B6   F9           MOV     R1,A
-   \   0000B7   02....       LJMP    ??Subroutine72_0 & 0xFFFF
     377          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine72_0:
-   \   000000   7F01         MOV     R7,#0x1
-   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
     378          
     379          /***************************************************************************************************
     380           * @fn      MT_ZdoNwkAddrReq
@@ -675,17 +514,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     385           *
     386           * @return  void
     387           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     388          void MT_ZdoNWKAddressRequest(uint8 *pBuf)
-   \                     MT_ZdoNWKAddressRequest:
     389          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     390            uint8 cmdId;
     391            uint8 retValue;
     392            uint8 reqType;
@@ -694,28 +524,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     395          
     396            /* parse header */
     397            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   8A82         MOV     DPL,R2
-   \   00000C   8B83         MOV     DPH,R3
-   \   00000E   A3           INC     DPTR
-   \   00000F   A3           INC     DPTR
-   \   000010   E0           MOVX    A,@DPTR
-   \   000011   F5..         MOV     ?V0 + 0,A
     398            pBuf += MT_RPC_FRAME_HDR_SZ;
     399          
     400            /* parse parameters */
     401            pExtAddr = pBuf;
-   \   000013   EA           MOV     A,R2
-   \   000014   2403         ADD     A,#0x3
-   \   000016   FE           MOV     R6,A
-   \   000017   EB           MOV     A,R3
-   \   000018   3400         ADDC    A,#0x0
-   \   00001A   FF           MOV     R7,A
     402            pBuf += Z_EXTADDR_LEN;
-   \   00001B   EE           MOV     A,R6
-   \   00001C   2408         ADD     A,#0x8
-   \   00001E   FA           MOV     R2,A
-   \   00001F   EF           MOV     A,R7
-   \   000020   12....       LCALL   ?Subroutine24 & 0xFFFF
     403          
     404            /* Request type */
     405            reqType = *pBuf++;
@@ -724,95 +537,10 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     408            startIndex = *pBuf;
     409          
     410            retValue = (uint8)ZDP_NwkAddrReq(pExtAddr, reqType, startIndex, 0);
-   \                     ??CrossCallReturnLabel_37:
-   \   000023   12....       LCALL   ??ZDP_NwkAddrReq?relay
-   \   000026                REQUIRE ?Subroutine5
-   \   000026                ; // Fall through to label ?Subroutine5
     411          
     412            /* Build and send back the response */
     413            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     414          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine5:
-   \   000000   12....       LCALL   ?Subroutine38 & 0xFFFF
-   \                     ??CrossCallReturnLabel_64:
-   \   000003   80..         SJMP    ??Subroutine64_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine24:
-   \   000000   12....       LCALL   ??Subroutine75_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_129:
-   \   000003   F9           MOV     R1,A
-   \   000004   A3           INC     DPTR
-   \   000005                ; Setup parameters for call to function ZDP_NwkAddrReq
-   \   000005                ; Setup parameters for call to function ZDP_IEEEAddrReq
-   \   000005   7D00         MOV     R5,#0x0
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   FC           MOV     R4,A
-   \   000009   EE           MOV     A,R6
-   \   00000A   FA           MOV     R2,A
-   \   00000B   EF           MOV     A,R7
-   \   00000C   FB           MOV     R3,A
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine64_0:
-   \   000000   7965         MOV     R1,#0x65
-   \   000002   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
-   \   000005                REQUIRE ??Subroutine65_0
-   \   000005                ; // Fall through to label ??Subroutine65_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine65_0:
-   \   000000   7401         MOV     A,#0x1
-   \   000002   02....       LJMP    ??Subroutine71_0 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine71_0:
-   \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003                REQUIRE ??Subroutine72_0
-   \   000003                ; // Fall through to label ??Subroutine72_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine58:
-   \   000000   E9           MOV     A,R1
-   \   000001   85..82       MOV     DPL,?XSP + 0
-   \   000004   85..83       MOV     DPH,?XSP + 1
-   \   000007   F0           MOVX    @DPTR,A
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000008   AC82         MOV     R4,DPL
-   \   00000A   AD83         MOV     R5,DPH
-   \   00000C   7B01         MOV     R3,#0x1
-   \   00000E   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine75_0:
-   \   000000   3400         ADDC    A,#0x0
-   \   000002   FB           MOV     R3,A
-   \   000003   8A82         MOV     DPL,R2
-   \   000005   8B83         MOV     DPH,R3
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine38:
-   \   000000   12....       LCALL   ?Subroutine58 & 0xFFFF
-   \                     ??CrossCallReturnLabel_120:
-   \   000003   AA..         MOV     R2,?V0 + 0
-   \   000005   22           RET
     415          
     416          /***************************************************************************************************
     417           * @fn      MT_ZdoIEEEAddrRequest
@@ -823,17 +551,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     422           *
     423           * @return  void
     424           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     425          void MT_ZdoIEEEAddrRequest (uint8 *pBuf)
-   \                     MT_ZdoIEEEAddrRequest:
     426          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     427            uint8 cmdId;
     428            uint8 retValue;
     429            uint16 shortAddr;
@@ -842,31 +561,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     432          
     433            /* parse header */
     434            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   8A82         MOV     DPL,R2
-   \   00000C   8B83         MOV     DPH,R3
-   \   00000E   A3           INC     DPTR
-   \   00000F   A3           INC     DPTR
-   \   000010   E0           MOVX    A,@DPTR
-   \   000011   F5..         MOV     ?V0 + 0,A
     435            pBuf += MT_RPC_FRAME_HDR_SZ;
-   \   000013   12....       LCALL   ?Subroutine31 & 0xFFFF
     436          
     437            /* Dev address */
     438            shortAddr = BUILD_UINT16(pBuf[0], pBuf[1]);
-   \                     ??CrossCallReturnLabel_56:
-   \   000016   12....       LCALL   ??Subroutine74_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_126:
-   \   000019   FE           MOV     R6,A
-   \   00001A   E4           CLR     A
-   \   00001B   39           ADDC    A,R1
-   \   00001C   FF           MOV     R7,A
     439            pBuf += 2;
-   \   00001D   EA           MOV     A,R2
-   \   00001E   2402         ADD     A,#0x2
-   \   000020   0A           INC     R2
-   \   000021   0A           INC     R2
-   \   000022   EB           MOV     A,R3
-   \   000023   12....       LCALL   ?Subroutine24 & 0xFFFF
     440          
     441            /* request type */
     442            reqType = *pBuf++;
@@ -875,44 +574,9 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     445            startIndex = *pBuf;
     446          
     447            retValue = (uint8)ZDP_IEEEAddrReq(shortAddr, reqType, startIndex, 0);
-   \                     ??CrossCallReturnLabel_38:
-   \   000026   12....       LCALL   ??ZDP_IEEEAddrReq?relay
-   \   000029   80..         SJMP    ?Subroutine5
     448          
     449            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     450          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine52:
-   \   000000   EA           MOV     A,R2
-   \   000001   2403         ADD     A,#0x3
-   \   000003   0A           INC     R2
-   \   000004   0A           INC     R2
-   \   000005   0A           INC     R2
-   \   000006   EB           MOV     A,R3
-   \   000007   3400         ADDC    A,#0x0
-   \   000009   FB           MOV     R3,A
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine74_0:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   FC           MOV     R4,A
-   \   000002   A3           INC     DPTR
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   F9           MOV     R1,A
-   \   000005   EC           MOV     A,R4
-   \   000006   2400         ADD     A,#0x0
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine31:
-   \   000000   12....       LCALL   ?Subroutine52 & 0xFFFF
-   \                     ??CrossCallReturnLabel_113:
-   \   000003                ; Setup parameters for call to function ZDApp_NetworkDiscoveryReq
-   \   000003   8A82         MOV     DPL,R2
-   \   000005   8B83         MOV     DPH,R3
-   \   000007   22           RET
     451          
     452          /***************************************************************************************************
     453           * @fn      MT_ZdoNodeDescRequest
@@ -923,17 +587,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     458           *
     459           * @return  void
     460           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     461          void MT_ZdoNodeDescRequest (uint8 *pBuf)
-   \                     MT_ZdoNodeDescRequest:
     462          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 10
-   \   000005   74F6         MOV     A,#-0xa
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     463            uint8 cmdId;
     464            uint8 retValue;
     465            zAddrType_t destAddr;
@@ -941,18 +596,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     467          
     468            /* parse header */
     469            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   12....       LCALL   ??Subroutine68_0 & 0xFFFF
     470            pBuf += MT_RPC_FRAME_HDR_SZ;
     471          
     472            /* Destination address */
     473            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_107:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     474            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_0:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine29 & 0xFFFF
     475            pBuf += 2;
     476          
     477            /* Network address of interest */
@@ -960,125 +608,9 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     479            pBuf += 2;
     480          
     481            retValue = (uint8)ZDP_NodeDescReq( &destAddr, shortAddr, 0);
-   \                     ??CrossCallReturnLabel_48:
-   \   000019   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00001C   7902         MOV     R1,#0x2
-   \   00001E   12....       LCALL   ?Subroutine47 & 0xFFFF
-   \                     ??CrossCallReturnLabel_79:
-   \   000021   E9           MOV     A,R1
-   \   000022   02....       LJMP    ??Subroutine69_0 & 0xFFFF
     482          
     483            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     484          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine29:
-   \   000000   E8           MOV     A,R0
-   \   000001   F0           MOVX    @DPTR,A
-   \   000002   A3           INC     DPTR
-   \   000003   E9           MOV     A,R1
-   \   000004   12....       LCALL   ?Subroutine55 & 0xFFFF
-   \                     ??CrossCallReturnLabel_102:
-   \   000007                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000007                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000007                ; Setup parameters for call to function ZDP_SimpleDescReq
-   \   000007                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000007                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000007                ; Setup parameters for call to function ZDP_NWKAddrOfInterestReq
-   \   000007   75..00       MOV     ?V0 + 0,#0x0
-   \   00000A   78..         MOV     R0,#?V0 + 0
-   \   00000C   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine55:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   EA           MOV     A,R2
-   \   000002                REQUIRE ??Subroutine66_0
-   \   000002                ; // Fall through to label ??Subroutine66_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine66_0:
-   \   000000   2402         ADD     A,#0x2
-   \   000002   0A           INC     R2
-   \   000003   0A           INC     R2
-   \   000004   EB           MOV     A,R3
-   \   000005   3400         ADDC    A,#0x0
-   \   000007   FB           MOV     R3,A
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
-   \   000000   7402         MOV     A,#0x2
-   \   000002   F0           MOVX    @DPTR,A
-   \   000003   8A82         MOV     DPL,R2
-   \   000005   8B83         MOV     DPH,R3
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   FC           MOV     R4,A
-   \   000009   A3           INC     DPTR
-   \   00000A   E0           MOVX    A,@DPTR
-   \   00000B   F9           MOV     R1,A
-   \   00000C   EC           MOV     A,R4
-   \   00000D   F8           MOV     R0,A
-   \   00000E   7401         MOV     A,#0x1
-   \   000010   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine68_0:
-   \   000000   8A82         MOV     DPL,R2
-   \   000002   8B83         MOV     DPH,R3
-   \   000004   A3           INC     DPTR
-   \   000005   A3           INC     DPTR
-   \   000006   E0           MOVX    A,@DPTR
-   \   000007   FE           MOV     R6,A
-   \   000008   12....       LCALL   ?Subroutine52 & 0xFFFF
-   \                     ??CrossCallReturnLabel_115:
-   \   00000B   7409         MOV     A,#0x9
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine69_0:
-   \   000000   12....       LCALL   ?XSTACK_DISP0_8
-   \   000003   AA82         MOV     R2,DPL
-   \   000005   AB83         MOV     R3,DPH
-   \   000007   12....       LCALL   ??ZDP_NWKAddrOfInterestReq?relay
-   \   00000A                REQUIRE ??Subroutine70_0
-   \   00000A                ; // Fall through to label ??Subroutine70_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine70_0:
-   \   000000   7401         MOV     A,#0x1
-   \   000002   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000005   12....       LCALL   ?Subroutine40 & 0xFFFF
-   \                     ??CrossCallReturnLabel_117:
-   \   000008   FA           MOV     R2,A
-   \   000009   7965         MOV     R1,#0x65
-   \   00000B   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
-   \   00000E   740A         MOV     A,#0xa
-   \   000010                REQUIRE ??Subroutine71_0
-   \   000010                ; // Fall through to label ??Subroutine71_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine40:
-   \   000000   12....       LCALL   ?Subroutine58 & 0xFFFF
-   \                     ??CrossCallReturnLabel_118:
-   \   000003   EE           MOV     A,R6
-   \   000004   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine47:
-   \   000000   8A82         MOV     DPL,R2
-   \   000002   8B83         MOV     DPH,R3
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   FC           MOV     R4,A
-   \   000006   A3           INC     DPTR
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   FB           MOV     R3,A
-   \   000009   EC           MOV     A,R4
-   \   00000A   2400         ADD     A,#0x0
-   \   00000C   E4           CLR     A
-   \   00000D   3B           ADDC    A,R3
-   \   00000E   FD           MOV     R5,A
-   \   00000F   22           RET
     485          
     486          /***************************************************************************************************
     487           * @fn      MT_ZdoPowerDescRequest
@@ -1089,17 +621,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     492           *
     493           * @return  void
     494           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     495          void MT_ZdoPowerDescRequest(uint8 *pBuf)
-   \                     MT_ZdoPowerDescRequest:
     496          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 10
-   \   000005   74F6         MOV     A,#-0xa
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     497            uint8 cmdId;
     498            uint8 retValue;
     499            zAddrType_t destAddr;
@@ -1107,18 +630,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     501          
     502            /* parse header */
     503            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   12....       LCALL   ??Subroutine68_0 & 0xFFFF
     504            pBuf += MT_RPC_FRAME_HDR_SZ;
     505          
     506            /* Dev address */
     507            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_108:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     508            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_1:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine29 & 0xFFFF
     509            pBuf += 2;
     510          
     511            /* Network address of interest */
@@ -1126,27 +642,9 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     513            pBuf += 2;
     514          
     515            retValue = (uint8)ZDP_PowerDescReq( &destAddr, shortAddr, 0);
-   \                     ??CrossCallReturnLabel_49:
-   \   000019   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00001C   7903         MOV     R1,#0x3
-   \   00001E   02....       LJMP    ?Subroutine0 & 0xFFFF
     516          
     517            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     518          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine0:
-   \   000000   12....       LCALL   ?Subroutine21 & 0xFFFF
-   \                     ??CrossCallReturnLabel_32:
-   \   000003                REQUIRE ??Subroutine69_0
-   \   000003                ; // Fall through to label ??Subroutine69_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine21:
-   \   000000   12....       LCALL   ?Subroutine47 & 0xFFFF
-   \                     ??CrossCallReturnLabel_80:
-   \   000003   7402         MOV     A,#0x2
-   \   000005   22           RET
     519          
     520          /***************************************************************************************************
     521           * @fn      MT_ZdoSimpleDescRequest
@@ -1157,17 +655,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     526           *
     527           * @return  void
     528           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     529          void MT_ZdoSimpleDescRequest(uint8 *pBuf)
-   \                     MT_ZdoSimpleDescRequest:
     530          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 10
-   \   000005   74F6         MOV     A,#-0xa
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     531            uint8 cmdId;
     532            uint8 retValue;
     533            uint8 epInt;
@@ -1176,18 +665,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     536          
     537            /* parse header */
     538            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   12....       LCALL   ??Subroutine68_0 & 0xFFFF
     539            pBuf += MT_RPC_FRAME_HDR_SZ;
     540          
     541            /* Dev address */
     542            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_109:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     543            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_2:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine29 & 0xFFFF
     544            pBuf += 2;
     545          
     546            /* Network address of interest */
@@ -1198,21 +680,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     551            epInt = *pBuf++;
     552          
     553            retValue = (uint8)ZDP_SimpleDescReq( &destAddr, shortAddr, epInt, 0);
-   \                     ??CrossCallReturnLabel_50:
-   \   000019   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00001C   8A82         MOV     DPL,R2
-   \   00001E   8B83         MOV     DPH,R3
-   \   000020   A3           INC     DPTR
-   \   000021   A3           INC     DPTR
-   \   000022   E0           MOVX    A,@DPTR
-   \   000023   F9           MOV     R1,A
-   \   000024   12....       LCALL   ?Subroutine21 & 0xFFFF
-   \                     ??CrossCallReturnLabel_31:
-   \   000027   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002A   AA82         MOV     R2,DPL
-   \   00002C   AB83         MOV     R3,DPH
-   \   00002E   12....       LCALL   ??ZDP_SimpleDescReq?relay
-   \   000031   02....       LJMP    ??Subroutine70_0 & 0xFFFF
     554          
     555            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     556          }
@@ -1226,17 +693,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     564           *
     565           * @return  void
     566           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     567          void MT_ZdoActiveEpRequest(uint8 *pBuf)
-   \                     MT_ZdoActiveEpRequest:
     568          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 10
-   \   000005   74F6         MOV     A,#-0xa
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     569            uint8 cmdId;
     570            uint8 retValue;
     571            zAddrType_t destAddr;
@@ -1244,18 +702,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     573          
     574            /* parse header */
     575            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   12....       LCALL   ??Subroutine68_0 & 0xFFFF
     576            pBuf += MT_RPC_FRAME_HDR_SZ;
     577          
     578            /* Dev address */
     579            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_110:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     580            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_3:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine29 & 0xFFFF
     581            pBuf += 2;
     582          
     583            /* Network address of interest */
@@ -1263,10 +714,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     585            pBuf += 2;
     586          
     587            retValue = (uint8)ZDP_ActiveEPReq( &destAddr, shortAddr, 0);
-   \                     ??CrossCallReturnLabel_51:
-   \   000019   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00001C   7905         MOV     R1,#0x5
-   \   00001E   02....       LJMP    ?Subroutine0 & 0xFFFF
     588          
     589            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     590          }
@@ -1280,20 +727,10 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     598           *
     599           * @return  void
     600           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     601          void MT_ZdoMatchDescRequest(uint8 *pBuf)
-   \                     MT_ZdoMatchDescRequest:
     602          {
-   \   000000   74F1         MOV     A,#-0xf
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 15
-   \   000005                ; Auto size: 74
-   \   000005   74B6         MOV     A,#-0x4a
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     603            uint8 cmdId;
     604            uint8 retValue = 0;
-   \   00000A   12....       LCALL   ?Subroutine6 & 0xFFFF
     605            uint8 i, numInClusters, numOutClusters;
     606            uint16 profileId;
     607            zAddrType_t destAddr;
@@ -1306,302 +743,57 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     614          
     615            /* Dev address */
     616            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_105:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     617            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_4:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine23 & 0xFFFF
     618            pBuf += 2;
     619          
     620            /* Network address of interest */
     621            shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
     622            pBuf += 2;
-   \                     ??CrossCallReturnLabel_35:
-   \   000019   12....       LCALL   ??Subroutine66_0 & 0xFFFF
     623          
     624            /* Profile ID */
     625            profileId = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_104:
-   \   00001C   8A82         MOV     DPL,R2
-   \   00001E   8B83         MOV     DPH,R3
-   \   000020   12....       LCALL   ?Subroutine11 & 0xFFFF
     626            pBuf += 2;
     627          
     628            /* NumInClusters */
     629            numInClusters = *pBuf++;
-   \                     ??CrossCallReturnLabel_13:
-   \   000023   FF           MOV     R7,A
-   \   000024   A3           INC     DPTR
-   \   000025   AA82         MOV     R2,DPL
-   \   000027   AB83         MOV     R3,DPH
     630            if ( numInClusters <= MTZDO_MAX_MATCH_CLUSTERS )
-   \   000029   C3           CLR     C
-   \   00002A   9411         SUBB    A,#0x11
-   \   00002C   5015         JNC     ??MT_ZdoMatchDescRequest_0
     631            {
     632              /* IN clusters */
     633              for ( i = 0; i < numInClusters; i++ )
-   \   00002E   88..         MOV     ?V0 + 2,R0
-   \                     ??MT_ZdoMatchDescRequest_1:
-   \   000030   E5..         MOV     A,?V0 + 2
-   \   000032   C3           CLR     C
-   \   000033   9F           SUBB    A,R7
-   \   000034   5016         JNC     ??MT_ZdoMatchDescRequest_2
     634              {
     635                inClusters[i] = BUILD_UINT16( pBuf[0], pBuf[1]);
-   \   000036   12....       LCALL   ?Subroutine14 & 0xFFFF
     636                pBuf += 2;
     637              }
     638            }
-   \                     ??CrossCallReturnLabel_17:
-   \   000039   742A         MOV     A,#0x2a
-   \   00003B   12....       LCALL   ?XSTACK_DISP0_8
-   \   00003E   12....       LCALL   ?Subroutine34 & 0xFFFF
-   \                     ??CrossCallReturnLabel_98:
-   \   000041   80ED         SJMP    ??MT_ZdoMatchDescRequest_1
     639            else
     640            {
     641              retValue = ZDP_INVALID_REQTYPE;
-   \                     ??MT_ZdoMatchDescRequest_0:
-   \   000043   85..82       MOV     DPL,?XSP + 0
-   \   000046   85..83       MOV     DPH,?XSP + 1
-   \   000049   7480         MOV     A,#-0x80
-   \   00004B   F0           MOVX    @DPTR,A
     642            }
     643          
     644            /* NumOutClusters */
     645            numOutClusters = *pBuf++;
-   \                     ??MT_ZdoMatchDescRequest_2:
-   \   00004C   8A82         MOV     DPL,R2
-   \   00004E   8B83         MOV     DPH,R3
-   \   000050   E0           MOVX    A,@DPTR
-   \   000051   F5..         MOV     ?V0 + 6,A
-   \   000053   A3           INC     DPTR
-   \   000054   AA82         MOV     R2,DPL
-   \   000056   AB83         MOV     R3,DPH
     646            if ( numOutClusters <= MTZDO_MAX_MATCH_CLUSTERS )
-   \   000058   C3           CLR     C
-   \   000059   9411         SUBB    A,#0x11
-   \   00005B   5017         JNC     ??MT_ZdoMatchDescRequest_3
     647            {
     648              /* OUT Clusters */
     649              for ( i = 0; i < numOutClusters; i++ )
-   \   00005D   75..00       MOV     ?V0 + 2,#0x0
-   \                     ??MT_ZdoMatchDescRequest_4:
-   \   000060   E5..         MOV     A,?V0 + 2
-   \   000062   C3           CLR     C
-   \   000063   95..         SUBB    A,?V0 + 6
-   \   000065   5017         JNC     ??MT_ZdoMatchDescRequest_5
     650              {
     651                outClusters[i] = BUILD_UINT16( pBuf[0], pBuf[1]);
-   \   000067   12....       LCALL   ?Subroutine14 & 0xFFFF
     652                pBuf += 2;
     653              }
     654            }
-   \                     ??CrossCallReturnLabel_18:
-   \   00006A   740A         MOV     A,#0xa
-   \   00006C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00006F   12....       LCALL   ?Subroutine34 & 0xFFFF
-   \                     ??CrossCallReturnLabel_99:
-   \   000072   80EC         SJMP    ??MT_ZdoMatchDescRequest_4
     655            else
     656            {
     657              retValue = ZDP_INVALID_REQTYPE;
-   \                     ??MT_ZdoMatchDescRequest_3:
-   \   000074   85..82       MOV     DPL,?XSP + 0
-   \   000077   85..83       MOV     DPH,?XSP + 1
-   \   00007A   7480         MOV     A,#-0x80
-   \   00007C   8059         SJMP    ??MT_ZdoMatchDescRequest_6
     658            }
     659          
     660            if ( retValue == 0 )
-   \                     ??MT_ZdoMatchDescRequest_5:
-   \   00007E   85..82       MOV     DPL,?XSP + 0
-   \   000081   85..83       MOV     DPH,?XSP + 1
-   \   000084   E0           MOVX    A,@DPTR
-   \   000085   7051         JNZ     ??MT_ZdoMatchDescRequest_7
     661            {
     662              retValue = (uint8)ZDP_MatchDescReq( &destAddr, shortAddr, profileId, numInClusters,
     663                                                 inClusters, numOutClusters, outClusters, 0);
-   \   000087                ; Setup parameters for call to function ZDP_MatchDescReq
-   \   000087   75..00       MOV     ?V0 + 2,#0x0
-   \   00008A   78..         MOV     R0,#?V0 + 2
-   \   00008C   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00008F   740B         MOV     A,#0xb
-   \   000091   12....       LCALL   ?XSTACK_DISP0_8
-   \   000094   8582..       MOV     ?V0 + 2,DPL
-   \   000097   8583..       MOV     ?V0 + 3,DPH
-   \   00009A   78..         MOV     R0,#?V0 + 2
-   \   00009C   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00009F   E5..         MOV     A,?V0 + 6
-   \   0000A1   F5..         MOV     ?V0 + 2,A
-   \   0000A3   78..         MOV     R0,#?V0 + 2
-   \   0000A5   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000A8   742E         MOV     A,#0x2e
-   \   0000AA   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000AD   8582..       MOV     ?V0 + 2,DPL
-   \   0000B0   8583..       MOV     ?V0 + 3,DPH
-   \   0000B3   78..         MOV     R0,#?V0 + 2
-   \   0000B5   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000B8   78..         MOV     R0,#?V0 + 0
-   \   0000BA   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000BD   EF           MOV     A,R7
-   \   0000BE   F9           MOV     R1,A
-   \   0000BF   7409         MOV     A,#0x9
-   \   0000C1   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000C4   AA82         MOV     R2,DPL
-   \   0000C6   AB83         MOV     R3,DPH
-   \   0000C8   12....       LCALL   ??ZDP_MatchDescReq?relay
-   \   0000CB   7408         MOV     A,#0x8
-   \   0000CD   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000D0   E9           MOV     A,R1
-   \   0000D1   85..82       MOV     DPL,?XSP + 0
-   \   0000D4   85..83       MOV     DPH,?XSP + 1
-   \                     ??MT_ZdoMatchDescRequest_6:
-   \   0000D7   F0           MOVX    @DPTR,A
     664            }
     665          
     666            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
-   \                     ??MT_ZdoMatchDescRequest_7:
-   \   0000D8                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   0000D8   AC82         MOV     R4,DPL
-   \   0000DA   AD83         MOV     R5,DPH
-   \   0000DC   7B01         MOV     R3,#0x1
-   \   0000DE   EE           MOV     A,R6
-   \   0000DF   FA           MOV     R2,A
-   \   0000E0   7965         MOV     R1,#0x65
-   \   0000E2   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
     667          }
-   \   0000E5   744A         MOV     A,#0x4a
-   \   0000E7   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000EA                REQUIRE ?Subroutine1
-   \   0000EA                ; // Fall through to label ?Subroutine1
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine1:
-   \   000000   7F07         MOV     R7,#0x7
-   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine34:
-   \   000000   12....       LCALL   ?Subroutine59 & 0xFFFF
-   \                     ??CrossCallReturnLabel_92:
-   \   000003   E5..         MOV     A,?V0 + 4
-   \   000005   F0           MOVX    @DPTR,A
-   \   000006   A3           INC     DPTR
-   \   000007   E5..         MOV     A,?V0 + 5
-   \   000009                REQUIRE ??Subroutine67_0
-   \   000009                ; // Fall through to label ??Subroutine67_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine67_0:
-   \   000000   12....       LCALL   ?Subroutine55 & 0xFFFF
-   \                     ??CrossCallReturnLabel_103:
-   \   000003   05..         INC     ?V0 + 2
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine14:
-   \   000000   8A82         MOV     DPL,R2
-   \   000002   8B83         MOV     DPH,R3
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   F5..         MOV     ?V0 + 4,A
-   \   000007   A3           INC     DPTR
-   \   000008   E0           MOVX    A,@DPTR
-   \   000009   F9           MOV     R1,A
-   \   00000A   E5..         MOV     A,?V0 + 4
-   \   00000C   2400         ADD     A,#0x0
-   \   00000E   E4           CLR     A
-   \   00000F   39           ADDC    A,R1
-   \   000010   F5..         MOV     ?V0 + 5,A
-   \   000012   E5..         MOV     A,?V0 + 2
-   \   000014   33           RLC     A
-   \   000015   F8           MOV     R0,A
-   \   000016   E4           CLR     A
-   \   000017   33           RLC     A
-   \   000018   F9           MOV     R1,A
-   \   000019   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine6:
-   \   000000   85..82       MOV     DPL,?XSP + 0
-   \   000003   85..83       MOV     DPH,?XSP + 1
-   \   000006   E4           CLR     A
-   \   000007   F0           MOVX    @DPTR,A
-   \   000008                REQUIRE ??Subroutine68_0
-   \   000008                ; // Fall through to label ??Subroutine68_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine59:
-   \   000000   E582         MOV     A,DPL
-   \   000002   28           ADD     A,R0
-   \   000003   F582         MOV     DPL,A
-   \   000005   E583         MOV     A,DPH
-   \   000007   39           ADDC    A,R1
-   \   000008   F583         MOV     DPH,A
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine23:
-   \   000000   E8           MOV     A,R0
-   \   000001   F0           MOVX    @DPTR,A
-   \   000002   A3           INC     DPTR
-   \   000003   E9           MOV     A,R1
-   \   000004   F0           MOVX    @DPTR,A
-   \   000005   EA           MOV     A,R2
-   \   000006   2402         ADD     A,#0x2
-   \   000008   12....       LCALL   ?Subroutine46 & 0xFFFF
-   \                     ??CrossCallReturnLabel_124:
-   \   00000B   E4           CLR     A
-   \   00000C   39           ADDC    A,R1
-   \   00000D   FD           MOV     R5,A
-   \   00000E   EA           MOV     A,R2
-   \   00000F   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine46:
-   \   000000   0A           INC     R2
-   \   000001   0A           INC     R2
-   \   000002   EB           MOV     A,R3
-   \   000003   3400         ADDC    A,#0x0
-   \   000005   FB           MOV     R3,A
-   \   000006                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
-   \   000006                ; Setup parameters for call to function ZDO_RemoveRegisteredCB
-   \   000006   8A82         MOV     DPL,R2
-   \   000008   8B83         MOV     DPH,R3
-   \   00000A                REQUIRE ??Subroutine74_0
-   \   00000A                ; // Fall through to label ??Subroutine74_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine11:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   F5..         MOV     ?V0 + 0,A
-   \   000003   A3           INC     DPTR
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   F8           MOV     R0,A
-   \   000006   E4           CLR     A
-   \   000007   C8           XCH     A,R0
-   \   000008   F9           MOV     R1,A
-   \   000009   E5..         MOV     A,?V0 + 0
-   \   00000B   2400         ADD     A,#0x0
-   \   00000D   E4           CLR     A
-   \   00000E   39           ADDC    A,R1
-   \   00000F   F5..         MOV     ?V0 + 1,A
-   \   000011   EA           MOV     A,R2
-   \   000012   2402         ADD     A,#0x2
-   \   000014   0A           INC     R2
-   \   000015   0A           INC     R2
-   \   000016   12....       LCALL   ?Subroutine54 & 0xFFFF
-   \                     ??CrossCallReturnLabel_128:
-   \   000019   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine54:
-   \   000000   EB           MOV     A,R3
-   \   000001                REQUIRE ??Subroutine75_0
-   \   000001                ; // Fall through to label ??Subroutine75_0
     668          
     669          /***************************************************************************************************
     670           * @fn      MT_ZdoComplexDescRequest
@@ -1612,17 +804,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     675           *
     676           * @return  void
     677           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     678          void MT_ZdoComplexDescRequest(uint8 *pBuf)
-   \                     MT_ZdoComplexDescRequest:
     679          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 10
-   \   000005   74F6         MOV     A,#-0xa
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     680            uint8 cmdId;
     681            uint8 retValue;
     682            zAddrType_t destAddr;
@@ -1630,18 +813,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     684          
     685            /* parse header */
     686            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   12....       LCALL   ??Subroutine68_0 & 0xFFFF
     687            pBuf += MT_RPC_FRAME_HDR_SZ;
     688          
     689            /* Dev address */
     690            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_111:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     691            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_5:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine29 & 0xFFFF
     692            pBuf += 2;
     693          
     694            /* Network address of interest */
@@ -1649,10 +825,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     696            pBuf += 2;
     697          
     698            retValue = (uint8)ZDP_ComplexDescReq( &destAddr, shortAddr, 0);
-   \                     ??CrossCallReturnLabel_52:
-   \   000019   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00001C   7910         MOV     R1,#0x10
-   \   00001E   02....       LJMP    ?Subroutine0 & 0xFFFF
     699          
     700            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     701          }
@@ -1666,17 +838,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     709           *
     710           * @return  void
     711           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     712          void MT_ZdoUserDescRequest(uint8 *pBuf)
-   \                     MT_ZdoUserDescRequest:
     713          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 10
-   \   000005   74F6         MOV     A,#-0xa
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     714            uint8 cmdId;
     715            uint8 retValue;
     716            zAddrType_t destAddr;
@@ -1684,18 +847,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     718          
     719            /* parse header */
     720            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   12....       LCALL   ??Subroutine68_0 & 0xFFFF
     721            pBuf += MT_RPC_FRAME_HDR_SZ;
     722          
     723            /* Dev address */
     724            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_112:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     725            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1]);
-   \                     ??CrossCallReturnLabel_6:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine29 & 0xFFFF
     726            pBuf += 2;
     727          
     728            /* Network address of interest */
@@ -1703,10 +859,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     730            pBuf += 2;
     731          
     732            retValue = (uint8)ZDP_UserDescReq( &destAddr, shortAddr, 0);
-   \                     ??CrossCallReturnLabel_53:
-   \   000019   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00001C   7911         MOV     R1,#0x11
-   \   00001E   80..         SJMP    ?Subroutine0
     733          
     734            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     735          }
@@ -1720,34 +872,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     743           *
     744           * @return  void
     745           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine4:
-   \   000000   12....       LCALL   ?Subroutine40 & 0xFFFF
-   \                     ??CrossCallReturnLabel_116:
-   \   000003                REQUIRE ??Subroutine63_0
-   \   000003                ; // Fall through to label ??Subroutine63_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine63_0:
-   \   000000   FA           MOV     R2,A
-   \   000001                REQUIRE ??Subroutine64_0
-   \   000001                ; // Fall through to label ??Subroutine64_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     746          void MT_ZdoEndDevAnnce(uint8 *pBuf)
-   \                     MT_ZdoEndDevAnnce:
     747          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   EA           MOV     A,R2
-   \   00000B   FC           MOV     R4,A
-   \   00000C   EB           MOV     A,R3
-   \   00000D   FD           MOV     R5,A
     748            uint8 cmdId;
     749            uint8 retValue;
     750            uint16 shortAddr;
@@ -1755,73 +881,17 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     752          
     753            /* parse header */
     754            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000E   8C82         MOV     DPL,R4
-   \   000010   8D83         MOV     DPH,R5
-   \   000012   A3           INC     DPTR
-   \   000013   A3           INC     DPTR
-   \   000014   E0           MOVX    A,@DPTR
-   \   000015   FE           MOV     R6,A
     755            pBuf += MT_RPC_FRAME_HDR_SZ;
-   \   000016   EC           MOV     A,R4
-   \   000017   2403         ADD     A,#0x3
-   \   000019   0C           INC     R4
-   \   00001A   0C           INC     R4
-   \   00001B   0C           INC     R4
-   \   00001C   ED           MOV     A,R5
-   \   00001D   3400         ADDC    A,#0x0
-   \   00001F   FD           MOV     R5,A
     756          
     757            /* network address */
     758            shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \   000020   8C82         MOV     DPL,R4
-   \   000022   8D83         MOV     DPH,R5
-   \   000024   E0           MOVX    A,@DPTR
-   \   000025   FA           MOV     R2,A
-   \   000026   A3           INC     DPTR
-   \   000027   E0           MOVX    A,@DPTR
-   \   000028   F8           MOV     R0,A
-   \   000029   E4           CLR     A
-   \   00002A   C8           XCH     A,R0
-   \   00002B   F9           MOV     R1,A
-   \   00002C   EA           MOV     A,R2
-   \   00002D   2400         ADD     A,#0x0
-   \   00002F   E4           CLR     A
-   \   000030   39           ADDC    A,R1
-   \   000031   FB           MOV     R3,A
     759            pBuf += 2;
-   \   000032   EC           MOV     A,R4
-   \   000033   2402         ADD     A,#0x2
-   \   000035   0C           INC     R4
-   \   000036   0C           INC     R4
-   \   000037   ED           MOV     A,R5
-   \   000038   3400         ADDC    A,#0x0
-   \   00003A   FD           MOV     R5,A
     760          
     761            /* extended address */
     762            pIEEEAddr = pBuf;
     763            pBuf += Z_EXTADDR_LEN;
     764          
     765            retValue = (uint8)ZDP_DeviceAnnce( shortAddr, pIEEEAddr, *pBuf, 0);
-   \   00003B                ; Setup parameters for call to function ZDP_DeviceAnnce
-   \   00003B   88..         MOV     ?V0 + 0,R0
-   \   00003D   78..         MOV     R0,#?V0 + 0
-   \   00003F   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000042   8C82         MOV     DPL,R4
-   \   000044   8D83         MOV     DPH,R5
-   \   000046   A3           INC     DPTR
-   \   000047   A3           INC     DPTR
-   \   000048   A3           INC     DPTR
-   \   000049   A3           INC     DPTR
-   \   00004A   A3           INC     DPTR
-   \   00004B   A3           INC     DPTR
-   \   00004C   A3           INC     DPTR
-   \   00004D   A3           INC     DPTR
-   \   00004E   E0           MOVX    A,@DPTR
-   \   00004F   F9           MOV     R1,A
-   \   000050   12....       LCALL   ??ZDP_DeviceAnnce?relay
-   \   000053   7401         MOV     A,#0x1
-   \   000055   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000058   02....       LJMP    ?Subroutine4 & 0xFFFF
     766          
     767            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     768          }
@@ -1835,17 +905,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     776           *
     777           * @return  void
     778           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     779          void MT_ZdoUserDescSet(uint8 *pBuf)
-   \                     MT_ZdoUserDescSet:
     780          {
-   \   000000   74F4         MOV     A,#-0xc
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 12
-   \   000005                ; Auto size: 27
-   \   000005   74E5         MOV     A,#-0x1b
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     781            uint8 cmdId;
     782            uint8 retValue;
     783            zAddrType_t destAddr;
@@ -1854,143 +915,26 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     786          
     787            /* parse header */
     788            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   8A82         MOV     DPL,R2
-   \   00000C   8B83         MOV     DPH,R3
-   \   00000E   A3           INC     DPTR
-   \   00000F   A3           INC     DPTR
-   \   000010   E0           MOVX    A,@DPTR
-   \   000011   F5..         MOV     ?V0 + 3,A
     789            pBuf += MT_RPC_FRAME_HDR_SZ;
-   \   000013   12....       LCALL   ?Subroutine33 & 0xFFFF
     790          
     791            /* Dev address */
     792            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_58:
-   \   000016   7409         MOV     A,#0x9
-   \   000018   12....       LCALL   ?XSTACK_DISP0_8
-   \   00001B   12....       LCALL   ?Subroutine7 & 0xFFFF
     793            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_7:
-   \   00001E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000021   E8           MOV     A,R0
-   \   000022   F0           MOVX    @DPTR,A
-   \   000023   A3           INC     DPTR
-   \   000024   E9           MOV     A,R1
-   \   000025   F0           MOVX    @DPTR,A
     794            pBuf += 2;
-   \   000026   12....       LCALL   ?Subroutine32 & 0xFFFF
     795          
     796            /* Network address of interest */
     797            shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_121:
-   \   000029   FC           MOV     R4,A
-   \   00002A   A3           INC     DPTR
-   \   00002B   E0           MOVX    A,@DPTR
-   \   00002C   F8           MOV     R0,A
-   \   00002D   E4           CLR     A
-   \   00002E   C8           XCH     A,R0
-   \   00002F   F9           MOV     R1,A
-   \   000030   EC           MOV     A,R4
-   \   000031   2400         ADD     A,#0x0
-   \   000033   FE           MOV     R6,A
-   \   000034   E4           CLR     A
-   \   000035   39           ADDC    A,R1
-   \   000036   FF           MOV     R7,A
     798            pBuf += 2;
-   \   000037   12....       LCALL   ?Subroutine32 & 0xFFFF
     799          
     800            /* User descriptor */
     801            userDesc.len = *pBuf++;
-   \                     ??CrossCallReturnLabel_122:
-   \   00003A   C0E0         PUSH    A
-   \   00003C   740A         MOV     A,#0xa
-   \   00003E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000041   D0E0         POP     A
-   \   000043   F0           MOVX    @DPTR,A
-   \   000044   8A82         MOV     DPL,R2
-   \   000046   8B83         MOV     DPH,R3
-   \   000048   A3           INC     DPTR
-   \   000049   AA82         MOV     R2,DPL
-   \   00004B   AB83         MOV     R3,DPH
     802            osal_memcpy( userDesc.desc, pBuf, userDesc.len );
-   \   00004D                ; Setup parameters for call to function osal_memcpy
-   \   00004D   8A..         MOV     ?V0 + 0,R2
-   \   00004F   8B..         MOV     ?V0 + 1,R3
-   \   000051   88..         MOV     ?V0 + 2,R0
-   \   000053   78..         MOV     R0,#?V0 + 0
-   \   000055   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000058   740D         MOV     A,#0xd
-   \   00005A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00005D   E0           MOVX    A,@DPTR
-   \   00005E   FC           MOV     R4,A
-   \   00005F   7D00         MOV     R5,#0x0
-   \   000061   740E         MOV     A,#0xe
-   \   000063   12....       LCALL   ?XSTACK_DISP0_8
-   \   000066   AA82         MOV     R2,DPL
-   \   000068   AB83         MOV     R3,DPH
-   \   00006A   12....       LCALL   ??osal_memcpy?relay
-   \   00006D   7403         MOV     A,#0x3
-   \   00006F   12....       LCALL   ?DEALLOC_XSTACK8
     803            pBuf += 16;
     804          
     805            retValue = (uint8)ZDP_UserDescSet( &destAddr, shortAddr, &userDesc, 0);
-   \   000072                ; Setup parameters for call to function ZDP_UserDescSet
-   \   000072   740A         MOV     A,#0xa
-   \   000074   12....       LCALL   ?XSTACK_DISP0_8
-   \   000077   8582..       MOV     ?V0 + 0,DPL
-   \   00007A   8583..       MOV     ?V0 + 1,DPH
-   \   00007D   78..         MOV     R0,#?V0 + 0
-   \   00007F   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000082   7900         MOV     R1,#0x0
-   \   000084   EE           MOV     A,R6
-   \   000085   FC           MOV     R4,A
-   \   000086   EF           MOV     A,R7
-   \   000087   FD           MOV     R5,A
-   \   000088   7403         MOV     A,#0x3
-   \   00008A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00008D   AA82         MOV     R2,DPL
-   \   00008F   AB83         MOV     R3,DPH
-   \   000091   12....       LCALL   ??ZDP_UserDescSet?relay
-   \   000094   7402         MOV     A,#0x2
-   \   000096   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000099   12....       LCALL   ?Subroutine58 & 0xFFFF
     806          
     807            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
-   \                     ??CrossCallReturnLabel_119:
-   \   00009C   AA..         MOV     R2,?V0 + 3
-   \   00009E   7965         MOV     R1,#0x65
-   \   0000A0   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
     808          }
-   \   0000A3   741B         MOV     A,#0x1b
-   \   0000A5                REQUIRE ?Subroutine2
-   \   0000A5                ; // Fall through to label ?Subroutine2
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine2:
-   \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003   7F04         MOV     R7,#0x4
-   \   000005   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine32:
-   \   000000   EA           MOV     A,R2
-   \   000001   2402         ADD     A,#0x2
-   \   000003   0A           INC     R2
-   \   000004   0A           INC     R2
-   \   000005                REQUIRE ??Subroutine73_0
-   \   000005                ; // Fall through to label ??Subroutine73_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine73_0:
-   \   000000   12....       LCALL   ?Subroutine54 & 0xFFFF
-   \                     ??CrossCallReturnLabel_127:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine33:
-   \   000000   12....       LCALL   ?Subroutine52 & 0xFFFF
-   \                     ??CrossCallReturnLabel_114:
-   \   000003   22           RET
     809          
     810          /***************************************************************************************************
     811           * @fn      MT_ZdoServiceDiscRequest
@@ -2001,51 +945,21 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     816           *
     817           * @return  void
     818           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     819          void MT_ZdoServiceDiscRequest(uint8 *pBuf)
-   \                     MT_ZdoServiceDiscRequest:
     820          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     821            uint8 cmdId;
     822            uint8 retValue;
     823            uint16 serviceMask;
     824          
     825            /* parse header */
     826            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   00000A   8A82         MOV     DPL,R2
-   \   00000C   8B83         MOV     DPH,R3
-   \   00000E   A3           INC     DPTR
-   \   00000F   A3           INC     DPTR
-   \   000010   E0           MOVX    A,@DPTR
-   \   000011   FE           MOV     R6,A
     827            pBuf += MT_RPC_FRAME_HDR_SZ;
-   \   000012   12....       LCALL   ?Subroutine33 & 0xFFFF
     828          
     829            /* Service Mask */
     830            serviceMask = BUILD_UINT16( pBuf[0], pBuf[1]);
     831            pBuf += 2;
     832          
     833            retValue = (uint8)ZDP_ServerDiscReq( serviceMask, 0);
-   \                     ??CrossCallReturnLabel_59:
-   \   000015                ; Setup parameters for call to function ZDP_ServerDiscReq
-   \   000015   7900         MOV     R1,#0x0
-   \   000017   8A82         MOV     DPL,R2
-   \   000019   8B83         MOV     DPH,R3
-   \   00001B   E0           MOVX    A,@DPTR
-   \   00001C   FC           MOV     R4,A
-   \   00001D   A3           INC     DPTR
-   \   00001E   E0           MOVX    A,@DPTR
-   \   00001F   FB           MOV     R3,A
-   \   000020   EC           MOV     A,R4
-   \   000021   FA           MOV     R2,A
-   \   000022   12....       LCALL   ??ZDP_ServerDiscReq?relay
-   \   000025   02....       LJMP    ?Subroutine4 & 0xFFFF
     834          
     835            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     836          }
@@ -2059,20 +973,10 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     844           *
     845           * @return  void
     846           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     847          void MT_ZdoEndDevBindRequest(uint8 *pBuf)
-   \                     MT_ZdoEndDevBindRequest:
     848          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 70
-   \   000005   74BA         MOV     A,#-0x46
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
     849            uint8 cmdId;
     850            uint8 retValue = 0;
-   \   00000A   12....       LCALL   ?Subroutine6 & 0xFFFF
     851            uint8 i, epInt, numInClusters, numOutClusters;
     852            zAddrType_t destAddr;
     853            uint16 shortAddr;
@@ -2084,13 +988,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     859          
     860            /* Dev address */
     861            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_106:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine7 & 0xFFFF
     862            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_8:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine23 & 0xFFFF
     863            pBuf += 2;
     864          
     865            /* Local coordinator of the binding */
@@ -2099,215 +997,52 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     868          
     869            /* For now, skip past the extended address */
     870            pBuf += Z_EXTADDR_LEN;
-   \                     ??CrossCallReturnLabel_36:
-   \   000019   240A         ADD     A,#0xa
-   \   00001B   FA           MOV     R2,A
-   \   00001C   12....       LCALL   ??Subroutine73_0 & 0xFFFF
     871          
     872            /* Endpoint */
     873            epInt = *pBuf++;
-   \                     ??CrossCallReturnLabel_123:
-   \   00001F   FF           MOV     R7,A
-   \   000020   A3           INC     DPTR
-   \   000021   AA82         MOV     R2,DPL
-   \   000023   AB83         MOV     R3,DPH
     874          
     875            /* Profile ID */
     876            profileID = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \   000025   12....       LCALL   ?Subroutine11 & 0xFFFF
     877            pBuf += 2;
     878          
     879            /* NumInClusters */
     880            numInClusters = *pBuf++;
-   \                     ??CrossCallReturnLabel_14:
-   \   000028   F5..         MOV     ?V0 + 4,A
-   \   00002A   A3           INC     DPTR
-   \   00002B   0A           INC     R2
-   \   00002C   AB83         MOV     R3,DPH
     881            if ( numInClusters <= MTZDO_MAX_ED_BIND_CLUSTERS )
-   \   00002E   C3           CLR     C
-   \   00002F   9410         SUBB    A,#0x10
-   \   000031   5019         JNC     ??MT_ZdoEndDevBindRequest_0
     882            {
     883              for ( i = 0; i < numInClusters; i++ )
-   \   000033   88..         MOV     ?V0 + 2,R0
-   \                     ??MT_ZdoEndDevBindRequest_1:
-   \   000035   E5..         MOV     A,?V0 + 2
-   \   000037   C3           CLR     C
-   \   000038   95..         SUBB    A,?V0 + 4
-   \   00003A   5019         JNC     ??MT_ZdoEndDevBindRequest_2
     884              {
     885                inClusters[i] = BUILD_UINT16(pBuf[0], pBuf[1]);
-   \   00003C   12....       LCALL   ?Subroutine15 & 0xFFFF
     886                pBuf += 2;
     887              }
     888            }
-   \                     ??CrossCallReturnLabel_19:
-   \   00003F   7428         MOV     A,#0x28
-   \   000041   12....       LCALL   ?XSTACK_DISP0_8
-   \   000044   12....       LCALL   ?Subroutine41 & 0xFFFF
-   \                     ??CrossCallReturnLabel_69:
-   \   000047   12....       LCALL   ??Subroutine67_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_100:
-   \   00004A   80E9         SJMP    ??MT_ZdoEndDevBindRequest_1
     889            else
     890            {
     891              retValue = ZDP_INVALID_REQTYPE;
-   \                     ??MT_ZdoEndDevBindRequest_0:
-   \   00004C   85..82       MOV     DPL,?XSP + 0
-   \   00004F   85..83       MOV     DPH,?XSP + 1
-   \   000052   7480         MOV     A,#-0x80
-   \   000054   F0           MOVX    @DPTR,A
     892            }
     893          
     894            /* NumOutClusters */
     895            numOutClusters = *pBuf++;
-   \                     ??MT_ZdoEndDevBindRequest_2:
-   \   000055   8A82         MOV     DPL,R2
-   \   000057   8B83         MOV     DPH,R3
-   \   000059   E0           MOVX    A,@DPTR
-   \   00005A   F5..         MOV     ?V0 + 5,A
-   \   00005C   A3           INC     DPTR
-   \   00005D   AA82         MOV     R2,DPL
-   \   00005F   AB83         MOV     R3,DPH
     896            if ( numOutClusters <= MTZDO_MAX_ED_BIND_CLUSTERS )
-   \   000061   C3           CLR     C
-   \   000062   9410         SUBB    A,#0x10
-   \   000064   501A         JNC     ??MT_ZdoEndDevBindRequest_3
     897            {
     898              for ( i = 0; i < numOutClusters; i++ )
-   \   000066   75..00       MOV     ?V0 + 2,#0x0
-   \                     ??MT_ZdoEndDevBindRequest_4:
-   \   000069   E5..         MOV     A,?V0 + 2
-   \   00006B   C3           CLR     C
-   \   00006C   95..         SUBB    A,?V0 + 5
-   \   00006E   501A         JNC     ??MT_ZdoEndDevBindRequest_5
     899              {
     900                outClusters[i] = BUILD_UINT16(pBuf[0], pBuf[1]);
-   \   000070   12....       LCALL   ?Subroutine15 & 0xFFFF
     901                pBuf += 2;
     902              }
     903            }
-   \                     ??CrossCallReturnLabel_20:
-   \   000073   740A         MOV     A,#0xa
-   \   000075   12....       LCALL   ?XSTACK_DISP0_8
-   \   000078   12....       LCALL   ?Subroutine41 & 0xFFFF
-   \                     ??CrossCallReturnLabel_70:
-   \   00007B   12....       LCALL   ??Subroutine67_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_101:
-   \   00007E   80E9         SJMP    ??MT_ZdoEndDevBindRequest_4
     904            else
     905            {
     906              retValue = ZDP_INVALID_REQTYPE;
-   \                     ??MT_ZdoEndDevBindRequest_3:
-   \   000080   85..82       MOV     DPL,?XSP + 0
-   \   000083   85..83       MOV     DPH,?XSP + 1
-   \   000086   7480         MOV     A,#-0x80
-   \   000088   8062         SJMP    ??MT_ZdoEndDevBindRequest_6
     907            }
     908          
     909            if ( retValue == 0 )
-   \                     ??MT_ZdoEndDevBindRequest_5:
-   \   00008A   85..82       MOV     DPL,?XSP + 0
-   \   00008D   85..83       MOV     DPH,?XSP + 1
-   \   000090   E0           MOVX    A,@DPTR
-   \   000091   705A         JNZ     ??MT_ZdoEndDevBindRequest_7
     910            {
     911              retValue = (uint8)ZDP_EndDeviceBindReq( &destAddr, shortAddr, epInt, profileID,
     912                                                    numInClusters, inClusters, numOutClusters, outClusters, 0);
-   \   000093                ; Setup parameters for call to function ZDP_EndDeviceBindReq
-   \   000093   75..00       MOV     ?V0 + 2,#0x0
-   \   000096   78..         MOV     R0,#?V0 + 2
-   \   000098   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00009B   740B         MOV     A,#0xb
-   \   00009D   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000A0   8582..       MOV     ?V0 + 2,DPL
-   \   0000A3   8583..       MOV     ?V0 + 3,DPH
-   \   0000A6   78..         MOV     R0,#?V0 + 2
-   \   0000A8   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000AB   E5..         MOV     A,?V0 + 5
-   \   0000AD   F5..         MOV     ?V0 + 2,A
-   \   0000AF   78..         MOV     R0,#?V0 + 2
-   \   0000B1   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000B4   742C         MOV     A,#0x2c
-   \   0000B6   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000B9   8582..       MOV     ?V0 + 2,DPL
-   \   0000BC   8583..       MOV     ?V0 + 3,DPH
-   \   0000BF   78..         MOV     R0,#?V0 + 2
-   \   0000C1   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000C4   E5..         MOV     A,?V0 + 4
-   \   0000C6   F5..         MOV     ?V0 + 2,A
-   \   0000C8   78..         MOV     R0,#?V0 + 2
-   \   0000CA   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000CD   78..         MOV     R0,#?V0 + 0
-   \   0000CF   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000D2   EF           MOV     A,R7
-   \   0000D3   F9           MOV     R1,A
-   \   0000D4   740A         MOV     A,#0xa
-   \   0000D6   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000D9   AA82         MOV     R2,DPL
-   \   0000DB   AB83         MOV     R3,DPH
-   \   0000DD   12....       LCALL   ??ZDP_EndDeviceBindReq?relay
-   \   0000E0   7409         MOV     A,#0x9
-   \   0000E2   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000E5   E9           MOV     A,R1
-   \   0000E6   85..82       MOV     DPL,?XSP + 0
-   \   0000E9   85..83       MOV     DPH,?XSP + 1
-   \                     ??MT_ZdoEndDevBindRequest_6:
-   \   0000EC   F0           MOVX    @DPTR,A
     913            }
     914          
     915            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
-   \                     ??MT_ZdoEndDevBindRequest_7:
-   \   0000ED                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   0000ED   AC82         MOV     R4,DPL
-   \   0000EF   AD83         MOV     R5,DPH
-   \   0000F1   7B01         MOV     R3,#0x1
-   \   0000F3   EE           MOV     A,R6
-   \   0000F4   FA           MOV     R2,A
-   \   0000F5   7965         MOV     R1,#0x65
-   \   0000F7   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
     916          }
-   \   0000FA   7446         MOV     A,#0x46
-   \   0000FC   02....       LJMP    ??Subroutine76_0 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine41:
-   \   000000   12....       LCALL   ?Subroutine59 & 0xFFFF
-   \                     ??CrossCallReturnLabel_93:
-   \   000003   E5..         MOV     A,?V0 + 6
-   \   000005   F0           MOVX    @DPTR,A
-   \   000006   A3           INC     DPTR
-   \   000007   E5..         MOV     A,?V0 + 7
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine15:
-   \   000000   8A82         MOV     DPL,R2
-   \   000002   8B83         MOV     DPH,R3
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   F5..         MOV     ?V0 + 6,A
-   \   000007   A3           INC     DPTR
-   \   000008   E0           MOVX    A,@DPTR
-   \   000009   F9           MOV     R1,A
-   \   00000A   E5..         MOV     A,?V0 + 6
-   \   00000C   2400         ADD     A,#0x0
-   \   00000E   E4           CLR     A
-   \   00000F   39           ADDC    A,R1
-   \   000010   F5..         MOV     ?V0 + 7,A
-   \   000012   E5..         MOV     A,?V0 + 2
-   \   000014   33           RLC     A
-   \   000015   F8           MOV     R0,A
-   \   000016   E4           CLR     A
-   \   000017   33           RLC     A
-   \   000018   F9           MOV     R1,A
-   \   000019   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine76_0:
-   \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003   7F08         MOV     R7,#0x8
-   \   000005   02....       LJMP    ?BANKED_LEAVE_XDATA
     917          
     918          /***************************************************************************************************
     919           * @fn      MT_ZdoBindRequest
@@ -2318,18 +1053,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     924           *
     925           * @return  void
     926           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     927          void MT_ZdoBindRequest(uint8 *pBuf)
-   \                     MT_ZdoBindRequest:
     928          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 19
-   \   000005   74ED         MOV     A,#-0x13
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   12....       LCALL   ?Subroutine19 & 0xFFFF
     929            uint8 cmdId;
     930            uint8 retValue;
     931            zAddrType_t destAddr, devAddr;
@@ -2343,13 +1068,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     939          
     940            /* Dev address */
     941            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_27:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine26 & 0xFFFF
     942            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_42:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine10 & 0xFFFF
     943            pBuf += 2;
     944          
     945            /* SrcAddress */
@@ -2365,42 +1084,17 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     955          
     956            /* Destination Address mode */
     957            devAddr.addrMode = *pBuf++;
-   \                     ??CrossCallReturnLabel_11:
-   \   000019   12....       LCALL   ?XSTACK_DISP0_8
-   \   00001C   12....       LCALL   ?Subroutine37 & 0xFFFF
     958          
     959            /* Destination Address */
     960            if ( devAddr.addrMode == Addr64Bit )
-   \                     ??CrossCallReturnLabel_62:
-   \   00001F   7012         JNZ     ??MT_ZdoBindRequest_0
     961            {
     962              ptr = pBuf;
     963              osal_cpyExtAddr( devAddr.addr.extAddr, ptr );
-   \   000021                ; Setup parameters for call to function sAddrExtCpy
-   \   000021   EE           MOV     A,R6
-   \   000022   FC           MOV     R4,A
-   \   000023   EF           MOV     A,R7
-   \   000024   FD           MOV     R5,A
-   \   000025   7401         MOV     A,#0x1
-   \   000027   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002A   AA82         MOV     R2,DPL
-   \   00002C   AB83         MOV     R3,DPH
-   \   00002E   12....       LCALL   ??sAddrExtCpy?relay
-   \   000031   800B         SJMP    ??MT_ZdoBindRequest_1
     964            }
     965            else
     966            {
     967              devAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??MT_ZdoBindRequest_0:
-   \   000033   12....       LCALL   ?Subroutine27 & 0xFFFF
     968            }
-   \                     ??CrossCallReturnLabel_44:
-   \   000036   12....       LCALL   ?XSTACK_DISP0_8
-   \   000039   E8           MOV     A,R0
-   \   00003A   F0           MOVX    @DPTR,A
-   \   00003B   A3           INC     DPTR
-   \   00003C   E9           MOV     A,R1
-   \   00003D   F0           MOVX    @DPTR,A
     969            /* The short address occupies LSB two bytes */
     970            pBuf += Z_EXTADDR_LEN;
     971          
@@ -2408,182 +1102,9 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     973            dstEPInt = *pBuf;
     974          
     975            retValue = (uint8)ZDP_BindReq( &destAddr, pSrcAddr, srcEPInt, clusterID, &devAddr, dstEPInt, 0);
-   \                     ??MT_ZdoBindRequest_1:
-   \   00003E                ; Setup parameters for call to function ZDP_BindUnbindReq
-   \   00003E   75..00       MOV     ?V0 + 4,#0x0
-   \   000041   78..         MOV     R0,#?V0 + 4
-   \   000043   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000046   8E82         MOV     DPL,R6
-   \   000048   8F83         MOV     DPH,R7
-   \   00004A   A3           INC     DPTR
-   \   00004B   A3           INC     DPTR
-   \   00004C   A3           INC     DPTR
-   \   00004D   A3           INC     DPTR
-   \   00004E   A3           INC     DPTR
-   \   00004F   A3           INC     DPTR
-   \   000050   A3           INC     DPTR
-   \   000051   A3           INC     DPTR
-   \   000052   E0           MOVX    A,@DPTR
-   \   000053   F5..         MOV     ?V0 + 4,A
-   \   000055   78..         MOV     R0,#?V0 + 4
-   \   000057   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00005A   7403         MOV     A,#0x3
-   \   00005C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00005F   8582..       MOV     ?V0 + 4,DPL
-   \   000062   8583..       MOV     ?V0 + 5,DPH
-   \   000065   78..         MOV     R0,#?V0 + 4
-   \   000067   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00006A   78..         MOV     R0,#?V0 + 6
-   \   00006C   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00006F   78..         MOV     R0,#?V0 + 2
-   \   000071   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000074   A9..         MOV     R1,?V0 + 1
-   \   000076   7412         MOV     A,#0x12
-   \   000078   12....       LCALL   ?XSTACK_DISP0_8
-   \   00007B   AC82         MOV     R4,DPL
-   \   00007D   AD83         MOV     R5,DPH
-   \   00007F   7A21         MOV     R2,#0x21
-   \   000081                REQUIRE ?Subroutine3
-   \   000081                ; // Fall through to label ?Subroutine3
     976          
     977            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
     978          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine3:
-   \   000000   7B00         MOV     R3,#0x0
-   \   000002   12....       LCALL   ??ZDP_BindUnbindReq?relay
-   \   000005   7408         MOV     A,#0x8
-   \   000007   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00000A   12....       LCALL   ?Subroutine38 & 0xFFFF
-   \                     ??CrossCallReturnLabel_65:
-   \   00000D   7965         MOV     R1,#0x65
-   \   00000F   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
-   \   000012   7413         MOV     A,#0x13
-   \   000014                REQUIRE ??Subroutine76_0
-   \   000014                ; // Fall through to label ??Subroutine76_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine37:
-   \   000000   E8           MOV     A,R0
-   \   000001   F0           MOVX    @DPTR,A
-   \   000002   8E82         MOV     DPL,R6
-   \   000004   8F83         MOV     DPH,R7
-   \   000006   A3           INC     DPTR
-   \   000007   0E           INC     R6
-   \   000008   AF83         MOV     R7,DPH
-   \   00000A   7403         MOV     A,#0x3
-   \   00000C   68           XRL     A,R0
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine27:
-   \   000000   12....       LCALL   ?Subroutine50 & 0xFFFF
-   \                     ??CrossCallReturnLabel_85:
-   \   000003   F8           MOV     R0,A
-   \   000004   7401         MOV     A,#0x1
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine26:
-   \   000000   7402         MOV     A,#0x2
-   \   000002   F0           MOVX    @DPTR,A
-   \   000003   8E82         MOV     DPL,R6
-   \   000005   8F83         MOV     DPH,R7
-   \   000007   12....       LCALL   ?Subroutine50 & 0xFFFF
-   \                     ??CrossCallReturnLabel_84:
-   \   00000A   F8           MOV     R0,A
-   \   00000B   740A         MOV     A,#0xa
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine50:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   FA           MOV     R2,A
-   \   000002   A3           INC     DPTR
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   F9           MOV     R1,A
-   \   000005   EA           MOV     A,R2
-   \   000006   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine19:
-   \   000000   EA           MOV     A,R2
-   \   000001   FE           MOV     R6,A
-   \   000002   EB           MOV     A,R3
-   \   000003   FF           MOV     R7,A
-   \   000004   12....       LCALL   ?Subroutine45 & 0xFFFF
-   \                     ??CrossCallReturnLabel_77:
-   \   000007   7412         MOV     A,#0x12
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine10:
-   \   000000   E8           MOV     A,R0
-   \   000001   F0           MOVX    @DPTR,A
-   \   000002   A3           INC     DPTR
-   \   000003   E9           MOV     A,R1
-   \   000004   F0           MOVX    @DPTR,A
-   \   000005   EE           MOV     A,R6
-   \   000006   2402         ADD     A,#0x2
-   \   000008   F5..         MOV     ?V0 + 2,A
-   \   00000A   EF           MOV     A,R7
-   \   00000B   3400         ADDC    A,#0x0
-   \   00000D   F5..         MOV     ?V0 + 3,A
-   \   00000F   E5..         MOV     A,?V0 + 2
-   \   000011   2408         ADD     A,#0x8
-   \   000013   FE           MOV     R6,A
-   \   000014   E5..         MOV     A,?V0 + 3
-   \   000016   12....       LCALL   ?Subroutine56 & 0xFFFF
-   \                     ??CrossCallReturnLabel_90:
-   \   000019   F5..         MOV     ?V0 + 1,A
-   \   00001B   A3           INC     DPTR
-   \   00001C   AE82         MOV     R6,DPL
-   \   00001E   AF83         MOV     R7,DPH
-   \   000020   12....       LCALL   ?Subroutine50 & 0xFFFF
-   \                     ??CrossCallReturnLabel_83:
-   \   000023   2400         ADD     A,#0x0
-   \   000025   F5..         MOV     ?V0 + 6,A
-   \   000027   E4           CLR     A
-   \   000028   39           ADDC    A,R1
-   \   000029   F5..         MOV     ?V0 + 7,A
-   \   00002B   EE           MOV     A,R6
-   \   00002C   2402         ADD     A,#0x2
-   \   00002E   0E           INC     R6
-   \   00002F   0E           INC     R6
-   \   000030   EF           MOV     A,R7
-   \   000031   12....       LCALL   ?Subroutine56 & 0xFFFF
-   \                     ??CrossCallReturnLabel_91:
-   \   000034   F8           MOV     R0,A
-   \   000035   7409         MOV     A,#0x9
-   \   000037   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine56:
-   \   000000   3400         ADDC    A,#0x0
-   \   000002   FF           MOV     R7,A
-   \   000003   8E82         MOV     DPL,R6
-   \   000005   8F83         MOV     DPH,R7
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine45:
-   \   000000   8E82         MOV     DPL,R6
-   \   000002   8F83         MOV     DPH,R7
-   \   000004   A3           INC     DPTR
-   \   000005   A3           INC     DPTR
-   \   000006   E0           MOVX    A,@DPTR
-   \   000007   F5..         MOV     ?V0 + 0,A
-   \   000009   EE           MOV     A,R6
-   \   00000A   2403         ADD     A,#0x3
-   \   00000C   0E           INC     R6
-   \   00000D   0E           INC     R6
-   \   00000E   0E           INC     R6
-   \   00000F   EF           MOV     A,R7
-   \   000010   3400         ADDC    A,#0x0
-   \   000012   FF           MOV     R7,A
-   \   000013   22           RET
     979          
     980          /***************************************************************************************************
     981           * @fn      MT_ZdoUnbindRequest
@@ -2594,18 +1115,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
     986           *
     987           * @return  void
     988           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     989          void MT_ZdoUnbindRequest(uint8 *pBuf)
-   \                     MT_ZdoUnbindRequest:
     990          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 16
-   \   000005                ; Auto size: 19
-   \   000005   74ED         MOV     A,#-0x13
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   12....       LCALL   ?Subroutine19 & 0xFFFF
     991            uint8 cmdId;
     992            uint8 retValue;
     993            zAddrType_t destAddr, devAddr;
@@ -2619,13 +1130,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1001          
    1002            /* dev address */
    1003            destAddr.addrMode = Addr16Bit;
-   \                     ??CrossCallReturnLabel_28:
-   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000010   12....       LCALL   ?Subroutine26 & 0xFFFF
    1004            destAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??CrossCallReturnLabel_43:
-   \   000013   12....       LCALL   ?XSTACK_DISP0_8
-   \   000016   12....       LCALL   ?Subroutine10 & 0xFFFF
    1005            pBuf += 2;
    1006          
    1007            /* SrcAddress */
@@ -2641,42 +1146,17 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1017          
    1018            /* Destination Address mode */
    1019            devAddr.addrMode = *pBuf++;
-   \                     ??CrossCallReturnLabel_12:
-   \   000019   12....       LCALL   ?XSTACK_DISP0_8
-   \   00001C   12....       LCALL   ?Subroutine37 & 0xFFFF
    1020          
    1021            /* Destination Address */
    1022            if ( devAddr.addrMode == Addr64Bit )
-   \                     ??CrossCallReturnLabel_63:
-   \   00001F   7012         JNZ     ??MT_ZdoUnbindRequest_0
    1023            {
    1024              ptr = pBuf;
    1025              osal_cpyExtAddr( devAddr.addr.extAddr, ptr );
-   \   000021                ; Setup parameters for call to function sAddrExtCpy
-   \   000021   EE           MOV     A,R6
-   \   000022   FC           MOV     R4,A
-   \   000023   EF           MOV     A,R7
-   \   000024   FD           MOV     R5,A
-   \   000025   7401         MOV     A,#0x1
-   \   000027   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002A   AA82         MOV     R2,DPL
-   \   00002C   AB83         MOV     R3,DPH
-   \   00002E   12....       LCALL   ??sAddrExtCpy?relay
-   \   000031   800B         SJMP    ??MT_ZdoUnbindRequest_1
    1026            }
    1027            else
    1028            {
    1029              devAddr.addr.shortAddr = BUILD_UINT16( pBuf[0], pBuf[1] );
-   \                     ??MT_ZdoUnbindRequest_0:
-   \   000033   12....       LCALL   ?Subroutine27 & 0xFFFF
    1030            }
-   \                     ??CrossCallReturnLabel_45:
-   \   000036   12....       LCALL   ?XSTACK_DISP0_8
-   \   000039   E8           MOV     A,R0
-   \   00003A   F0           MOVX    @DPTR,A
-   \   00003B   A3           INC     DPTR
-   \   00003C   E9           MOV     A,R1
-   \   00003D   F0           MOVX    @DPTR,A
    1031            /* The short address occupies LSB two bytes */
    1032            pBuf += Z_EXTADDR_LEN;
    1033          
@@ -2684,42 +1164,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1035            dstEPInt = *pBuf;
    1036          
    1037            retValue = (uint8)ZDP_UnbindReq( &destAddr, pSrcAddr, srcEPInt, clusterID, &devAddr, dstEPInt, 0);
-   \                     ??MT_ZdoUnbindRequest_1:
-   \   00003E                ; Setup parameters for call to function ZDP_BindUnbindReq
-   \   00003E   75..00       MOV     ?V0 + 4,#0x0
-   \   000041   78..         MOV     R0,#?V0 + 4
-   \   000043   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000046   8E82         MOV     DPL,R6
-   \   000048   8F83         MOV     DPH,R7
-   \   00004A   A3           INC     DPTR
-   \   00004B   A3           INC     DPTR
-   \   00004C   A3           INC     DPTR
-   \   00004D   A3           INC     DPTR
-   \   00004E   A3           INC     DPTR
-   \   00004F   A3           INC     DPTR
-   \   000050   A3           INC     DPTR
-   \   000051   A3           INC     DPTR
-   \   000052   E0           MOVX    A,@DPTR
-   \   000053   F5..         MOV     ?V0 + 4,A
-   \   000055   78..         MOV     R0,#?V0 + 4
-   \   000057   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00005A   7403         MOV     A,#0x3
-   \   00005C   12....       LCALL   ?XSTACK_DISP0_8
-   \   00005F   8582..       MOV     ?V0 + 4,DPL
-   \   000062   8583..       MOV     ?V0 + 5,DPH
-   \   000065   78..         MOV     R0,#?V0 + 4
-   \   000067   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00006A   78..         MOV     R0,#?V0 + 6
-   \   00006C   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00006F   78..         MOV     R0,#?V0 + 2
-   \   000071   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000074   A9..         MOV     R1,?V0 + 1
-   \   000076   7412         MOV     A,#0x12
-   \   000078   12....       LCALL   ?XSTACK_DISP0_8
-   \   00007B   AC82         MOV     R4,DPL
-   \   00007D   AD83         MOV     R5,DPH
-   \   00007F   7A22         MOV     R2,#0x22
-   \   000081   02....       LJMP    ?Subroutine3 & 0xFFFF
    1038          
    1039            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue);
    1040          }
@@ -3202,76 +1646,22 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1517           *
    1518           * @return  void
    1519           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1520          void MT_ZdoStartupFromApp(uint8 *pBuf)
-   \                     MT_ZdoStartupFromApp:
    1521          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
    1522            uint8 cmd0, cmd1, retValue;
    1523          
    1524            /* parse header */
    1525            cmd0 = pBuf[MT_RPC_POS_CMD0];
-   \   00000A   12....       LCALL   ?Subroutine48 & 0xFFFF
    1526            cmd1 = pBuf[MT_RPC_POS_CMD1];
    1527            pBuf += MT_RPC_FRAME_HDR_SZ;
    1528          
    1529            retValue = ZDOInitDevice(100);
-   \                     ??CrossCallReturnLabel_81:
-   \   00000D                ; Setup parameters for call to function ZDOInitDevice
-   \   00000D   7A64         MOV     R2,#0x64
-   \   00000F   7B00         MOV     R3,#0x0
-   \   000011   12....       LCALL   ??ZDOInitDevice?relay
-   \   000014   12....       LCALL   ?Subroutine39 & 0xFFFF
    1530          
    1531            if (MT_RPC_CMD_SREQ == (cmd0 & MT_RPC_CMD_TYPE_MASK))
-   \                     ??CrossCallReturnLabel_66:
-   \   000017   700D         JNZ     ??MT_ZdoStartupFromApp_0
    1532            {
    1533              MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP|(uint8)MT_RPC_SYS_ZDO), cmd1,1, &retValue);
-   \   000019                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000019   AC82         MOV     R4,DPL
-   \   00001B   AD83         MOV     R5,DPH
-   \   00001D   7B01         MOV     R3,#0x1
-   \   00001F   EE           MOV     A,R6
-   \   000020   FA           MOV     R2,A
-   \   000021   7965         MOV     R1,#0x65
-   \   000023   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
    1534            }
    1535          }
-   \                     ??MT_ZdoStartupFromApp_0:
-   \   000026   02....       LJMP    ??Subroutine65_0 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine39:
-   \   000000   E9           MOV     A,R1
-   \   000001   85..82       MOV     DPL,?XSP + 0
-   \   000004   85..83       MOV     DPH,?XSP + 1
-   \   000007   F0           MOVX    @DPTR,A
-   \   000008   74E0         MOV     A,#-0x20
-   \   00000A   5F           ANL     A,R7
-   \   00000B   6420         XRL     A,#0x20
-   \   00000D   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine48:
-   \   000000   8A82         MOV     DPL,R2
-   \   000002   8B83         MOV     DPH,R3
-   \   000004   A3           INC     DPTR
-   \   000005   E0           MOVX    A,@DPTR
-   \   000006   FF           MOV     R7,A
-   \   000007   8A82         MOV     DPL,R2
-   \   000009   8B83         MOV     DPH,R3
-   \   00000B   A3           INC     DPTR
-   \   00000C   A3           INC     DPTR
-   \   00000D   E0           MOVX    A,@DPTR
-   \   00000E   FE           MOV     R6,A
-   \   00000F   22           RET
    1536          
    1537          
    1538          /***************************************************************************************************
@@ -3283,35 +1673,15 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1544           *
    1545           * @return  void
    1546           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1547          void MT_ZdoNetworkDiscoveryReq(uint8 *pBuf)
-   \                     MT_ZdoNetworkDiscoveryReq:
    1548          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
    1549            uint8  retValue = ZFailure;
-   \   00000A   85..82       MOV     DPL,?XSP + 0
-   \   00000D   85..83       MOV     DPH,?XSP + 1
-   \   000010   7401         MOV     A,#0x1
-   \   000012   F0           MOVX    @DPTR,A
    1550            uint8  cmdId;
    1551            uint32 scanChannels;
    1552          
    1553            /* parse header */
    1554            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   000013   8A82         MOV     DPL,R2
-   \   000015   8B83         MOV     DPH,R3
-   \   000017   A3           INC     DPTR
-   \   000018   A3           INC     DPTR
-   \   000019   E0           MOVX    A,@DPTR
-   \   00001A   FF           MOV     R7,A
    1555            pBuf += MT_RPC_FRAME_HDR_SZ;
-   \   00001B   12....       LCALL   ?Subroutine31 & 0xFFFF
    1556          
    1557            /* Packet format */
    1558            /* scan channels (4) | scan duration (1) */
@@ -3321,57 +1691,15 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1562            pBuf += 4;
    1563          
    1564            retValue = ZDApp_NetworkDiscoveryReq(scanChannels, *pBuf);
-   \                     ??CrossCallReturnLabel_57:
-   \   00001E   A3           INC     DPTR
-   \   00001F   A3           INC     DPTR
-   \   000020   A3           INC     DPTR
-   \   000021   A3           INC     DPTR
-   \   000022   E0           MOVX    A,@DPTR
-   \   000023   FE           MOV     R6,A
-   \   000024                ; Setup parameters for call to function osal_build_uint32
-   \   000024   7904         MOV     R1,#0x4
-   \   000026   12....       LCALL   ??osal_build_uint32?relay
-   \   000029   EE           MOV     A,R6
-   \   00002A   F9           MOV     R1,A
-   \   00002B   12....       LCALL   ??ZDApp_NetworkDiscoveryReq?relay
-   \   00002E   E9           MOV     A,R1
-   \   00002F   85..82       MOV     DPL,?XSP + 0
-   \   000032   85..83       MOV     DPH,?XSP + 1
-   \   000035   F0           MOVX    @DPTR,A
    1565          
    1566            // Register ZDO callback for MT to handle the network discovery confirm
    1567            // and beacon notification confirm
    1568            ZDO_RegisterForZdoCB( ZDO_NWK_DISCOVERY_CNF_CBID, &MT_ZdoNwkDiscoveryCnfCB );
-   \   000036                ; Setup parameters for call to function ZDO_RegisterForZdoCB
-   \   000036   7A..         MOV     R2,#??MT_ZdoNwkDiscoveryCnfCB?relay & 0xff
-   \   000038   7B..         MOV     R3,#(??MT_ZdoNwkDiscoveryCnfCB?relay >> 8) & 0xff
-   \   00003A   7902         MOV     R1,#0x2
-   \   00003C   12....       LCALL   ??ZDO_RegisterForZdoCB?relay
    1569            ZDO_RegisterForZdoCB( ZDO_BEACON_NOTIFY_IND_CBID, &MT_ZdoBeaconIndCB );
-   \   00003F                ; Setup parameters for call to function ZDO_RegisterForZdoCB
-   \   00003F   7A..         MOV     R2,#??MT_ZdoBeaconIndCB?relay & 0xff
-   \   000041   7B..         MOV     R3,#(??MT_ZdoBeaconIndCB?relay >> 8) & 0xff
-   \   000043   7903         MOV     R1,#0x3
-   \   000045   12....       LCALL   ?Subroutine42 & 0xFFFF
    1570          
    1571            /* Build and send back the response */
    1572            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue );
-   \                     ??CrossCallReturnLabel_71:
-   \   000048   EF           MOV     A,R7
-   \   000049   02....       LJMP    ??Subroutine63_0 & 0xFFFF
    1573          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine42:
-   \   000000   12....       LCALL   ??ZDO_RegisterForZdoCB?relay
-   \   000003                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000003                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000003   85..82       MOV     DPL,?XSP + 0
-   \   000006   85..83       MOV     DPH,?XSP + 1
-   \   000009   AC82         MOV     R4,DPL
-   \   00000B   AD83         MOV     R5,DPH
-   \   00000D   7B01         MOV     R3,#0x1
-   \   00000F   22           RET
    1574          
    1575          
    1576          /***************************************************************************************************
@@ -3383,33 +1711,15 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1582           *
    1583           * @return  void
    1584           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1585          void MT_ZdoJoinReq(uint8 *pBuf)
-   \                     MT_ZdoJoinReq:
    1586          {
-   \   000000   74F4         MOV     A,#-0xc
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 12
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   EA           MOV     A,R2
-   \   00000B   FE           MOV     R6,A
-   \   00000C   EB           MOV     A,R3
-   \   00000D   FF           MOV     R7,A
    1587            uint8  retValue = ZFailure;
-   \   00000E   85..82       MOV     DPL,?XSP + 0
-   \   000011   85..83       MOV     DPH,?XSP + 1
-   \   000014   7401         MOV     A,#0x1
-   \   000016   F0           MOVX    @DPTR,A
    1588            uint8  cmdId;
    1589            uint16 panId;
    1590            uint16 chosenParent;
    1591          
    1592            /* parse header */
    1593            cmdId = pBuf[MT_RPC_POS_CMD1];
-   \   000017   12....       LCALL   ?Subroutine45 & 0xFFFF
    1594            pBuf += MT_RPC_FRAME_HDR_SZ;
    1595          
    1596            /* Packet format */
@@ -3421,116 +1731,14 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1602            chosenParent = BUILD_UINT16(pBuf[11], pBuf[12]);
    1603          
    1604            retValue = ZDApp_JoinReq(pBuf[0], panId, &(pBuf[3]), chosenParent, pBuf[13], pBuf[14]);
-   \                     ??CrossCallReturnLabel_78:
-   \   00001A                ; Setup parameters for call to function ZDApp_JoinReq
-   \   00001A   EE           MOV     A,R6
-   \   00001B   240E         ADD     A,#0xe
-   \   00001D   12....       LCALL   ?Subroutine35 & 0xFFFF
-   \                     ??CrossCallReturnLabel_60:
-   \   000020   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000023   EE           MOV     A,R6
-   \   000024   240D         ADD     A,#0xd
-   \   000026   12....       LCALL   ?Subroutine35 & 0xFFFF
-   \                     ??CrossCallReturnLabel_61:
-   \   000029   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00002C   EE           MOV     A,R6
-   \   00002D   240B         ADD     A,#0xb
-   \   00002F   F582         MOV     DPL,A
-   \   000031   EF           MOV     A,R7
-   \   000032   12....       LCALL   ??Subroutine78_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_134:
-   \   000035   FA           MOV     R2,A
-   \   000036   EE           MOV     A,R6
-   \   000037   240C         ADD     A,#0xc
-   \   000039   F582         MOV     DPL,A
-   \   00003B   EF           MOV     A,R7
-   \   00003C   12....       LCALL   ??Subroutine78_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_135:
-   \   00003F   F9           MOV     R1,A
-   \   000040   EA           MOV     A,R2
-   \   000041   2400         ADD     A,#0x0
-   \   000043   F5..         MOV     ?V0 + 2,A
-   \   000045   E4           CLR     A
-   \   000046   39           ADDC    A,R1
-   \   000047   F5..         MOV     ?V0 + 3,A
-   \   000049   78..         MOV     R0,#?V0 + 2
-   \   00004B   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00004E   EE           MOV     A,R6
-   \   00004F   2403         ADD     A,#0x3
-   \   000051   FC           MOV     R4,A
-   \   000052   EF           MOV     A,R7
-   \   000053   3400         ADDC    A,#0x0
-   \   000055   FD           MOV     R5,A
-   \   000056   8E82         MOV     DPL,R6
-   \   000058   8F83         MOV     DPH,R7
-   \   00005A   A3           INC     DPTR
-   \   00005B   E0           MOVX    A,@DPTR
-   \   00005C   FA           MOV     R2,A
-   \   00005D   8E82         MOV     DPL,R6
-   \   00005F   8F83         MOV     DPH,R7
-   \   000061   A3           INC     DPTR
-   \   000062   A3           INC     DPTR
-   \   000063   E0           MOVX    A,@DPTR
-   \   000064   F9           MOV     R1,A
-   \   000065   EA           MOV     A,R2
-   \   000066   2400         ADD     A,#0x0
-   \   000068   E4           CLR     A
-   \   000069   39           ADDC    A,R1
-   \   00006A   FB           MOV     R3,A
-   \   00006B   8E82         MOV     DPL,R6
-   \   00006D   8F83         MOV     DPH,R7
-   \   00006F   E0           MOVX    A,@DPTR
-   \   000070   F9           MOV     R1,A
-   \   000071   12....       LCALL   ??ZDApp_JoinReq?relay
-   \   000074   7404         MOV     A,#0x4
-   \   000076   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000079   E9           MOV     A,R1
-   \   00007A   85..82       MOV     DPL,?XSP + 0
-   \   00007D   85..83       MOV     DPH,?XSP + 1
-   \   000080   F0           MOVX    @DPTR,A
    1605          
    1606            /* Register for MT to receive Join Confirm */
    1607            ZDO_RegisterForZdoCB( ZDO_JOIN_CNF_CBID, &MT_ZdoJoinCnfCB );
-   \   000081                ; Setup parameters for call to function ZDO_RegisterForZdoCB
-   \   000081   7A..         MOV     R2,#??MT_ZdoJoinCnfCB?relay & 0xff
-   \   000083   7B..         MOV     R3,#(??MT_ZdoJoinCnfCB?relay >> 8) & 0xff
-   \   000085   7904         MOV     R1,#0x4
-   \   000087   12....       LCALL   ?Subroutine42 & 0xFFFF
    1608          
    1609            /* Build and send back the response */
    1610            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP | (uint8)MT_RPC_SYS_ZDO), cmdId, 1, &retValue );
-   \                     ??CrossCallReturnLabel_72:
-   \   00008A   AA..         MOV     R2,?V0 + 0
-   \   00008C   7965         MOV     R1,#0x65
-   \   00008E   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
    1611          
    1612          }
-   \   000091   7401         MOV     A,#0x1
-   \   000093   02....       LJMP    ?Subroutine2 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine35:
-   \   000000   F582         MOV     DPL,A
-   \   000002   EF           MOV     A,R7
-   \   000003   12....       LCALL   ??Subroutine79_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_140:
-   \   000006   E0           MOVX    A,@DPTR
-   \   000007   F5..         MOV     ?V0 + 1,A
-   \   000009   78..         MOV     R0,#?V0 + 1
-   \   00000B   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine78_0:
-   \   000000   12....       LCALL   ??Subroutine79_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_144:
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine79_0:
-   \   000000   3400         ADDC    A,#0x0
-   \   000002   F583         MOV     DPH,A
-   \   000004   22           RET
    1613          
    1614          /***************************************************************************************************
    1615           * @fn          MT_ZdoNwkDiscoveryCnfCB
@@ -3542,55 +1750,22 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1621           *
    1622           * @return      void
    1623           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1624          void *MT_ZdoNwkDiscoveryCnfCB ( void *pStr )
-   \                     MT_ZdoNwkDiscoveryCnfCB:
    1625          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 0
-   \   000005   EA           MOV     A,R2
-   \   000006   FE           MOV     R6,A
-   \   000007   EB           MOV     A,R3
-   \   000008   FF           MOV     R7,A
    1626            /* pStr: status (uint8) */
    1627            /* Packet Format */
    1628            /* Status (1) */
    1629          
    1630            // Scan completed. De-register the callback with ZDO
    1631            ZDO_DeregisterForZdoCB( ZDO_NWK_DISCOVERY_CNF_CBID );
-   \   000009                ; Setup parameters for call to function ZDO_DeregisterForZdoCB
-   \   000009   7902         MOV     R1,#0x2
-   \   00000B   12....       LCALL   ??ZDO_DeregisterForZdoCB?relay
    1632            ZDO_DeregisterForZdoCB( ZDO_BEACON_NOTIFY_IND_CBID );
-   \   00000E                ; Setup parameters for call to function ZDO_DeregisterForZdoCB
-   \   00000E   7903         MOV     R1,#0x3
-   \   000010   12....       LCALL   ??ZDO_DeregisterForZdoCB?relay
    1633          
    1634            // Send the buffered beacon indication
    1635            MT_ZdoBeaconIndCB ( NULL );
-   \   000013                ; Setup parameters for call to function MT_ZdoBeaconIndCB
-   \   000013   7A00         MOV     R2,#0x0
-   \   000015   7B00         MOV     R3,#0x0
-   \   000017   12....       LCALL   ??MT_ZdoBeaconIndCB?relay
    1636          
    1637            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_AREQ | (uint8)MT_RPC_SYS_ZDO),
    1638                                                   MT_ZDO_NWK_DISCOVERY_CNF, 1, pStr);
-   \   00001A                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   00001A   EE           MOV     A,R6
-   \   00001B   FC           MOV     R4,A
-   \   00001C   EF           MOV     A,R7
-   \   00001D   FD           MOV     R5,A
-   \   00001E   7B01         MOV     R3,#0x1
-   \   000020   7AC7         MOV     R2,#-0x39
-   \   000022   7945         MOV     R1,#0x45
-   \   000024   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
    1639            return NULL;
-   \   000027   7A00         MOV     R2,#0x0
-   \   000029   7B00         MOV     R3,#0x0
-   \   00002B   02....       LJMP    ??Subroutine72_0 & 0xFFFF
    1640          }
    1641          
    1642          
@@ -3604,19 +1779,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1650           *
    1651           * @return      void
    1652           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1653          void *MT_ZdoBeaconIndCB ( void *pStr )
-   \                     MT_ZdoBeaconIndCB:
    1654          {
-   \   000000   74F5         MOV     A,#-0xb
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 11
-   \   000005                ; Auto size: 0
-   \   000005   EA           MOV     A,R2
-   \   000006   FE           MOV     R6,A
-   \   000007   EB           MOV     A,R3
-   \   000008   FF           MOV     R7,A
    1655            zdoBeaconInd_t *pBeacon = pStr;
    1656            uint8 *pTmp;
    1657          
@@ -3624,421 +1788,67 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1659            /* devCnt (1) | device #1 (21) | device #2 (21) |... | device #n (21) */
    1660          
    1661            if( pStr != NULL)
-   \   000009   EE           MOV     A,R6
-   \   00000A   4F           ORL     A,R7
-   \   00000B   90....       MOV     DPTR,#pBeaconIndBuf
-   \   00000E   7003         JNZ     $+5
-   \   000010   02....       LJMP    ??MT_ZdoBeaconIndCB_0 & 0xFFFF
    1662            {
    1663              if( pBeaconIndBuf == NULL )
-   \   000013   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_39:
-   \   000016   7027         JNZ     ??MT_ZdoBeaconIndCB_1
    1664              {
    1665                // If pBeaconIndBuf has not been allocated yet
    1666                // allocate memory now with MAX_UART_TX_BUFF
    1667                if( NULL == (pBeaconIndBuf = (uint8 *)osal_mem_alloc(MT_ZDO_BEACON_IND_PACK_LEN)))
-   \   000018                ; Setup parameters for call to function osal_mem_alloc
-   \   000018   7A7B         MOV     R2,#0x7b
-   \   00001A   7B00         MOV     R3,#0x0
-   \   00001C   12....       LCALL   ??osal_mem_alloc?relay
-   \   00001F   90....       MOV     DPTR,#pBeaconIndBuf
-   \   000022   EA           MOV     A,R2
-   \   000023   F0           MOVX    @DPTR,A
-   \   000024   A3           INC     DPTR
-   \   000025   EB           MOV     A,R3
-   \   000026   F0           MOVX    @DPTR,A
-   \   000027   90....       MOV     DPTR,#pBeaconIndBuf
-   \   00002A   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_40:
-   \   00002D   7009         JNZ     ??MT_ZdoBeaconIndCB_2
    1668                {
    1669                  // Memory failure
    1670                  return NULL;
-   \                     ??MT_ZdoBeaconIndCB_3:
-   \   00002F   7A00         MOV     R2,#0x0
-   \   000031   7B00         MOV     R3,#0x0
-   \   000033   7F03         MOV     R7,#0x3
-   \   000035   02....       LJMP    ?BANKED_LEAVE_XDATA
    1671                }
    1672                pBeaconIndBuf[0] = 0; // First byte is devCnt. Initialize to 0.
-   \                     ??MT_ZdoBeaconIndCB_2:
-   \   000038   E0           MOVX    A,@DPTR
-   \   000039   F583         MOV     DPH,A
-   \   00003B   8882         MOV     DPL,R0
-   \   00003D   E4           CLR     A
-   \   00003E   F0           MOVX    @DPTR,A
    1673              }
    1674          
    1675              // Fill in the buffer with the beacon indication
    1676              pTmp = pBeaconIndBuf + (1 + pBeaconIndBuf[0] * MT_ZDO_BEACON_IND_LEN);
-   \                     ??MT_ZdoBeaconIndCB_1:
-   \   00003F   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_33:
-   \   000042   F8           MOV     R0,A
-   \   000043   A9F0         MOV     R1,B
-   \   000045   90....       MOV     DPTR,#pBeaconIndBuf
-   \   000048   E0           MOVX    A,@DPTR
-   \   000049   28           ADD     A,R0
-   \   00004A   FA           MOV     R2,A
-   \   00004B   A3           INC     DPTR
-   \   00004C   E0           MOVX    A,@DPTR
-   \   00004D   39           ADDC    A,R1
-   \   00004E   8A82         MOV     DPL,R2
-   \   000050   F583         MOV     DPH,A
-   \   000052   A3           INC     DPTR
-   \   000053   AA82         MOV     R2,DPL
-   \   000055   AB83         MOV     R3,DPH
    1677              *pTmp++ = LO_UINT16(pBeacon->sourceAddr);
-   \   000057   8E82         MOV     DPL,R6
-   \   000059   8F83         MOV     DPH,R7
-   \   00005B   12....       LCALL   ?Subroutine20 & 0xFFFF
    1678              *pTmp++ = HI_UINT16(pBeacon->sourceAddr);
-   \                     ??CrossCallReturnLabel_29:
-   \   00005E   12....       LCALL   ??Subroutine77_0 & 0xFFFF
    1679              *pTmp++ = LO_UINT16(pBeacon->panID);
-   \                     ??CrossCallReturnLabel_132:
-   \   000061   2402         ADD     A,#0x2
-   \   000063   F8           MOV     R0,A
-   \   000064   EF           MOV     A,R7
-   \   000065   12....       LCALL   ?Subroutine30 & 0xFFFF
-   \                     ??CrossCallReturnLabel_54:
-   \   000068   0A           INC     R2
-   \   000069   AB83         MOV     R3,DPH
    1680              *pTmp++ = HI_UINT16(pBeacon->panID);
-   \   00006B   8882         MOV     DPL,R0
-   \   00006D   8983         MOV     DPH,R1
-   \   00006F   A3           INC     DPTR
-   \   000070   12....       LCALL   ?Subroutine20 & 0xFFFF
    1681              *pTmp++ = pBeacon->logicalChannel;
-   \                     ??CrossCallReturnLabel_30:
-   \   000073   A3           INC     DPTR
-   \   000074   A3           INC     DPTR
-   \   000075   A3           INC     DPTR
-   \   000076   12....       LCALL   ?Subroutine17 & 0xFFFF
    1682              *pTmp++ = pBeacon->permitJoining;
-   \                     ??CrossCallReturnLabel_23:
-   \   000079   12....       LCALL   ?Subroutine17 & 0xFFFF
    1683              *pTmp++ = pBeacon->routerCapacity;
-   \                     ??CrossCallReturnLabel_24:
-   \   00007C   A3           INC     DPTR
-   \   00007D   12....       LCALL   ?Subroutine16 & 0xFFFF
    1684              *pTmp++ = pBeacon->deviceCapacity;
-   \                     ??CrossCallReturnLabel_21:
-   \   000080   12....       LCALL   ?Subroutine16 & 0xFFFF
    1685              *pTmp++ = pBeacon->protocolVersion;
-   \                     ??CrossCallReturnLabel_22:
-   \   000083   A3           INC     DPTR
-   \   000084   12....       LCALL   ?Subroutine13 & 0xFFFF
    1686              *pTmp++ = pBeacon->stackProfile;
-   \                     ??CrossCallReturnLabel_15:
-   \   000087   12....       LCALL   ?Subroutine13 & 0xFFFF
    1687              *pTmp++ = pBeacon->LQI;
-   \                     ??CrossCallReturnLabel_16:
-   \   00008A   A3           INC     DPTR
-   \   00008B   12....       LCALL   ??Subroutine77_0 & 0xFFFF
    1688              *pTmp++ = pBeacon->depth;
-   \                     ??CrossCallReturnLabel_133:
-   \   00008E   240B         ADD     A,#0xb
-   \   000090   12....       LCALL   ?Subroutine12 & 0xFFFF
    1689              *pTmp++ = pBeacon->updateID;
-   \                     ??CrossCallReturnLabel_130:
-   \   000093   240C         ADD     A,#0xc
-   \   000095   12....       LCALL   ?Subroutine12 & 0xFFFF
    1690              osal_memcpy( pTmp, pBeacon->extendedPanID, Z_EXTADDR_LEN);
-   \                     ??CrossCallReturnLabel_131:
-   \   000098   240D         ADD     A,#0xd
-   \   00009A   F5..         MOV     ?V0 + 0,A
-   \   00009C   EF           MOV     A,R7
-   \   00009D   3400         ADDC    A,#0x0
-   \   00009F   F5..         MOV     ?V0 + 1,A
-   \   0000A1   75..00       MOV     ?V0 + 2,#0x0
-   \   0000A4   78..         MOV     R0,#?V0 + 0
-   \   0000A6   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   0000A9   7C08         MOV     R4,#0x8
-   \   0000AB   7D00         MOV     R5,#0x0
-   \   0000AD   12....       LCALL   ??osal_memcpy?relay
-   \   0000B0   7403         MOV     A,#0x3
-   \   0000B2   12....       LCALL   ?DEALLOC_XSTACK8
    1691          
    1692              pBeaconIndBuf[0] += 1; // Increment the devCnt
-   \   0000B5   12....       LCALL   ?Subroutine51 & 0xFFFF
-   \                     ??CrossCallReturnLabel_86:
-   \   0000B8   04           INC     A
-   \   0000B9   F0           MOVX    @DPTR,A
    1693          
    1694              // Check if the buffer can fit in another beacon
    1695              if( ((pBeaconIndBuf[0] + 1) * MT_ZDO_BEACON_IND_LEN + 1) > MT_ZDO_BEACON_IND_PACK_LEN )
-   \   0000BA   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_34:
-   \   0000BD   2416         ADD     A,#0x16
-   \   0000BF   F8           MOV     R0,A
-   \   0000C0   E5F0         MOV     A,B
-   \   0000C2   3400         ADDC    A,#0x0
-   \   0000C4   F9           MOV     R1,A
-   \   0000C5   C3           CLR     C
-   \   0000C6   E8           MOV     A,R0
-   \   0000C7   947C         SUBB    A,#0x7c
-   \   0000C9   E9           MOV     A,R1
-   \   0000CA   9400         SUBB    A,#0x0
-   \   0000CC   A2D2         MOV     C,0xD0 /* PSW */.2
-   \   0000CE   65D0         XRL     A,PSW
-   \   0000D0   33           RLC     A
-   \   0000D1   5003         JNC     $+5
-   \   0000D3   02....       LJMP    ??MT_ZdoBeaconIndCB_3 & 0xFFFF
    1696              {
    1697                // Packet full, send the packet over MT
    1698                MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_AREQ | (uint8)MT_RPC_SYS_ZDO),
    1699                                             MT_ZDO_BEACON_NOTIFY_IND,
    1700                                             (pBeaconIndBuf[0] * MT_ZDO_BEACON_IND_LEN + 1), pBeaconIndBuf);
-   \   0000D6                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   0000D6   12....       LCALL   ?Subroutine28 & 0xFFFF
    1701                pBeaconIndBuf[0] = 0; // Reset the devCnt back to zero
    1702              }
    1703            }
-   \                     ??CrossCallReturnLabel_46:
-   \   0000D9   90....       MOV     DPTR,#pBeaconIndBuf
-   \   0000DC   E0           MOVX    A,@DPTR
-   \   0000DD   F8           MOV     R0,A
-   \   0000DE   A3           INC     DPTR
-   \   0000DF   E0           MOVX    A,@DPTR
-   \   0000E0   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_25:
-   \   0000E3   F583         MOV     DPH,A
-   \   0000E5   8882         MOV     DPL,R0
-   \   0000E7   E4           CLR     A
-   \                     ??MT_ZdoBeaconIndCB_4:
-   \   0000E8   F0           MOVX    @DPTR,A
-   \   0000E9   02....       LJMP    ??MT_ZdoBeaconIndCB_3 & 0xFFFF
    1704            else
    1705            {
    1706              if( (pBeaconIndBuf != NULL) && (pBeaconIndBuf[0] != 0) )
-   \                     ??MT_ZdoBeaconIndCB_0:
-   \   0000EC   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_41:
-   \   0000EF   7003         JNZ     $+5
-   \   0000F1   02....       LJMP    ??MT_ZdoBeaconIndCB_3 & 0xFFFF
-   \   0000F4   E0           MOVX    A,@DPTR
-   \   0000F5   F583         MOV     DPH,A
-   \   0000F7   8882         MOV     DPL,R0
-   \   0000F9   E0           MOVX    A,@DPTR
-   \   0000FA   600E         JZ      ??MT_ZdoBeaconIndCB_5
    1707              {
    1708                // End of beacon indication, send the packet over MT
    1709                MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_AREQ | (uint8)MT_RPC_SYS_ZDO),
    1710                                             MT_ZDO_BEACON_NOTIFY_IND,
    1711                                             (pBeaconIndBuf[0] * MT_ZDO_BEACON_IND_LEN + 1), pBeaconIndBuf);
-   \   0000FC                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   0000FC   12....       LCALL   ?Subroutine28 & 0xFFFF
    1712              }
-   \                     ??CrossCallReturnLabel_47:
-   \   0000FF   12....       LCALL   ?Subroutine18 & 0xFFFF
    1713              // Free the allocated memory
    1714              if(pBeaconIndBuf != NULL)
-   \                     ??CrossCallReturnLabel_26:
-   \   000102   F9           MOV     R1,A
-   \   000103   E8           MOV     A,R0
-   \   000104   49           ORL     A,R1
-   \   000105   7003         JNZ     $+5
-   \   000107   02....       LJMP    ??MT_ZdoBeaconIndCB_3 & 0xFFFF
    1715              {
    1716                osal_mem_free(pBeaconIndBuf);
-   \                     ??MT_ZdoBeaconIndCB_5:
-   \   00010A                ; Setup parameters for call to function osal_mem_free
-   \   00010A   90....       MOV     DPTR,#pBeaconIndBuf
-   \   00010D   E0           MOVX    A,@DPTR
-   \   00010E   FA           MOV     R2,A
-   \   00010F   A3           INC     DPTR
-   \   000110   E0           MOVX    A,@DPTR
-   \   000111   FB           MOV     R3,A
-   \   000112   12....       LCALL   ??osal_mem_free?relay
    1717                pBeaconIndBuf = NULL;
-   \   000115   90....       MOV     DPTR,#pBeaconIndBuf
-   \   000118   E4           CLR     A
-   \   000119   F0           MOVX    @DPTR,A
-   \   00011A   A3           INC     DPTR
-   \   00011B   80CB         SJMP    ??MT_ZdoBeaconIndCB_4
    1718              }
    1719            }
    1720          
    1721            return NULL;
    1722          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine28:
-   \   000000   90....       MOV     DPTR,#pBeaconIndBuf
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   FC           MOV     R4,A
-   \   000005   A3           INC     DPTR
-   \   000006   E0           MOVX    A,@DPTR
-   \   000007   FD           MOV     R5,A
-   \   000008   75F015       MOV     B,#0x15
-   \   00000B   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine25:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   F8           MOV     R0,A
-   \   000002   A3           INC     DPTR
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   F9           MOV     R1,A
-   \   000005   E8           MOV     A,R0
-   \   000006   49           ORL     A,R1
-   \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine22:
-   \   000000   12....       LCALL   ?Subroutine51 & 0xFFFF
-   \                     ??CrossCallReturnLabel_87:
-   \   000003   75F015       MOV     B,#0x15
-   \   000006   A4           MUL     AB
-   \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine51:
-   \   000000   90....       MOV     DPTR,#pBeaconIndBuf
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   F8           MOV     R0,A
-   \   000005   A3           INC     DPTR
-   \   000006   E0           MOVX    A,@DPTR
-   \   000007   F583         MOV     DPH,A
-   \   000009   8882         MOV     DPL,R0
-   \   00000B   E0           MOVX    A,@DPTR
-   \   00000C   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine20:
-   \   000000   12....       LCALL   ?Subroutine44 & 0xFFFF
-   \                     ??CrossCallReturnLabel_75:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine44:
-   \   000000   12....       LCALL   ?Subroutine60 & 0xFFFF
-   \                     ??CrossCallReturnLabel_94:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine60:
-   \   000000   12....       LCALL   ?Subroutine62 & 0xFFFF
-   \                     ??CrossCallReturnLabel_153:
-   \   000003   8E82         MOV     DPL,R6
-   \   000005   8F83         MOV     DPH,R7
-   \   000007   A3           INC     DPTR
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine18:
-   \   000000   F583         MOV     DPH,A
-   \   000002   8882         MOV     DPL,R0
-   \   000004   E0           MOVX    A,@DPTR
-   \   000005   A4           MUL     AB
-   \   000006   04           INC     A
-   \   000007   FB           MOV     R3,A
-   \   000008   7AC5         MOV     R2,#-0x3b
-   \   00000A   7945         MOV     R1,#0x45
-   \   00000C   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
-   \   00000F   90....       MOV     DPTR,#pBeaconIndBuf
-   \   000012   E0           MOVX    A,@DPTR
-   \   000013   F8           MOV     R0,A
-   \   000014   A3           INC     DPTR
-   \   000015   E0           MOVX    A,@DPTR
-   \   000016   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine17:
-   \   000000   12....       LCALL   ?Subroutine44 & 0xFFFF
-   \                     ??CrossCallReturnLabel_76:
-   \   000003   A3           INC     DPTR
-   \   000004   A3           INC     DPTR
-   \   000005   A3           INC     DPTR
-   \   000006   A3           INC     DPTR
-   \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine16:
-   \   000000   12....       LCALL   ?Subroutine43 & 0xFFFF
-   \                     ??CrossCallReturnLabel_73:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine43:
-   \   000000   12....       LCALL   ?Subroutine60 & 0xFFFF
-   \                     ??CrossCallReturnLabel_95:
-   \   000003   A3           INC     DPTR
-   \   000004   A3           INC     DPTR
-   \   000005   A3           INC     DPTR
-   \   000006   A3           INC     DPTR
-   \   000007   A3           INC     DPTR
-   \   000008   A3           INC     DPTR
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine13:
-   \   000000   12....       LCALL   ?Subroutine43 & 0xFFFF
-   \                     ??CrossCallReturnLabel_74:
-   \   000003   A3           INC     DPTR
-   \   000004   A3           INC     DPTR
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine12:
-   \   000000   F582         MOV     DPL,A
-   \   000002   EF           MOV     A,R7
-   \   000003   12....       LCALL   ??Subroutine79_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_139:
-   \   000006                REQUIRE ??Subroutine77_0
-   \   000006                ; // Fall through to label ??Subroutine77_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine77_0:
-   \   000000   12....       LCALL   ?Subroutine49 & 0xFFFF
-   \                     ??CrossCallReturnLabel_151:
-   \   000003                ; Setup parameters for call to function osal_memcpy
-   \   000003   EE           MOV     A,R6
-   \   000004   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine30:
-   \   000000   12....       LCALL   ?Subroutine53 & 0xFFFF
-   \                     ??CrossCallReturnLabel_89:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine53:
-   \   000000   12....       LCALL   ?Subroutine61 & 0xFFFF
-   \                     ??CrossCallReturnLabel_97:
-   \   000003   8A82         MOV     DPL,R2
-   \   000005   8B83         MOV     DPH,R3
-   \   000007   F0           MOVX    @DPTR,A
-   \   000008   A3           INC     DPTR
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine61:
-   \   000000   3400         ADDC    A,#0x0
-   \   000002   F9           MOV     R1,A
-   \   000003   8882         MOV     DPL,R0
-   \   000005   8983         MOV     DPH,R1
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine49:
-   \   000000   12....       LCALL   ?Subroutine62 & 0xFFFF
-   \                     ??CrossCallReturnLabel_154:
-   \   000003   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine62:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   8A82         MOV     DPL,R2
-   \   000003   8B83         MOV     DPH,R3
-   \   000005   F0           MOVX    @DPTR,A
-   \   000006   A3           INC     DPTR
-   \   000007   0A           INC     R2
-   \   000008   AB83         MOV     R3,DPH
-   \   00000A   22           RET
    1723          
    1724          
    1725          
@@ -4051,21 +1861,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1732           *
    1733           * @return      void
    1734           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1735          void *MT_ZdoJoinCnfCB ( void *pStr )
-   \                     MT_ZdoJoinCnfCB:
    1736          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 5
-   \   000005   74FB         MOV     A,#-0x5
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   EA           MOV     A,R2
-   \   00000B   FE           MOV     R6,A
-   \   00000C   EB           MOV     A,R3
-   \   00000D   FF           MOV     R7,A
    1737            /* pStr: zdoJoinCnf_t* */
    1738            /* Packet Format */
    1739            /* Status (1) | device addr (2) | parent addr (2) */
@@ -4075,79 +1872,17 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1743          
    1744            /* Join Complete. De-register the callback with ZDO */
    1745            ZDO_DeregisterForZdoCB( ZDO_JOIN_CNF_CBID );
-   \   00000E                ; Setup parameters for call to function ZDO_DeregisterForZdoCB
-   \   00000E   7904         MOV     R1,#0x4
-   \   000010   12....       LCALL   ??ZDO_DeregisterForZdoCB?relay
    1746          
    1747            buf[0] = joinCnf->status;
-   \   000013   8E82         MOV     DPL,R6
-   \   000015   8F83         MOV     DPH,R7
-   \   000017   E0           MOVX    A,@DPTR
-   \   000018   85..82       MOV     DPL,?XSP + 0
-   \   00001B   85..83       MOV     DPH,?XSP + 1
-   \   00001E   F0           MOVX    @DPTR,A
    1748            buf[1] = LO_UINT16( joinCnf->deviceAddr );
-   \   00001F   8E82         MOV     DPL,R6
-   \   000021   8F83         MOV     DPH,R7
-   \   000023   A3           INC     DPTR
-   \   000024   A882         MOV     R0,DPL
-   \   000026   A983         MOV     R1,DPH
-   \   000028   E0           MOVX    A,@DPTR
-   \   000029   C0E0         PUSH    A
-   \   00002B   7401         MOV     A,#0x1
-   \   00002D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000030   D0E0         POP     A
-   \   000032   F0           MOVX    @DPTR,A
    1749            buf[2] = HI_UINT16( joinCnf->deviceAddr );
-   \   000033   8882         MOV     DPL,R0
-   \   000035   8983         MOV     DPH,R1
-   \   000037   A3           INC     DPTR
-   \   000038   E0           MOVX    A,@DPTR
-   \   000039   C0E0         PUSH    A
-   \   00003B   7402         MOV     A,#0x2
-   \   00003D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000040   D0E0         POP     A
-   \   000042   F0           MOVX    @DPTR,A
    1750            buf[3] = LO_UINT16( joinCnf->parentAddr );
-   \   000043   EE           MOV     A,R6
-   \   000044   2403         ADD     A,#0x3
-   \   000046   F8           MOV     R0,A
-   \   000047   EF           MOV     A,R7
-   \   000048   12....       LCALL   ?Subroutine61 & 0xFFFF
-   \                     ??CrossCallReturnLabel_96:
-   \   00004B   C0E0         PUSH    A
-   \   00004D   7403         MOV     A,#0x3
-   \   00004F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000052   D0E0         POP     A
-   \   000054   F0           MOVX    @DPTR,A
    1751            buf[4] = HI_UINT16( joinCnf->parentAddr );
-   \   000055   8882         MOV     DPL,R0
-   \   000057   8983         MOV     DPH,R1
-   \   000059   A3           INC     DPTR
-   \   00005A   E0           MOVX    A,@DPTR
-   \   00005B   C0E0         PUSH    A
-   \   00005D   7404         MOV     A,#0x4
-   \   00005F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000062   D0E0         POP     A
-   \   000064   F0           MOVX    @DPTR,A
    1752          
    1753            MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_AREQ | (uint8)MT_RPC_SYS_ZDO),
    1754                                         MT_ZDO_JOIN_CNF, MT_ZDO_JOIN_CNF_LEN, buf);
-   \   000065                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000065   85..82       MOV     DPL,?XSP + 0
-   \   000068   85..83       MOV     DPH,?XSP + 1
-   \   00006B   AC82         MOV     R4,DPL
-   \   00006D   AD83         MOV     R5,DPH
-   \   00006F   7B05         MOV     R3,#0x5
-   \   000071   7AC6         MOV     R2,#-0x3a
-   \   000073   7945         MOV     R1,#0x45
-   \   000075   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
    1755          
    1756            return NULL;
-   \   000078   7A00         MOV     R2,#0x0
-   \   00007A   7B00         MOV     R3,#0x0
-   \   00007C   7405         MOV     A,#0x5
-   \   00007E   02....       LJMP    ??Subroutine71_0 & 0xFFFF
    1757          }
    1758          
    1759          /*************************************************************************************************
@@ -4159,67 +1894,24 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1765           *
    1766           * @return  void
    1767           *************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1768          void MT_ZdoRegisterForZDOMsg(uint8 *pBuf)
-   \                     MT_ZdoRegisterForZDOMsg:
    1769          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
    1770            uint8 cmd0, cmd1, tmp;
    1771            uint16 cId;
    1772          
    1773            /* parse header */
    1774            cmd0 = pBuf[MT_RPC_POS_CMD0];
-   \   00000A   12....       LCALL   ?Subroutine9 & 0xFFFF
    1775            cmd1 = pBuf[MT_RPC_POS_CMD1];
    1776            pBuf += MT_RPC_FRAME_HDR_SZ;
    1777          
    1778            cId = BUILD_UINT16(pBuf[0], pBuf[1]);
    1779            tmp = ZDO_RegisterForZDOMsg(MT_TaskID, cId);
-   \                     ??CrossCallReturnLabel_9:
-   \   00000D   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
-   \   000010   12....       LCALL   ?Subroutine39 & 0xFFFF
    1780          
    1781            if (MT_RPC_CMD_SREQ == (cmd0 & MT_RPC_CMD_TYPE_MASK))
-   \                     ??CrossCallReturnLabel_67:
-   \   000013   700D         JNZ     ??MT_ZdoRegisterForZDOMsg_0
    1782            {
    1783              MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP|(uint8)MT_RPC_SYS_ZDO), cmd1, 1, &tmp);
-   \   000015                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000015   AC82         MOV     R4,DPL
-   \   000017   AD83         MOV     R5,DPH
-   \   000019   7B01         MOV     R3,#0x1
-   \   00001B   EE           MOV     A,R6
-   \   00001C   FA           MOV     R2,A
-   \   00001D   7965         MOV     R1,#0x65
-   \   00001F   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
    1784            }
    1785          }
-   \                     ??MT_ZdoRegisterForZDOMsg_0:
-   \   000022   02....       LJMP    ??Subroutine65_0 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
-   \   000000   12....       LCALL   ?Subroutine48 & 0xFFFF
-   \                     ??CrossCallReturnLabel_82:
-   \   000003   EA           MOV     A,R2
-   \   000004   2403         ADD     A,#0x3
-   \   000006   0A           INC     R2
-   \   000007   12....       LCALL   ?Subroutine46 & 0xFFFF
-   \                     ??CrossCallReturnLabel_125:
-   \   00000A   FA           MOV     R2,A
-   \   00000B   E4           CLR     A
-   \   00000C   39           ADDC    A,R1
-   \   00000D   FB           MOV     R3,A
-   \   00000E   90....       MOV     DPTR,#MT_TaskID
-   \   000011   E0           MOVX    A,@DPTR
-   \   000012   F9           MOV     R1,A
-   \   000013   22           RET
    1786          
    1787          /*************************************************************************************************
    1788           * @fn      MT_ZdoRemoveRegisteredCB(pBuf);
@@ -4230,49 +1922,24 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    1793           *
    1794           * @return  void
    1795           *************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1796          void MT_ZdoRemoveRegisteredCB(uint8 *pBuf)
-   \                     MT_ZdoRemoveRegisteredCB:
    1797          {
-   \   000000   74F7         MOV     A,#-0x9
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 9
-   \   000005                ; Auto size: 1
-   \   000005   74FF         MOV     A,#-0x1
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
    1798            uint8 cmd0, cmd1, tmp;
    1799            uint16 cId;
    1800          
    1801            /* parse header */
    1802            cmd0 = pBuf[MT_RPC_POS_CMD0];
-   \   00000A   12....       LCALL   ?Subroutine9 & 0xFFFF
    1803            cmd1 = pBuf[MT_RPC_POS_CMD1];
    1804            pBuf += MT_RPC_FRAME_HDR_SZ;
    1805          
    1806            cId = BUILD_UINT16(pBuf[0], pBuf[1]);
    1807            tmp = ZDO_RemoveRegisteredCB(MT_TaskID, cId);
-   \                     ??CrossCallReturnLabel_10:
-   \   00000D   12....       LCALL   ??ZDO_RemoveRegisteredCB?relay
-   \   000010   12....       LCALL   ?Subroutine39 & 0xFFFF
    1808          
    1809            if (MT_RPC_CMD_SREQ == (cmd0 & MT_RPC_CMD_TYPE_MASK))
-   \                     ??CrossCallReturnLabel_68:
-   \   000013   700D         JNZ     ??MT_ZdoRemoveRegisteredCB_0
    1810            {
    1811              MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_SRSP|(uint8)MT_RPC_SYS_ZDO), cmd1, 1, &tmp);
-   \   000015                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   000015   AC82         MOV     R4,DPL
-   \   000017   AD83         MOV     R5,DPH
-   \   000019   7B01         MOV     R3,#0x1
-   \   00001B   EE           MOV     A,R6
-   \   00001C   FA           MOV     R2,A
-   \   00001D   7965         MOV     R1,#0x65
-   \   00001F   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
    1812            }
    1813          }
-   \                     ??MT_ZdoRemoveRegisteredCB_0:
-   \   000022   02....       LJMP    ??Subroutine65_0 & 0xFFFF
    1814          
    1815          #endif /* MT_ZDO_FUNC */
    1816          
@@ -4588,591 +2255,43 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_ZDO.c
    2126           *
    2127           * @return  void
    2128           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    2129          void MT_ZdoSendMsgCB(zdoIncomingMsg_t *pMsg)
-   \                     MT_ZdoSendMsgCB:
    2130          {
-   \   000000   74F1         MOV     A,#-0xf
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 15
-   \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 0,R2
-   \   000007   8B..         MOV     ?V0 + 1,R3
    2131            uint8 len = pMsg->asduLen + 9;
-   \   000009   EA           MOV     A,R2
-   \   00000A   2410         ADD     A,#0x10
-   \   00000C   F582         MOV     DPL,A
-   \   00000E   EB           MOV     A,R3
-   \   00000F   12....       LCALL   ??Subroutine78_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_136:
-   \   000012   2409         ADD     A,#0x9
-   \   000014   F5..         MOV     ?V0 + 2,A
    2132            uint8 *pBuf = (uint8 *)osal_mem_alloc(len);
-   \   000016                ; Setup parameters for call to function osal_mem_alloc
-   \   000016   FA           MOV     R2,A
-   \   000017   7B00         MOV     R3,#0x0
-   \   000019   12....       LCALL   ??osal_mem_alloc?relay
-   \   00001C   8A..         MOV     ?V0 + 4,R2
-   \   00001E   8B..         MOV     ?V0 + 5,R3
-   \   000020   AE..         MOV     R6,?V0 + 4
-   \   000022   AF..         MOV     R7,?V0 + 5
    2133          
    2134            if (pBuf != NULL)
-   \   000024   EE           MOV     A,R6
-   \   000025   4F           ORL     A,R7
-   \   000026   606A         JZ      ??MT_ZdoSendMsgCB_0
    2135            {
    2136              uint8 *pTmp = pBuf;
    2137          
    2138              // Assuming exclusive use of network short addresses.
    2139              *pTmp++ = LO_UINT16(pMsg->srcAddr.addr.shortAddr);
-   \   000028   E5..         MOV     A,?V0 + 0
-   \   00002A   2402         ADD     A,#0x2
-   \   00002C   F8           MOV     R0,A
-   \   00002D   E5..         MOV     A,?V0 + 1
-   \   00002F   12....       LCALL   ?Subroutine30 & 0xFFFF
-   \                     ??CrossCallReturnLabel_55:
-   \   000032   AA82         MOV     R2,DPL
-   \   000034   12....       LCALL   ??Subroutine80_0 & 0xFFFF
    2140              *pTmp++ = HI_UINT16(pMsg->srcAddr.addr.shortAddr);
    2141              *pTmp++ = pMsg->wasBroadcast;
-   \                     ??CrossCallReturnLabel_147:
-   \   000037   240B         ADD     A,#0xb
-   \   000039   12....       LCALL   ?Subroutine57 & 0xFFFF
-   \                     ??CrossCallReturnLabel_141:
-   \   00003C   12....       LCALL   ??Subroutine81_0 & 0xFFFF
    2142              *pTmp++ = LO_UINT16(pMsg->clusterID);
-   \                     ??CrossCallReturnLabel_148:
-   \   00003F   240C         ADD     A,#0xc
-   \   000041   12....       LCALL   ?Subroutine8 & 0xFFFF
    2143              *pTmp++ = HI_UINT16(pMsg->clusterID);
    2144              *pTmp++ = pMsg->SecurityUse;
-   \                     ??CrossCallReturnLabel_145:
-   \   000044   240E         ADD     A,#0xe
-   \   000046   12....       LCALL   ?Subroutine57 & 0xFFFF
-   \                     ??CrossCallReturnLabel_142:
-   \   000049   12....       LCALL   ??Subroutine81_0 & 0xFFFF
    2145              *pTmp++ = pMsg->TransSeq;
-   \                     ??CrossCallReturnLabel_149:
-   \   00004C   240F         ADD     A,#0xf
-   \   00004E   12....       LCALL   ?Subroutine57 & 0xFFFF
-   \                     ??CrossCallReturnLabel_143:
-   \   000051   12....       LCALL   ??Subroutine81_0 & 0xFFFF
    2146              // Skipping asduLen since it can be deduced from the RPC packet length.
    2147              *pTmp++ = LO_UINT16(pMsg->macDestAddr);
-   \                     ??CrossCallReturnLabel_150:
-   \   000054   2411         ADD     A,#0x11
-   \   000056   12....       LCALL   ?Subroutine8 & 0xFFFF
    2148              *pTmp++ = HI_UINT16(pMsg->macDestAddr);
    2149              (void)osal_memcpy(pTmp, pMsg->asdu, pMsg->asduLen);
-   \                     ??CrossCallReturnLabel_146:
-   \   000059   2413         ADD     A,#0x13
-   \   00005B   12....       LCALL   ?Subroutine36 & 0xFFFF
-   \                     ??CrossCallReturnLabel_137:
-   \   00005E   F5..         MOV     ?V0 + 4,A
-   \   000060   A3           INC     DPTR
-   \   000061   E0           MOVX    A,@DPTR
-   \   000062   F5..         MOV     ?V0 + 5,A
-   \   000064   75..00       MOV     ?V0 + 6,#0x0
-   \   000067   78..         MOV     R0,#?V0 + 4
-   \   000069   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   00006C   E5..         MOV     A,?V0 + 0
-   \   00006E   2410         ADD     A,#0x10
-   \   000070   12....       LCALL   ?Subroutine36 & 0xFFFF
-   \                     ??CrossCallReturnLabel_138:
-   \   000073   FC           MOV     R4,A
-   \   000074   7D00         MOV     R5,#0x0
-   \   000076   12....       LCALL   ??osal_memcpy?relay
-   \   000079   7403         MOV     A,#0x3
-   \   00007B   12....       LCALL   ?DEALLOC_XSTACK8
    2150          
    2151              MT_BuildAndSendZToolResponse(((uint8)MT_RPC_CMD_AREQ | (uint8)MT_RPC_SYS_ZDO),
    2152                                                   MT_ZDO_MSG_CB_INCOMING, len, pBuf);
-   \   00007E                ; Setup parameters for call to function MT_BuildAndSendZToolResponse
-   \   00007E   EE           MOV     A,R6
-   \   00007F   FC           MOV     R4,A
-   \   000080   EF           MOV     A,R7
-   \   000081   FD           MOV     R5,A
-   \   000082   AB..         MOV     R3,?V0 + 2
-   \   000084   7AFF         MOV     R2,#-0x1
-   \   000086   7945         MOV     R1,#0x45
-   \   000088   12....       LCALL   ??MT_BuildAndSendZToolResponse?relay
    2153          
    2154              osal_mem_free(pBuf);
-   \   00008B                ; Setup parameters for call to function osal_mem_free
-   \   00008B   EE           MOV     A,R6
-   \   00008C   FA           MOV     R2,A
-   \   00008D   EF           MOV     A,R7
-   \   00008E   FB           MOV     R3,A
-   \   00008F   12....       LCALL   ??osal_mem_free?relay
    2155            }
    2156          }
-   \                     ??MT_ZdoSendMsgCB_0:
-   \   000092   02....       LJMP    ?Subroutine1 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine36:
-   \   000000   F582         MOV     DPL,A
-   \   000002   E5..         MOV     A,?V0 + 1
-   \   000004                REQUIRE ??Subroutine78_0
-   \   000004                ; // Fall through to label ??Subroutine78_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine57:
-   \   000000   F582         MOV     DPL,A
-   \   000002   E5..         MOV     A,?V0 + 1
-   \   000004                REQUIRE ??Subroutine79_0
-   \   000004                ; // Fall through to label ??Subroutine79_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
-   \   000000   F8           MOV     R0,A
-   \   000001   E5..         MOV     A,?V0 + 1
-   \   000003   12....       LCALL   ?Subroutine53 & 0xFFFF
-   \                     ??CrossCallReturnLabel_88:
-   \   000006   0A           INC     R2
-   \   000007                REQUIRE ??Subroutine80_0
-   \   000007                ; // Fall through to label ??Subroutine80_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine80_0:
-   \   000000   AB83         MOV     R3,DPH
-   \   000002   8882         MOV     DPL,R0
-   \   000004   8983         MOV     DPH,R1
-   \   000006   A3           INC     DPTR
-   \   000007                REQUIRE ??Subroutine81_0
-   \   000007                ; // Fall through to label ??Subroutine81_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine81_0:
-   \   000000   12....       LCALL   ?Subroutine49 & 0xFFFF
-   \                     ??CrossCallReturnLabel_152:
-   \   000003                ; Setup parameters for call to function osal_memcpy
-   \   000003   E5..         MOV     A,?V0 + 0
-   \   000005   22           RET
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoInit?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoInit
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoCommandProcessing?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoCommandProcessing
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoNWKAddressRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoNWKAddressRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoIEEEAddrRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoIEEEAddrRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoNodeDescRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoNodeDescRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoPowerDescRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoPowerDescRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoSimpleDescRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoSimpleDescRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoActiveEpRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoActiveEpRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoMatchDescRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoMatchDescRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoComplexDescRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoComplexDescRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoUserDescRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoUserDescRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoEndDevAnnce?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoEndDevAnnce
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoUserDescSet?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoUserDescSet
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoServiceDiscRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoServiceDiscRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoEndDevBindRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoEndDevBindRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoBindRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoBindRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoUnbindRequest?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoUnbindRequest
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoStartupFromApp?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoStartupFromApp
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoNetworkDiscoveryReq?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoNetworkDiscoveryReq
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoJoinReq?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoJoinReq
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoNwkDiscoveryCnfCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoNwkDiscoveryCnfCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoBeaconIndCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoBeaconIndCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoJoinCnfCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoJoinCnfCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoRegisterForZDOMsg?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoRegisterForZDOMsg
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoRemoveRegisteredCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoRemoveRegisteredCB
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ZdoSendMsgCB?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ZdoSendMsgCB
    2157          
    2158          #endif   /*ZDO Command Processing in MT*/
    2159          /***************************************************************************************************
    2160          ***************************************************************************************************/
 
-   Maximum stack usage in bytes:
-
-     Function                       ISTACK PSTACK XSTACK
-     --------                       ------ ------ ------
-     MT_ZdoActiveEpRequest              1      0     29
-       -> ZDP_NWKAddrOfInterestReq      0      0     40
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     38
-     MT_ZdoBeaconIndCB                  1      0     23
-       -> osal_mem_alloc                0      0     22
-       -> osal_memcpy                   0      0     28
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     22
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     22
-       -> osal_mem_free                 0      0     22
-     MT_ZdoBindRequest                  1      0     52
-       -> sAddrExtCpy                   0      0     70
-       -> ZDP_BindUnbindReq             0      0     86
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     70
-     MT_ZdoCommandProcessing            0      0      9
-       -> MT_ZdoNWKAddressRequest       0      0     18
-       -> MT_ZdoIEEEAddrRequest         0      0     18
-       -> MT_ZdoNodeDescRequest         0      0     18
-       -> MT_ZdoPowerDescRequest        0      0     18
-       -> MT_ZdoSimpleDescRequest       0      0     18
-       -> MT_ZdoActiveEpRequest         0      0     18
-       -> MT_ZdoMatchDescRequest        0      0     18
-       -> MT_ZdoComplexDescRequest      0      0     18
-       -> MT_ZdoUserDescRequest         0      0     18
-       -> MT_ZdoEndDevAnnce             0      0     18
-       -> MT_ZdoUserDescSet             0      0     18
-       -> MT_ZdoServiceDiscRequest      0      0     18
-       -> MT_ZdoEndDevBindRequest       0      0     18
-       -> MT_ZdoBindRequest             0      0     18
-       -> MT_ZdoUnbindRequest           0      0     18
-       -> MT_ZdoNetworkDiscoveryReq     0      0     18
-       -> MT_ZdoJoinReq                 0      0     18
-       -> MT_ZdoStartupFromApp          0      0     18
-       -> MT_ZdoRegisterForZDOMsg       0      0     18
-       -> MT_ZdoRemoveRegisteredCB      0      0     18
-     MT_ZdoComplexDescRequest           1      0     29
-       -> ZDP_NWKAddrOfInterestReq      0      0     40
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     38
-     MT_ZdoEndDevAnnce                  1      0     20
-       -> ZDP_DeviceAnnce               0      0     22
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoEndDevBindRequest            1      0    104
-       -> ZDP_EndDeviceBindReq          0      0    190
-       -> MT_BuildAndSendZToolResponse
-                                        0      0    172
-     MT_ZdoIEEEAddrRequest              1      0     19
-       -> ZDP_IEEEAddrReq               0      0     20
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoInit                         0      0      0
-     MT_ZdoJoinCnfCB                    1      0     14
-       -> ZDO_DeregisterForZdoCB        0      0     28
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     28
-     MT_ZdoJoinReq                      1      0     26
-       -> ZDApp_JoinReq                 0      0     34
-       -> ZDO_RegisterForZdoCB          0      0     26
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     26
-     MT_ZdoMatchDescRequest             1      0    106
-       -> ZDP_MatchDescReq              0      0    194
-       -> MT_BuildAndSendZToolResponse
-                                        0      0    178
-     MT_ZdoNWKAddressRequest            1      0     19
-       -> ZDP_NwkAddrReq                0      0     20
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoNetworkDiscoveryReq          1      0     19
-       -> osal_build_uint32             0      0     20
-       -> ZDApp_NetworkDiscoveryReq     0      0     20
-       -> ZDO_RegisterForZdoCB          0      0     20
-       -> ZDO_RegisterForZdoCB          0      0     20
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoNodeDescRequest              1      0     29
-       -> ZDP_NWKAddrOfInterestReq      0      0     40
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     38
-     MT_ZdoNwkDiscoveryCnfCB            0      0      9
-       -> ZDO_DeregisterForZdoCB        0      0     18
-       -> ZDO_DeregisterForZdoCB        0      0     18
-       -> MT_ZdoBeaconIndCB             0      0     18
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     18
-     MT_ZdoPowerDescRequest             1      0     29
-       -> ZDP_NWKAddrOfInterestReq      0      0     40
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     38
-     MT_ZdoRegisterForZDOMsg            1      0     19
-       -> ZDO_RegisterForZDOMsg         0      0     20
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoRemoveRegisteredCB           1      0     19
-       -> ZDO_RemoveRegisteredCB        0      0     20
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoSendMsgCB                    1      0     18
-       -> osal_mem_alloc                0      0     30
-       -> osal_memcpy                   0      0     36
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     30
-       -> osal_mem_free                 0      0     30
-     MT_ZdoServiceDiscRequest           1      0     19
-       -> ZDP_ServerDiscReq             0      0     20
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoSimpleDescRequest            1      0     29
-       -> ZDP_SimpleDescReq             0      0     40
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     38
-     MT_ZdoStartupFromApp               1      0     19
-       -> ZDOInitDevice                 0      0     20
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     20
-     MT_ZdoUnbindRequest                1      0     52
-       -> sAddrExtCpy                   0      0     70
-       -> ZDP_BindUnbindReq             0      0     86
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     70
-     MT_ZdoUserDescRequest              1      0     29
-       -> ZDP_NWKAddrOfInterestReq      0      0     40
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     38
-     MT_ZdoUserDescSet                  1      0     51
-       -> osal_memcpy                   0      0     84
-       -> ZDP_UserDescSet               0      0     82
-       -> MT_BuildAndSendZToolResponse
-                                        0      0     78
-
-
-   Segment part sizes:
-
-     Function/Label                    Bytes
-     --------------                    -----
-     _zdoCallbackSub                      4
-     pBeaconIndBuf                        2
-     MT_ZdoInit                           3
-     MT_ZdoCommandProcessing            186
-     ??Subroutine72_0                     5
-     MT_ZdoNWKAddressRequest             38
-     ?Subroutine5                         5
-     ?Subroutine24                       14
-     ??Subroutine64_0                     5
-     ??Subroutine65_0                     5
-     ??Subroutine71_0                     3
-     ?Subroutine58                       15
-     ??Subroutine75_0                     9
-     ?Subroutine38                        6
-     MT_ZdoIEEEAddrRequest               43
-     ?Subroutine52                       11
-     ??Subroutine74_0                     9
-     ?Subroutine31                        8
-     MT_ZdoNodeDescRequest               37
-     ?Subroutine29                       13
-     ?Subroutine55                        2
-     ??Subroutine66_0                     9
-     ?Subroutine7                        17
-     ??Subroutine68_0                    14
-     ??Subroutine69_0                    10
-     ??Subroutine70_0                    16
-     ?Subroutine40                        5
-     ?Subroutine47                       16
-     MT_ZdoPowerDescRequest              33
-     ?Subroutine0                         3
-     ?Subroutine21                        6
-     MT_ZdoSimpleDescRequest             52
-     MT_ZdoActiveEpRequest               33
-     MT_ZdoMatchDescRequest             234
-     ?Subroutine1                         5
-     ?Subroutine34                        9
-     ??Subroutine67_0                     6
-     ?Subroutine14                       26
-     ?Subroutine6                         8
-     ?Subroutine59                       11
-     ?Subroutine23                       16
-     ?Subroutine46                       10
-     ?Subroutine11                       26
-     ?Subroutine54                        1
-     MT_ZdoComplexDescRequest            33
-     MT_ZdoUserDescRequest               32
-     ?Subroutine4                         3
-     ??Subroutine63_0                     1
-     MT_ZdoEndDevAnnce                   91
-     MT_ZdoUserDescSet                  165
-     ?Subroutine2                         8
-     ?Subroutine32                        5
-     ??Subroutine73_0                     4
-     ?Subroutine33                        4
-     MT_ZdoServiceDiscRequest            40
-     MT_ZdoEndDevBindRequest            255
-     ?Subroutine41                       10
-     ?Subroutine15                       26
-     ??Subroutine76_0                     8
-     MT_ZdoBindRequest                  129
-     ?Subroutine3                        20
-     ?Subroutine37                       14
-     ?Subroutine27                        7
-     ?Subroutine26                       14
-     ?Subroutine50                        7
-     ?Subroutine19                       10
-     ?Subroutine10                       56
-     ?Subroutine56                        9
-     ?Subroutine45                       20
-     MT_ZdoUnbindRequest                132
-     MT_ZdoStartupFromApp                41
-     ?Subroutine39                       14
-     ?Subroutine48                       16
-     MT_ZdoNetworkDiscoveryReq           76
-     ?Subroutine42                       16
-     MT_ZdoJoinReq                      150
-     ?Subroutine35                       12
-     ??Subroutine78_0                     5
-     ??Subroutine79_0                     5
-     MT_ZdoNwkDiscoveryCnfCB             46
-     MT_ZdoBeaconIndCB                  285
-     ?Subroutine28                       12
-     ?Subroutine25                        8
-     ?Subroutine22                        8
-     ?Subroutine51                       13
-     ?Subroutine20                        4
-     ?Subroutine44                        4
-     ?Subroutine60                        9
-     ?Subroutine18                       23
-     ?Subroutine17                        8
-     ?Subroutine16                        4
-     ?Subroutine43                       10
-     ?Subroutine13                        6
-     ?Subroutine12                        6
-     ??Subroutine77_0                     5
-     ?Subroutine30                        4
-     ?Subroutine53                       10
-     ?Subroutine61                        9
-     ?Subroutine49                        4
-     ?Subroutine62                       11
-     MT_ZdoJoinCnfCB                    129
-     MT_ZdoRegisterForZDOMsg             37
-     ?Subroutine9                        20
-     MT_ZdoRemoveRegisteredCB            37
-     MT_ZdoSendMsgCB                    149
-     ?Subroutine36                        4
-     ?Subroutine57                        4
-     ?Subroutine8                         7
-     ??Subroutine80_0                     7
-     ??Subroutine81_0                     6
-     ??MT_ZdoInit?relay                   6
-     ??MT_ZdoCommandProcessing?relay      6
-     ??MT_ZdoNWKAddressRequest?relay      6
-     ??MT_ZdoIEEEAddrRequest?relay        6
-     ??MT_ZdoNodeDescRequest?relay        6
-     ??MT_ZdoPowerDescRequest?relay       6
-     ??MT_ZdoSimpleDescRequest?relay      6
-     ??MT_ZdoActiveEpRequest?relay        6
-     ??MT_ZdoMatchDescRequest?relay       6
-     ??MT_ZdoComplexDescRequest?relay     6
-     ??MT_ZdoUserDescRequest?relay        6
-     ??MT_ZdoEndDevAnnce?relay            6
-     ??MT_ZdoUserDescSet?relay            6
-     ??MT_ZdoServiceDiscRequest?relay     6
-     ??MT_ZdoEndDevBindRequest?relay      6
-     ??MT_ZdoBindRequest?relay            6
-     ??MT_ZdoUnbindRequest?relay          6
-     ??MT_ZdoStartupFromApp?relay         6
-     ??MT_ZdoNetworkDiscoveryReq?relay    6
-     ??MT_ZdoJoinReq?relay                6
-     ??MT_ZdoNwkDiscoveryCnfCB?relay      6
-     ??MT_ZdoBeaconIndCB?relay            6
-     ??MT_ZdoJoinCnfCB?relay              6
-     ??MT_ZdoRegisterForZDOMsg?relay      6
-     ??MT_ZdoRemoveRegisteredCB?relay     6
-     ??MT_ZdoSendMsgCB?relay              6
 
  
- 3 310 bytes in segment BANKED_CODE
-   156 bytes in segment BANK_RELAYS
-     6 bytes in segment XDATA_Z
  
- 3 466 bytes of CODE  memory
-     6 bytes of XDATA memory
+ 0 bytes of memory
 
 Errors: none
 Warnings: none

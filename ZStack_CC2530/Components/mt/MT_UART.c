@@ -21,7 +21,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -107,10 +107,10 @@ void MT_UartInit ()
   uartConfig.configured           = TRUE;
   uartConfig.baudRate             = MT_UART_DEFAULT_BAUDRATE;
   uartConfig.flowControl          = MT_UART_DEFAULT_OVERFLOW;
-  uartConfig.flowControlThreshold = MT_UART_DEFAULT_THRESHOLD;
-  uartConfig.rx.maxBufSize        = MT_UART_DEFAULT_MAX_RX_BUFF;
-  uartConfig.tx.maxBufSize        = MT_UART_DEFAULT_MAX_TX_BUFF;
-  uartConfig.idleTimeout          = MT_UART_DEFAULT_IDLE_TIMEOUT;
+  uartConfig.flowControlThreshold = MT_UART_DEFAULT_THRESHOLD;  //128/2
+  uartConfig.rx.maxBufSize        = MT_UART_DEFAULT_MAX_RX_BUFF; //128
+  uartConfig.tx.maxBufSize        = MT_UART_DEFAULT_MAX_TX_BUFF; //128
+  uartConfig.idleTimeout          = MT_UART_DEFAULT_IDLE_TIMEOUT; //6
   uartConfig.intEnable            = TRUE;
 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
   uartConfig.callBackFunc         = MT_UartProcessZToolData;
@@ -196,12 +196,12 @@ void MT_UartProcessZToolData ( uint8 port, uint8 event )
 {
   uint8  ch;
   uint8  bytesInRxBuffer;
-  
+
   (void)event;  // Intentionally unreferenced parameter
 
-  while (Hal_UART_RxBufLen(port))
+  while (Hal_UART_RxBufLen(port)) //ÕâÀïÅÐ¶Ï»¹ÓÐÊý¾Ý¶ÁÈ¡
   {
-    HalUARTRead (port, &ch, 1);
+    HalUARTRead (port, &ch, 1);   //¶ÁÈ¡Ò»¸ö×Ö½Ú
 
     switch (state)
     {

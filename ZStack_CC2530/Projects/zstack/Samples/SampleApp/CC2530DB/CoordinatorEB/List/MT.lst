@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:11:46 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:56:10 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,13 +44,13 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
 #                          \ZStack_CC2530\Components\mt\MT.c -D ZTOOL_P1 -D   #
-#                          MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D           #
-#                          LCD_SUPPORTED=DEBUG -lC D:\github_storehouse\Zigbe #
-#                          e\ZStack_CC2530\Projects\zstack\Samples\SampleApp\ #
-#                          CC2530DB\CoordinatorEB\List\ -lA                   #
+#                          xMT_TASK -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D        #
+#                          xLCD_SUPPORTED=DEBUG -lC                           #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
-#                          ist\ --diag_suppress Pe001,Pa010 -o                #
+#                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #
+#                          \Projects\zstack\Samples\SampleApp\CC2530DB\Coordi #
+#                          natorEB\List\ --diag_suppress Pe001,Pa010 -o       #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\O #
 #                          bj\ -e --no_code_motion --debug --core=plain       #
@@ -249,12 +249,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT.c
     120           **************************************************************************************************/
     121          
 
-   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
     122          mtProcessMsg_t mtProcessIncoming[] =
    \                     mtProcessIncoming:
    \   000000                DS 22
-   \   000016                REQUIRE `?<Initializer for mtProcessIncoming>`
-   \   000016                REQUIRE __INIT_XDATA_I
+   \   000016                REQUIRE __INIT_XDATA_Z
     123          {
     124            NULL,
     125          
@@ -382,15 +381,13 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT.c
    \   000004                ; Auto size: 0
     231          #if defined (MT_ZDO_FUNC)
     232            MT_ZdoInit();
-   \   000004                ; Setup parameters for call to function MT_ZdoInit
-   \   000004   12....       LCALL   ??MT_ZdoInit?relay
     233          #endif
     234            MT_SysResetInd();
-   \   000007                ; Setup parameters for call to function MT_SysResetInd
-   \   000007   12....       LCALL   ??MT_SysResetInd?relay
+   \   000004                ; Setup parameters for call to function MT_SysResetInd
+   \   000004   12....       LCALL   ??MT_SysResetInd?relay
     235          }
-   \   00000A                REQUIRE ?Subroutine0
-   \   00000A                ; // Fall through to label ?Subroutine0
+   \   000007                REQUIRE ?Subroutine0
+   \   000007                ; // Fall through to label ?Subroutine0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
@@ -1576,20 +1573,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT.c
    \   00002C   A3           INC     DPTR
    \   00002D   22           RET
 
-   \                                 In  segment XDATA_ID, align 1, keep-with-next
-   \                     `?<Initializer for mtProcessIncoming>`:
-   \   000000   0000         DW 0H
-   \   000002   ....         DW ??MT_SysCommandProcessing?relay
-   \   000004   0000         DW 0H
-   \   000006   0000         DW 0H
-   \   000008   0000         DW 0H
-   \   00000A   ....         DW ??MT_ZdoCommandProcessing?relay
-   \   00000C   0000         DW 0H
-   \   00000E   0000         DW 0H
-   \   000010   0000         DW 0H
-   \   000012   0000         DW 0H
-   \   000014   0000         DW 0H
-
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??MT_Init?relay:
    \   000000   12....       LCALL   ?BDISPATCH
@@ -1655,7 +1638,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT.c
      MT_BuildSPIMsg                     1      0     37
        -> osal_memcpy                   0      0     38
      MT_Init                            2      0      0
-       -> MT_ZdoInit                    4      0      0
        -> MT_SysResetInd                4      0      0
      MT_ProcessIncoming                 3      0      3
        -> MT_BuildAndSendZToolResponse
@@ -1671,7 +1653,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT.c
      mtProcessIncoming                      22
      debugThreshold                          1
      debugCompId                             1
-     MT_Init                                10
+     MT_Init                                 7
      ?Subroutine0                            7
      MT_BuildSPIMsg                         76
      ?Subroutine1                            5
@@ -1709,7 +1691,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT.c
      ?Subroutine20                           4
      ?Subroutine23                           5
      ?Subroutine3                           46
-     ?<Initializer for mtProcessIncoming>   22
      ??MT_Init?relay                         6
      ??MT_BuildSPIMsg?relay                  6
      ??MT_BuildAndSendZToolResponse?relay    6
@@ -1720,13 +1701,11 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT.c
      ??MT_BuildEndpointDesc?relay            6
 
  
- 1 188 bytes in segment BANKED_CODE
+ 1 185 bytes in segment BANKED_CODE
     48 bytes in segment BANK_RELAYS
-    22 bytes in segment XDATA_I
-    22 bytes in segment XDATA_ID
-     2 bytes in segment XDATA_Z
+    24 bytes in segment XDATA_Z
  
- 1 258 bytes of CODE  memory
+ 1 233 bytes of CODE  memory
     24 bytes of XDATA memory
 
 Errors: none

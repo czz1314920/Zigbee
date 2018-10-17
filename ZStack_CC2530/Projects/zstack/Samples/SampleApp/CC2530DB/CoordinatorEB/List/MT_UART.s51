@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        05/Oct/2018  11:11:44 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        17/Oct/2018  17:56:10 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,8 +44,8 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbe /
 //                          e\ZStack_CC2530\Components\mt\MT_UART.c -D        /
-//                          ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D             /
-//                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC            /
+//                          ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D           /
+//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC          /
 //                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
 //                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
 //                          \List\ -lA D:\github_storehouse\Zigbee\ZStack_CC2 /
@@ -445,7 +445,7 @@ MT_UartRegisterTaskID SYMBOL "MT_UartRegisterTaskID"
 //   21   its documentation for any purpose.
 //   22 
 //   23   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-//   24   PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+//   24   PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
 //   25   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
 //   26   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
 //   27   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -608,13 +608,14 @@ MT_UartInit:
         MOVX    @DPTR,A
 //  108   uartConfig.baudRate             = MT_UART_DEFAULT_BAUDRATE;
         LCALL   ?XSTACK_DISP0_8
-        MOV     A,#0x2
+        MOV     A,#0x3
         MOVX    @DPTR,A
 //  109   uartConfig.flowControl          = MT_UART_DEFAULT_OVERFLOW;
+        DEC     A
         LCALL   ?XSTACK_DISP0_8
-        MOV     A,#0x1
+        CLR     A
         MOVX    @DPTR,A
-//  110   uartConfig.flowControlThreshold = MT_UART_DEFAULT_THRESHOLD;
+//  110   uartConfig.flowControlThreshold = MT_UART_DEFAULT_THRESHOLD;  //128/2
         MOV     A,#0x3
         LCALL   ?XSTACK_DISP0_8
         MOV     A,#0x40
@@ -622,7 +623,7 @@ MT_UartInit:
         INC     DPTR
         CLR     A
         MOVX    @DPTR,A
-//  111   uartConfig.rx.maxBufSize        = MT_UART_DEFAULT_MAX_RX_BUFF;
+//  111   uartConfig.rx.maxBufSize        = MT_UART_DEFAULT_MAX_RX_BUFF; //128
         MOV     A,#0xa
         LCALL   ?XSTACK_DISP0_8
         MOV     A,#-0x80
@@ -630,7 +631,7 @@ MT_UartInit:
         INC     DPTR
         CLR     A
         MOVX    @DPTR,A
-//  112   uartConfig.tx.maxBufSize        = MT_UART_DEFAULT_MAX_TX_BUFF;
+//  112   uartConfig.tx.maxBufSize        = MT_UART_DEFAULT_MAX_TX_BUFF; //128
         MOV     A,#0x12
         LCALL   ?XSTACK_DISP0_8
         MOV     A,#-0x80
@@ -638,7 +639,7 @@ MT_UartInit:
         INC     DPTR
         CLR     A
         MOVX    @DPTR,A
-//  113   uartConfig.idleTimeout          = MT_UART_DEFAULT_IDLE_TIMEOUT;
+//  113   uartConfig.idleTimeout          = MT_UART_DEFAULT_IDLE_TIMEOUT; //6
         MOV     A,#0x5
         LCALL   ?XSTACK_DISP0_8
         MOV     A,#0x6
@@ -949,13 +950,13 @@ MT_UartProcessZToolData:
         MOV     R6,A
 //  197   uint8  ch;
 //  198   uint8  bytesInRxBuffer;
-//  199   
+//  199 
 //  200   (void)event;  // Intentionally unreferenced parameter
         SJMP    ??MT_UartProcessZToolData_0
 //  201 
-//  202   while (Hal_UART_RxBufLen(port))
+//  202   while (Hal_UART_RxBufLen(port)) //ÕâÀïÅÐ¶Ï»¹ÓÐÊý¾Ý¶ÁÈ¡
 //  203   {
-//  204     HalUARTRead (port, &ch, 1);
+//  204     HalUARTRead (port, &ch, 1);   //¶ÁÈ¡Ò»¸ö×Ö½Ú
 //  205 
 //  206     switch (state)
 //  207     {

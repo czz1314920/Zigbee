@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        05/Oct/2018  11:11:59 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        17/Oct/2018  17:56:12 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,8 +44,8 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbe /
 //                          e\ZStack_CC2530\Components\mt\MT_TASK.c -D        /
-//                          ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D             /
-//                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC            /
+//                          ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D           /
+//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC          /
 //                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
 //                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
 //                          \List\ -lA D:\github_storehouse\Zigbee\ZStack_CC2 /
@@ -153,10 +153,6 @@
         FUNCTION ??MT_ProcessEvent?relay,0203H
         PUBLIC ??MT_TaskInit?relay
         FUNCTION ??MT_TaskInit?relay,0203H
-        PUBLIC ??MT_TransportAlloc?relay
-        FUNCTION ??MT_TransportAlloc?relay,0203H
-        PUBLIC ??MT_TransportSend?relay
-        FUNCTION ??MT_TransportSend?relay,0203H
         PUBLIC MT_ProcessEvent
         FUNCTION MT_ProcessEvent,021203H
         ARGFRAME XSTACK, 0, STACK
@@ -167,15 +163,6 @@
         FUNCTION MT_TaskInit,021203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME XSTACK, 9, STACK
-        PUBLIC MT_TransportAlloc
-        FUNCTION MT_TransportAlloc,021203H
-        ARGFRAME XSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        PUBLIC MT_TransportSend
-        FUNCTION MT_TransportSend,021203H
-        ARGFRAME XSTACK, 0, STACK
-        LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 10, STACK
         
         CFI Names cfiNames0
         CFI StackFrame CFA_SP SP IDATA
@@ -278,8 +265,6 @@ MT_ProcessIncoming  SYMBOL "MT_ProcessIncoming"
 osal_msg_deallocate SYMBOL "osal_msg_deallocate"
 MT_Init             SYMBOL "MT_Init"
 MT_AfExec           SYMBOL "MT_AfExec"
-MT_SysOsalTimerExpired SYMBOL "MT_SysOsalTimerExpired"
-osal_msg_allocate   SYMBOL "osal_msg_allocate"
 ??HalUARTWrite?relay SYMBOL "?relay", HalUARTWrite
 ??MTProcessAppRspMsg?relay SYMBOL "?relay", MTProcessAppRspMsg
 ??MT_AfExec?relay   SYMBOL "?relay", MT_AfExec
@@ -287,11 +272,9 @@ osal_msg_allocate   SYMBOL "osal_msg_allocate"
 ??MT_ProcessDebugMsg?relay SYMBOL "?relay", MT_ProcessDebugMsg
 ??MT_ProcessDebugStr?relay SYMBOL "?relay", MT_ProcessDebugStr
 ??MT_ProcessIncoming?relay SYMBOL "?relay", MT_ProcessIncoming
-??MT_SysOsalTimerExpired?relay SYMBOL "?relay", MT_SysOsalTimerExpired
 ??MT_UartCalcFCS?relay SYMBOL "?relay", MT_UartCalcFCS
 ??MT_UartInit?relay SYMBOL "?relay", MT_UartInit
 ??MT_UartRegisterTaskID?relay SYMBOL "?relay", MT_UartRegisterTaskID
-??osal_msg_allocate?relay SYMBOL "?relay", osal_msg_allocate
 ??osal_msg_deallocate?relay SYMBOL "?relay", osal_msg_deallocate
 ??osal_msg_receive?relay SYMBOL "?relay", osal_msg_receive
 ??osal_set_event?relay SYMBOL "?relay", osal_set_event
@@ -299,10 +282,6 @@ MT_ProcessEvent     SYMBOL "MT_ProcessEvent"
 ??MT_ProcessEvent?relay SYMBOL "?relay", MT_ProcessEvent
 MT_TaskInit         SYMBOL "MT_TaskInit"
 ??MT_TaskInit?relay SYMBOL "?relay", MT_TaskInit
-MT_TransportAlloc   SYMBOL "MT_TransportAlloc"
-??MT_TransportAlloc?relay SYMBOL "?relay", MT_TransportAlloc
-MT_TransportSend    SYMBOL "MT_TransportSend"
-??MT_TransportSend?relay SYMBOL "?relay", MT_TransportSend
 
         EXTERN MT_UartInit
         FUNCTION MT_UartInit,0202H
@@ -395,20 +374,6 @@ MT_TransportSend    SYMBOL "MT_TransportSend"
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN MT_SysOsalTimerExpired
-        FUNCTION MT_SysOsalTimerExpired,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN osal_msg_allocate
-        FUNCTION osal_msg_allocate,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN ??HalUARTWrite?relay
         FUNCTION ??HalUARTWrite?relay,00H
         EXTERN ??MTProcessAppRspMsg?relay
@@ -423,16 +388,12 @@ MT_TransportSend    SYMBOL "MT_TransportSend"
         FUNCTION ??MT_ProcessDebugStr?relay,00H
         EXTERN ??MT_ProcessIncoming?relay
         FUNCTION ??MT_ProcessIncoming?relay,00H
-        EXTERN ??MT_SysOsalTimerExpired?relay
-        FUNCTION ??MT_SysOsalTimerExpired?relay,00H
         EXTERN ??MT_UartCalcFCS?relay
         FUNCTION ??MT_UartCalcFCS?relay,00H
         EXTERN ??MT_UartInit?relay
         FUNCTION ??MT_UartInit?relay,00H
         EXTERN ??MT_UartRegisterTaskID?relay
         FUNCTION ??MT_UartRegisterTaskID?relay,00H
-        EXTERN ??osal_msg_allocate?relay
-        FUNCTION ??osal_msg_allocate?relay,00H
         EXTERN ??osal_msg_deallocate?relay
         FUNCTION ??osal_msg_deallocate?relay,00H
         EXTERN ??osal_msg_receive?relay
@@ -741,50 +702,6 @@ MT_ProcessEvent:
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL MT_ProcessEvent, MT_SysOsalTimerExpired
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 16, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL MT_ProcessEvent, MT_SysOsalTimerExpired
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 16, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL MT_ProcessEvent, MT_SysOsalTimerExpired
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 16, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL MT_ProcessEvent, MT_SysOsalTimerExpired
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 16, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         MOV     A,#-0x10
         LCALL   ?BANKED_ENTER_XDATA
         CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
@@ -998,84 +915,38 @@ MT_ProcessEvent:
 //  143   /* Handle MT_SYS_OSAL_START_TIMER callbacks */
 //  144 #if defined MT_SYS_FUNC
 //  145   if ( events & (MT_SYS_OSAL_EVENT_MASK))
-??MT_ProcessEvent_12:
-        MOV     A,R7
-        ANL     A,#0xf
-        JZ      ??MT_ProcessEvent_13
 //  146   {
 //  147     if (events & MT_SYS_OSAL_EVENT_0)
-        MOV     A,R7
-        ANL     A,#0x8
-        JZ      ??MT_ProcessEvent_14
 //  148     {
 //  149       MT_SysOsalTimerExpired(0x00);
-        ; Setup parameters for call to function MT_SysOsalTimerExpired
-        MOV     R1,#0x0
-        LCALL   ??MT_SysOsalTimerExpired?relay
 //  150       events ^= MT_SYS_OSAL_EVENT_0;
-        MOV     A,#0x8
-        XRL     A,R7
-        MOV     R7,A
 //  151     }
 //  152 
 //  153     if (events & MT_SYS_OSAL_EVENT_1)
-??MT_ProcessEvent_14:
-        MOV     A,R7
-        ANL     A,#0x4
-        JZ      ??MT_ProcessEvent_15
 //  154     {
 //  155       MT_SysOsalTimerExpired(0x01);
-        ; Setup parameters for call to function MT_SysOsalTimerExpired
-        MOV     R1,#0x1
-        LCALL   ??MT_SysOsalTimerExpired?relay
 //  156       events ^= MT_SYS_OSAL_EVENT_1;
-        MOV     A,#0x4
-        XRL     A,R7
-        MOV     R7,A
 //  157     }
 //  158 
 //  159     if (events & MT_SYS_OSAL_EVENT_2)
-??MT_ProcessEvent_15:
-        MOV     A,R7
-        ANL     A,#0x2
-        JZ      ??MT_ProcessEvent_16
 //  160     {
 //  161       MT_SysOsalTimerExpired(0x02);
-        ; Setup parameters for call to function MT_SysOsalTimerExpired
-        MOV     R1,#0x2
-        LCALL   ??MT_SysOsalTimerExpired?relay
 //  162       events ^= MT_SYS_OSAL_EVENT_2;
-        MOV     A,#0x2
-        XRL     A,R7
-        MOV     R7,A
 //  163     }
 //  164 
 //  165     if (events & MT_SYS_OSAL_EVENT_3)
-??MT_ProcessEvent_16:
-        MOV     A,R7
-        ANL     A,#0x1
-        JZ      ??MT_ProcessEvent_17
 //  166     {
 //  167       MT_SysOsalTimerExpired(0x03);
-        ; Setup parameters for call to function MT_SysOsalTimerExpired
-        MOV     R1,#0x3
-        LCALL   ??MT_SysOsalTimerExpired?relay
 //  168       events ^= MT_SYS_OSAL_EVENT_3;
-        MOV     A,#0x1
-        XRL     A,R7
-        MOV     R7,A
 //  169     }
 //  170 
 //  171     return events;
-??MT_ProcessEvent_17:
-        MOV     A,R6
-        SJMP    ??MT_ProcessEvent_10
 //  172   }
 //  173 #endif
 //  174 
 //  175   /* Discard or make more handlers */
 //  176   return 0;
-??MT_ProcessEvent_13:
+??MT_ProcessEvent_12:
         MOV     R2,#0x0
         MOV     R3,#0x0
 ??MT_ProcessEvent_8:
@@ -1084,6 +955,20 @@ MT_ProcessEvent:
         CFI EndBlock cfiBlock1
 //  177 
 //  178 } /* MT_ProcessEvent() */
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??MT_TaskInit?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    MT_TaskInit
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??MT_ProcessEvent?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    MT_ProcessEvent
+
+        END
 //  179 
 //  180 /***************************************************************************************************
 //  181  * @fn      MT_ProcessIncomingCommand
@@ -1171,102 +1056,25 @@ MT_ProcessEvent:
 //  263  *
 //  264  * @return  pointer the allocated memory or NULL if fail to allocate the memory
 //  265  ***************************************************************************************************/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  266 uint8 *MT_TransportAlloc(uint8 cmd0, uint8 len)
-MT_TransportAlloc:
-        CFI Block cfiBlock2 Using cfiCommon0
-        CFI Function MT_TransportAlloc
-        CODE
 //  267 {
-        FUNCALL MT_TransportAlloc, osal_msg_allocate
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xa
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 10)
-        ; Saved register size: 10
-        ; Auto size: 0
-        MOV     A,R2
 //  268   uint8 *p;
 //  269 
 //  270   (void)cmd0;  // Intentionally unreferenced parameter
 //  271 
 //  272   /* Allocate a buffer of data length + SOP+CMD+FCS (5 bytes) */
 //  273   p = osal_msg_allocate(len + SPI_0DATA_MSG_LEN);
-        ; Setup parameters for call to function osal_msg_allocate
-        ADD     A,#0x5
-        MOV     R2,A
-        CLR     A
-        ADDC    A,#0x0
-        MOV     R3,A
-        LCALL   ??osal_msg_allocate?relay
-        MOV     DPL,R2
-        MOV     DPH,R3
 //  274 
 //  275   if (p)
-        MOV     A,DPL
-        ORL     A,DPH
-        JZ      ??MT_TransportAlloc_0
 //  276   {
 //  277     p++; /* Save space for SOP_VALUE, msg structure */
 //  278     return p;
-        INC     DPTR
-        MOV     R2,DPL
-        MOV     R3,DPH
-        SJMP    ??MT_TransportAlloc_1
 //  279   }
 //  280   else
 //  281   {
 //  282     return NULL;
-??MT_TransportAlloc_0:
-        MOV     R2,#0x0
-        MOV     R3,#0x0
-        CFI EndBlock cfiBlock2
 //  283   }
-??MT_TransportAlloc_1:
-        REQUIRE ?Subroutine0
-        ; // Fall through to label ?Subroutine0
 //  284 }
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
-?Subroutine0:
-        CFI Block cfiBlock3 Using cfiCommon0
-        CFI NoFunction
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 10)
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        MOV     R7,#0x2
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock3
 //  285 
 //  286 /***************************************************************************************************
 //  287  * @fn      MT_TransportSend
@@ -1277,172 +1085,37 @@ MT_TransportAlloc:
 //  292  *
 //  293  * @return  None
 //  294  ***************************************************************************************************/
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
 //  295 void MT_TransportSend(uint8 *pBuf)
-MT_TransportSend:
-        CFI Block cfiBlock4 Using cfiCommon0
-        CFI Function MT_TransportSend
-        CODE
 //  296 {
-        FUNCALL MT_TransportSend, MT_UartCalcFCS
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL MT_TransportSend, HalUARTWrite
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL MT_TransportSend, osal_msg_deallocate
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xa
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 10)
-        ; Saved register size: 10
-        ; Auto size: 0
 //  297   uint8 *msgPtr;
 //  298   uint8 dataLen = pBuf[0]; /* Data length is on byte #1 from the pointer */
-        MOV     DPL,R2
-        MOV     DPH,R3
-        MOVX    A,@DPTR
-        MOV     R1,A
 //  299 
 //  300   /* Move back to the SOP */
 //  301   msgPtr = pBuf-1;
-        MOV     A,R2
-        ADD     A,#-0x1
-        MOV     R6,A
-        MOV     A,R3
-        ADDC    A,#-0x1
-        MOV     R7,A
 //  302 
 //  303   /* Insert SOP */
 //  304   msgPtr[0] = MT_UART_SOF;
-        MOV     DPL,R6
-        MOV     DPH,R7
-        MOV     A,#-0x2
-        MOVX    @DPTR,A
 //  305 
 //  306   /* Insert FCS */
 //  307   msgPtr[SPI_0DATA_MSG_LEN - 1 + dataLen] = MT_UartCalcFCS (pBuf, (3 + dataLen));
-        MOV     DPL,R1
-        MOV     ?V0 + 0,DPL
-        ; Setup parameters for call to function MT_UartCalcFCS
-        INC     R1
-        INC     R1
-        INC     R1
-        LCALL   ??MT_UartCalcFCS?relay
-        MOV     A,R6
-        ADD     A,?V0 + 0
-        MOV     DPL,A
-        MOV     A,R7
-        ADDC    A,#0x0
-        MOV     DPH,A
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        INC     DPTR
-        MOV     A,R1
-        MOVX    @DPTR,A
 //  308 
 //  309   /* Send to UART */
 //  310 #ifdef MT_UART_DEFAULT_PORT
 //  311   HalUARTWrite(MT_UART_DEFAULT_PORT, msgPtr, dataLen + SPI_0DATA_MSG_LEN);
-        ; Setup parameters for call to function HalUARTWrite
-        MOV     A,?V0 + 0
-        ADD     A,#0x5
-        MOV     R4,A
-        CLR     A
-        ADDC    A,#0x0
-        MOV     R5,A
-        MOV     A,R6
-        MOV     R2,A
-        MOV     A,R7
-        MOV     R3,A
-        MOV     R1,#0x0
-        LCALL   ??HalUARTWrite?relay
 //  312 #endif
 //  313 
 //  314   /* Deallocate */
 //  315   osal_msg_deallocate(msgPtr);
-        ; Setup parameters for call to function osal_msg_deallocate
-        MOV     A,R6
-        MOV     R2,A
-        MOV     A,R7
-        MOV     R3,A
-        LCALL   ??osal_msg_deallocate?relay
 //  316 }
-        SJMP    ?Subroutine0
-        CFI EndBlock cfiBlock4
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??MT_TaskInit?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    MT_TaskInit
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??MT_ProcessEvent?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    MT_ProcessEvent
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??MT_TransportAlloc?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    MT_TransportAlloc
-
-        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??MT_TransportSend?relay:
-        LCALL   ?BDISPATCH
-        DATA
-        DC24    MT_TransportSend
-
-        END
 //  317 #endif /* MT_TASK */
 //  318 /***************************************************************************************************
 //  319  ***************************************************************************************************/
 // 
-// 465 bytes in segment BANKED_CODE
-//  24 bytes in segment BANK_RELAYS
+// 279 bytes in segment BANKED_CODE
+//  12 bytes in segment BANK_RELAYS
 //   1 byte  in segment XDATA_Z
 // 
-// 489 bytes of CODE  memory
+// 291 bytes of CODE  memory
 //   1 byte  of XDATA memory
 //
 //Errors: none

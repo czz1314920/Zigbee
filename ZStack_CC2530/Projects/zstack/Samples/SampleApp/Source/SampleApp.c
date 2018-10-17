@@ -13,6 +13,7 @@
 #include "hal_lcd.h"
 #include "hal_led.h"
 #include "hal_key.h"
+#include "MT_UART.h"
 
 /*********************************************************************
  * MACROS
@@ -117,6 +118,13 @@ void SampleApp_Init( uint8 task_id )
   SampleApp_TaskID = task_id;
   SampleApp_NwkState = DEV_INIT;
   SampleApp_TransID = 0;
+
+  /* Initialize the Serial port */
+  MT_UartInit();
+
+  /* Register taskID - Do this after UartInit() because it will reset the taskID */
+  MT_UartRegisterTaskID(task_id);
+  HalUARTWrite(0,"Hello Wrold!",12);
 
   // Device hardware initialization can be added here or in main() (Zmain.c).
   // If the hardware is application specific - add it here.

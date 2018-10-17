@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        05/Oct/2018  11:11:49 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        17/Oct/2018  17:23:19 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,8 +44,8 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbe /
 //                          e\ZStack_CC2530\Components\stack\zdo\ZDProfile.c  /
-//                          -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D          /
-//                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC            /
+//                          -D ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D        /
+//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC          /
 //                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
 //                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
 //                          \List\ -lA D:\github_storehouse\Zigbee\ZStack_CC2 /
@@ -595,14 +595,8 @@ ZDApp_InMsgCB       SYMBOL "ZDApp_InMsgCB"
 ??ZDO_ProcessNodeDescReq?relay SYMBOL "?relay", `?<Name ZDO_ProcessNodeDescR 31>`
 `?<Name ZDO_ProcessPowerDesc 33>` SYMBOL "ZDO_ProcessPowerDescReq"
 ??ZDO_ProcessPowerDescReq?relay SYMBOL "?relay", `?<Name ZDO_ProcessPowerDesc 33>`
-`?<Name ZDO_ProcessServerDis 35>` SYMBOL "ZDO_ProcessServerDiscReq"
-??ZDO_ProcessServerDiscReq?relay SYMBOL "?relay", `?<Name ZDO_ProcessServerDis 35>`
-`?<Name ZDO_ProcessSimpleDes 37>` SYMBOL "ZDO_ProcessSimpleDescReq"
-??ZDO_ProcessSimpleDescReq?relay SYMBOL "?relay", `?<Name ZDO_ProcessSimpleDes 37>`
-`?<Name ZDO_ProcessUserDescR 39>` SYMBOL "ZDO_ProcessUserDescReq"
-??ZDO_ProcessUserDescReq?relay SYMBOL "?relay", `?<Name ZDO_ProcessUserDescR 39>`
-`?<Name ZDO_ProcessUserDescS 41>` SYMBOL "ZDO_ProcessUserDescSet"
-??ZDO_ProcessUserDescSet?relay SYMBOL "?relay", `?<Name ZDO_ProcessUserDescS 41>`
+`?<Name ZDO_ProcessSimpleDes 35>` SYMBOL "ZDO_ProcessSimpleDescReq"
+??ZDO_ProcessSimpleDescReq?relay SYMBOL "?relay", `?<Name ZDO_ProcessSimpleDes 35>`
 ??osal_buffer_uint32?relay SYMBOL "?relay", osal_buffer_uint32
 ??osal_mem_alloc?relay SYMBOL "?relay", osal_mem_alloc
 ??osal_mem_free?relay SYMBOL "?relay", osal_mem_free
@@ -824,14 +818,8 @@ zdpProcessAddrReq   SYMBOL "zdpProcessAddrReq"
         FUNCTION ??ZDO_ProcessNodeDescReq?relay,00H
         EXTERN ??ZDO_ProcessPowerDescReq?relay
         FUNCTION ??ZDO_ProcessPowerDescReq?relay,00H
-        EXTERN ??ZDO_ProcessServerDiscReq?relay
-        FUNCTION ??ZDO_ProcessServerDiscReq?relay,00H
         EXTERN ??ZDO_ProcessSimpleDescReq?relay
         FUNCTION ??ZDO_ProcessSimpleDescReq?relay,00H
-        EXTERN ??ZDO_ProcessUserDescReq?relay
-        FUNCTION ??ZDO_ProcessUserDescReq?relay,00H
-        EXTERN ??ZDO_ProcessUserDescSet?relay
-        FUNCTION ??ZDO_ProcessUserDescSet?relay,00H
         EXTERN ??osal_buffer_uint32?relay
         FUNCTION ??osal_buffer_uint32?relay,00H
         EXTERN ??osal_mem_alloc?relay
@@ -1081,12 +1069,6 @@ zdpMsgProcs:
         DW ??ZDO_ProcessActiveEPReq?relay
         DW 6
         DW ??ZDO_ProcessMatchDescReq?relay
-        DW 17
-        DW ??ZDO_ProcessUserDescReq?relay
-        DW 20
-        DW ??ZDO_ProcessUserDescSet?relay
-        DW 21
-        DW ??ZDO_ProcessServerDiscReq?relay
         DW 65535
         DW 0H
 //  170 {
@@ -22188,12 +22170,12 @@ ZDP_IncomingData:
 // 
 // 6 492 bytes in segment BANKED_CODE
 //   204 bytes in segment BANK_RELAYS
-//    49 bytes in segment CODE_C
+//    37 bytes in segment CODE_C
 //     2 bytes in segment XDATA_I
 //     2 bytes in segment XDATA_ID
 //    84 bytes in segment XDATA_Z
 // 
-// 6 747 bytes of CODE  memory
+// 6 735 bytes of CODE  memory
 //    86 bytes of XDATA memory
 //
 //Errors: none

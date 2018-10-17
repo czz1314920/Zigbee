@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        05/Oct/2018  11:11:43 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        17/Oct/2018  17:23:16 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,8 +44,8 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbe /
 //                          e\ZStack_CC2530\Components\stack\zdo\ZDApp.c -D   /
-//                          ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D             /
-//                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC            /
+//                          ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D           /
+//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC          /
 //                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
 //                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
 //                          \List\ -lA D:\github_storehouse\Zigbee\ZStack_CC2 /
@@ -297,7 +297,6 @@
         PUBLIC AddrMgrWriteNVRequest
         FUNCTION AddrMgrWriteNVRequest,0203H
         ARGFRAME XSTACK, 0, STACK
-        PUBLIC MatchRsps
         PUBLIC ZDAppCheckForHoldKey
         FUNCTION ZDAppCheckForHoldKey,021203H
         ARGFRAME XSTACK, 9, STACK
@@ -346,9 +345,7 @@
         LOCFRAME XSTACK, 9, STACK
         PUBLIC ZDApp_InitUserDesc
         FUNCTION ZDApp_InitUserDesc,021203H
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
+        ARGFRAME XSTACK, 0, STACK
         LOCFRAME XSTACK, 31, STACK
         PUBLIC ZDApp_InitZdoCBFunc
         FUNCTION ZDApp_InitZdoCBFunc,0203H
@@ -1894,13 +1891,7 @@ ZDO_beaconNotifyIndCB SYMBOL "ZDO_beaconNotifyIndCB"
 //  142  */
 //  143 
 //  144 #if defined( LCD_SUPPORTED )
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
-        DATA8
 //  145   uint8 MatchRsps = 0;
-MatchRsps:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
 //  146 #endif
 //  147 
 
@@ -2198,17 +2189,6 @@ ZDApp_Init:
         ARGFRAME XSTACK, 9, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL ZDApp_Init, ZDApp_InitUserDesc
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 9, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 9, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL ZDApp_Init, ZDOInitDevice
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2322,8 +2302,6 @@ ZDApp_Init:
 //  279 
 //  280 #if defined( ZDO_USERDESC_RESPONSE )
 //  281   ZDApp_InitUserDesc();
-        ; Setup parameters for call to function ZDApp_InitUserDesc
-        LCALL   ??ZDApp_InitUserDesc?relay
 //  282 #endif // ZDO_USERDESC_RESPONSE
 //  283 
 //  284   // Start the device?
@@ -15247,16 +15225,16 @@ __Constant_3e8:
 // 3039 /*********************************************************************
 // 3040 *********************************************************************/
 // 
-// 5 219 bytes in segment BANKED_CODE
+// 5 216 bytes in segment BANKED_CODE
 //   390 bytes in segment BANK_RELAYS
 //    12 bytes in segment XDATA_I
 //    12 bytes in segment XDATA_ID
 //     8 bytes in segment XDATA_ROM_C
-//    54 bytes in segment XDATA_Z
+//    53 bytes in segment XDATA_Z
 // 
-// 5 621 bytes of CODE  memory
+// 5 618 bytes of CODE  memory
 //     0 bytes of CONST memory (+ 8 bytes shared)
-//    66 bytes of XDATA memory
+//    65 bytes of XDATA memory
 //
 //Errors: none
 //Warnings: none

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        05/Oct/2018  11:11:50 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        17/Oct/2018  17:23:05 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -45,9 +45,9 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbe /
 //                          e\ZStack_CC2530\Projects\zstack\Samples\SampleApp /
-//                          \Source\OSAL_SampleApp.c -D ZTOOL_P1 -D MT_TASK   /
-//                          -D MT_SYS_FUNC -D MT_ZDO_FUNC -D                  /
-//                          LCD_SUPPORTED=DEBUG -lC                           /
+//                          \Source\OSAL_SampleApp.c -D ZTOOL_P1 -D xMT_TASK  /
+//                          -D xMT_SYS_FUNC -D xMT_ZDO_FUNC -D                /
+//                          xLCD_SUPPORTED=DEBUG -lC                          /
 //                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
 //                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
 //                          \List\ -lA D:\github_storehouse\Zigbee\ZStack_CC2 /
@@ -252,38 +252,34 @@ osal_memset         SYMBOL "osal_memset"
 macTaskInit         SYMBOL "macTaskInit"
 nwk_init            SYMBOL "nwk_init"
 Hal_Init            SYMBOL "Hal_Init"
-MT_TaskInit         SYMBOL "MT_TaskInit"
 APS_Init            SYMBOL "APS_Init"
 APSF_Init           SYMBOL "APSF_Init"
 ZDApp_Init          SYMBOL "ZDApp_Init"
 ZDNwkMgr_Init       SYMBOL "ZDNwkMgr_Init"
 SampleApp_Init      SYMBOL "SampleApp_Init"
 ??APSF_Init?relay   SYMBOL "?relay", APSF_Init
-`?<Name APSF_ProcessEvent 12>` SYMBOL "APSF_ProcessEvent"
-??APSF_ProcessEvent?relay SYMBOL "?relay", `?<Name APSF_ProcessEvent 12>`
+`?<Name APSF_ProcessEvent 11>` SYMBOL "APSF_ProcessEvent"
+??APSF_ProcessEvent?relay SYMBOL "?relay", `?<Name APSF_ProcessEvent 11>`
 ??APS_Init?relay    SYMBOL "?relay", APS_Init
-`?<Name APS_event_loop 15>` SYMBOL "APS_event_loop"
-??APS_event_loop?relay SYMBOL "?relay", `?<Name APS_event_loop 15>`
+`?<Name APS_event_loop 14>` SYMBOL "APS_event_loop"
+??APS_event_loop?relay SYMBOL "?relay", `?<Name APS_event_loop 14>`
 ??Hal_Init?relay    SYMBOL "?relay", Hal_Init
-`?<Name Hal_ProcessEvent 18>` SYMBOL "Hal_ProcessEvent"
-??Hal_ProcessEvent?relay SYMBOL "?relay", `?<Name Hal_ProcessEvent 18>`
-`?<Name MT_ProcessEvent 20>` SYMBOL "MT_ProcessEvent"
-??MT_ProcessEvent?relay SYMBOL "?relay", `?<Name MT_ProcessEvent 20>`
-??MT_TaskInit?relay SYMBOL "?relay", MT_TaskInit
+`?<Name Hal_ProcessEvent 17>` SYMBOL "Hal_ProcessEvent"
+??Hal_ProcessEvent?relay SYMBOL "?relay", `?<Name Hal_ProcessEvent 17>`
 ??SampleApp_Init?relay SYMBOL "?relay", SampleApp_Init
-`?<Name SampleApp_ProcessEve 24>` SYMBOL "SampleApp_ProcessEvent"
-??SampleApp_ProcessEvent?relay SYMBOL "?relay", `?<Name SampleApp_ProcessEve 24>`
+`?<Name SampleApp_ProcessEve 20>` SYMBOL "SampleApp_ProcessEvent"
+??SampleApp_ProcessEvent?relay SYMBOL "?relay", `?<Name SampleApp_ProcessEve 20>`
 ??ZDApp_Init?relay  SYMBOL "?relay", ZDApp_Init
-`?<Name ZDApp_event_loop 27>` SYMBOL "ZDApp_event_loop"
-??ZDApp_event_loop?relay SYMBOL "?relay", `?<Name ZDApp_event_loop 27>`
+`?<Name ZDApp_event_loop 23>` SYMBOL "ZDApp_event_loop"
+??ZDApp_event_loop?relay SYMBOL "?relay", `?<Name ZDApp_event_loop 23>`
 ??ZDNwkMgr_Init?relay SYMBOL "?relay", ZDNwkMgr_Init
-`?<Name ZDNwkMgr_event_loop 30>` SYMBOL "ZDNwkMgr_event_loop"
-??ZDNwkMgr_event_loop?relay SYMBOL "?relay", `?<Name ZDNwkMgr_event_loop 30>`
-`?<Name macEventLoop 32>` SYMBOL "macEventLoop"
-??macEventLoop?relay SYMBOL "?relay", `?<Name macEventLoop 32>`
+`?<Name ZDNwkMgr_event_loop 26>` SYMBOL "ZDNwkMgr_event_loop"
+??ZDNwkMgr_event_loop?relay SYMBOL "?relay", `?<Name ZDNwkMgr_event_loop 26>`
+`?<Name macEventLoop 28>` SYMBOL "macEventLoop"
+??macEventLoop?relay SYMBOL "?relay", `?<Name macEventLoop 28>`
 ??macTaskInit?relay SYMBOL "?relay", macTaskInit
-`?<Name nwk_event_loop 35>` SYMBOL "nwk_event_loop"
-??nwk_event_loop?relay SYMBOL "?relay", `?<Name nwk_event_loop 35>`
+`?<Name nwk_event_loop 31>` SYMBOL "nwk_event_loop"
+??nwk_event_loop?relay SYMBOL "?relay", `?<Name nwk_event_loop 31>`
 ??nwk_init?relay    SYMBOL "?relay", nwk_init
 ??osal_mem_alloc?relay SYMBOL "?relay", osal_mem_alloc
 ??osal_memset?relay SYMBOL "?relay", osal_memset
@@ -320,13 +316,6 @@ osalInitTasks       SYMBOL "osalInitTasks"
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN Hal_Init
         FUNCTION Hal_Init,0202H
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN MT_TaskInit
-        FUNCTION MT_TaskInit,0202H
         ARGFRAME ISTACK, 2, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 0, STACK
@@ -379,10 +368,6 @@ osalInitTasks       SYMBOL "osalInitTasks"
         FUNCTION ??Hal_Init?relay,00H
         EXTERN ??Hal_ProcessEvent?relay
         FUNCTION ??Hal_ProcessEvent?relay,00H
-        EXTERN ??MT_ProcessEvent?relay
-        FUNCTION ??MT_ProcessEvent?relay,00H
-        EXTERN ??MT_TaskInit?relay
-        FUNCTION ??MT_TaskInit?relay,00H
         EXTERN ??SampleApp_Init?relay
         FUNCTION ??SampleApp_Init?relay,00H
         EXTERN ??SampleApp_ProcessEvent?relay
@@ -489,7 +474,6 @@ tasksArr:
         DW ??macEventLoop?relay
         DW ??nwk_event_loop?relay
         DW ??Hal_ProcessEvent?relay
-        DW ??MT_ProcessEvent?relay
         DW ??APS_event_loop?relay
         DW ??APSF_ProcessEvent?relay
         DW ??ZDApp_event_loop?relay
@@ -517,7 +501,7 @@ tasksArr:
         DATA8
 //   90 const uint8 tasksCnt = sizeof( tasksArr ) / sizeof( tasksArr[0] );
 tasksCnt:
-        DB 9
+        DB 8
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA16
@@ -602,17 +586,6 @@ osalInitTasks:
         ARGFRAME XSTACK, 0, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL osalInitTasks, MT_TaskInit
-        LOCFRAME ISTACK, 2, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 0, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 2, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 0, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL osalInitTasks, APS_Init
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -680,7 +653,7 @@ osalInitTasks:
 //  109 
 //  110   tasksEvents = (uint16 *)osal_mem_alloc( sizeof( uint16 ) * tasksCnt);
         ; Setup parameters for call to function osal_mem_alloc
-        MOV     R2,#0x12
+        MOV     R2,#0x10
         MOV     R3,#0x0
         LCALL   ??osal_mem_alloc?relay
         MOV     DPTR,#tasksEvents
@@ -691,7 +664,7 @@ osalInitTasks:
         MOVX    @DPTR,A
 //  111   osal_memset( tasksEvents, 0, (sizeof( uint16 ) * tasksCnt));
         ; Setup parameters for call to function osal_memset
-        MOV     R4,#0x12
+        MOV     R4,#0x10
         MOV     R5,#0x0
         MOV     R1,#0x0
         LCALL   ??osal_memset?relay
@@ -710,33 +683,30 @@ osalInitTasks:
         LCALL   ??Hal_Init?relay
 //  116 #if defined( MT_TASK )
 //  117   MT_TaskInit( taskID++ );
-        ; Setup parameters for call to function MT_TaskInit
-        MOV     R1,#0x3
-        LCALL   ??MT_TaskInit?relay
 //  118 #endif
 //  119   APS_Init( taskID++ );
         ; Setup parameters for call to function APS_Init
-        MOV     R1,#0x4
+        MOV     R1,#0x3
         LCALL   ??APS_Init?relay
 //  120 #if defined ( ZIGBEE_FRAGMENTATION )
 //  121   APSF_Init( taskID++ );
         ; Setup parameters for call to function APSF_Init
-        MOV     R1,#0x5
+        MOV     R1,#0x4
         LCALL   ??APSF_Init?relay
 //  122 #endif
 //  123   ZDApp_Init( taskID++ );
         ; Setup parameters for call to function ZDApp_Init
-        MOV     R1,#0x6
+        MOV     R1,#0x5
         LCALL   ??ZDApp_Init?relay
 //  124 #if defined ( ZIGBEE_FREQ_AGILITY ) || defined ( ZIGBEE_PANID_CONFLICT )
 //  125   ZDNwkMgr_Init( taskID++ );
         ; Setup parameters for call to function ZDNwkMgr_Init
-        MOV     R1,#0x7
+        MOV     R1,#0x6
         LCALL   ??ZDNwkMgr_Init?relay
 //  126 #endif
 //  127   SampleApp_Init( taskID );
         ; Setup parameters for call to function SampleApp_Init
-        MOV     R1,#0x8
+        MOV     R1,#0x7
         LCALL   ??SampleApp_Init?relay
 //  128 }
         POP     DPH
@@ -759,13 +729,13 @@ osalInitTasks:
 //  130 /*********************************************************************
 //  131 *********************************************************************/
 // 
-// 80 bytes in segment BANKED_CODE
+// 75 bytes in segment BANKED_CODE
 //  6 bytes in segment BANK_RELAYS
-// 19 bytes in segment XDATA_ROM_C
+// 17 bytes in segment XDATA_ROM_C
 //  2 bytes in segment XDATA_Z
 // 
-// 86 bytes of CODE  memory
-// 19 bytes of CONST memory
+// 81 bytes of CODE  memory
+// 17 bytes of CONST memory
 //  2 bytes of XDATA memory
 //
 //Errors: none

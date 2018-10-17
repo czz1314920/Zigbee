@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:11:43 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:23:16 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,8 +44,8 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
 #                          \ZStack_CC2530\Components\stack\zdo\ZDApp.c -D     #
-#                          ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC  #
-#                          -D LCD_SUPPORTED=DEBUG -lC                         #
+#                          ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D            #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
 #                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #
@@ -271,12 +271,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDApp.c
     142           */
     143          
     144          #if defined( LCD_SUPPORTED )
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
     145            uint8 MatchRsps = 0;
-   \                     MatchRsps:
-   \   000000                DS 1
-   \   000001                REQUIRE __INIT_XDATA_Z
     146          #endif
     147          
 
@@ -553,53 +548,51 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDApp.c
     279          
     280          #if defined( ZDO_USERDESC_RESPONSE )
     281            ZDApp_InitUserDesc();
-   \   000029                ; Setup parameters for call to function ZDApp_InitUserDesc
-   \   000029   12....       LCALL   ??ZDApp_InitUserDesc?relay
     282          #endif // ZDO_USERDESC_RESPONSE
     283          
     284            // Start the device?
     285            if ( devState != DEV_HOLD )
-   \   00002C   90....       MOV     DPTR,#devState
-   \   00002F   E0           MOVX    A,@DPTR
-   \   000030   6009         JZ      ??ZDApp_Init_0
+   \   000029   90....       MOV     DPTR,#devState
+   \   00002C   E0           MOVX    A,@DPTR
+   \   00002D   6009         JZ      ??ZDApp_Init_0
     286            {
     287              ZDOInitDevice( 0 );
-   \   000032                ; Setup parameters for call to function ZDOInitDevice
-   \   000032   7A00         MOV     R2,#0x0
-   \   000034   7B00         MOV     R3,#0x0
-   \   000036   12....       LCALL   ??ZDOInitDevice?relay
-   \   000039   8014         SJMP    ??ZDApp_Init_1
+   \   00002F                ; Setup parameters for call to function ZDOInitDevice
+   \   00002F   7A00         MOV     R2,#0x0
+   \   000031   7B00         MOV     R3,#0x0
+   \   000033   12....       LCALL   ??ZDOInitDevice?relay
+   \   000036   8014         SJMP    ??ZDApp_Init_1
     288            }
     289            else
     290            {
     291              ZDOInitDevice( ZDO_INIT_HOLD_NWK_START );
    \                     ??ZDApp_Init_0:
-   \   00003B                ; Setup parameters for call to function ZDOInitDevice
-   \   00003B   7AFF         MOV     R2,#-0x1
-   \   00003D   7BFF         MOV     R3,#-0x1
-   \   00003F   12....       LCALL   ??ZDOInitDevice?relay
+   \   000038                ; Setup parameters for call to function ZDOInitDevice
+   \   000038   7AFF         MOV     R2,#-0x1
+   \   00003A   7BFF         MOV     R3,#-0x1
+   \   00003C   12....       LCALL   ??ZDOInitDevice?relay
     292              // Blink LED to indicate HOLD_START
     293              HalLedBlink ( HAL_LED_4, 0, 50, 500 );
-   \   000042                ; Setup parameters for call to function HalLedBlink
-   \   000042   7CF4         MOV     R4,#-0xc
-   \   000044   7D01         MOV     R5,#0x1
-   \   000046   7B32         MOV     R3,#0x32
-   \   000048   7A00         MOV     R2,#0x0
-   \   00004A   7908         MOV     R1,#0x8
-   \   00004C   12....       LCALL   ??HalLedBlink?relay
+   \   00003F                ; Setup parameters for call to function HalLedBlink
+   \   00003F   7CF4         MOV     R4,#-0xc
+   \   000041   7D01         MOV     R5,#0x1
+   \   000043   7B32         MOV     R3,#0x32
+   \   000045   7A00         MOV     R2,#0x0
+   \   000047   7908         MOV     R1,#0x8
+   \   000049   12....       LCALL   ??HalLedBlink?relay
     294            }
     295          
     296            // Initialize the ZDO callback function pointers zdoCBFunc[]
     297            ZDApp_InitZdoCBFunc();
    \                     ??ZDApp_Init_1:
-   \   00004F                ; Setup parameters for call to function ZDApp_InitZdoCBFunc
-   \   00004F   12....       LCALL   ??ZDApp_InitZdoCBFunc?relay
+   \   00004C                ; Setup parameters for call to function ZDApp_InitZdoCBFunc
+   \   00004C   12....       LCALL   ??ZDApp_InitZdoCBFunc?relay
     298          
     299            ZDApp_RegisterCBs();
-   \   000052                ; Setup parameters for call to function ZDApp_RegisterCBs
-   \   000052   12....       LCALL   ??ZDApp_RegisterCBs?relay
+   \   00004F                ; Setup parameters for call to function ZDApp_RegisterCBs
+   \   00004F   12....       LCALL   ??ZDApp_RegisterCBs?relay
     300          } /* ZDApp_Init() */
-   \   000055   02....       LJMP    ??Subroutine42_0 & 0xFFFF
+   \   000052   02....       LJMP    ??Subroutine42_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ??Subroutine42_0:
@@ -7421,13 +7414,12 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDApp.c
        -> ZDAppCheckForHoldKey          0      0     18
        -> ZDO_Init                      0      0     18
        -> afRegister                    0      0     18
-       -> ZDApp_InitUserDesc            0      0     18
        -> ZDOInitDevice                 0      0     18
        -> ZDOInitDevice                 0      0     18
        -> HalLedBlink                   0      0     18
        -> ZDApp_InitZdoCBFunc           0      0     18
        -> ZDApp_RegisterCBs             0      0     18
-     ZDApp_InitUserDesc                 0      0     40
+     ZDApp_InitUserDesc                 0      0     31
        -> osal_memset                   0      0     54
        -> osal_nv_item_init             0      0     58
        -> osal_nv_read                  0      0     62
@@ -7647,7 +7639,6 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDApp.c
 
      Function/Label                              Bytes
      --------------                              -----
-     MatchRsps                                      1
      zdoDiscCounter                                 1
      ZDAppNwkAddr                                   9
      zdappMgmtNwkDiscRspTransSeq                    1
@@ -7669,7 +7660,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDApp.c
      retryCnt                                       1
      ZDApp_epDesc                                   6
      ZDApp_SavedPollRate                            2
-     ZDApp_Init                                    88
+     ZDApp_Init                                    85
      ??Subroutine42_0                               5
      ZDApp_SecInit                                 11
      ZDApp_event_loop                             220
@@ -7867,16 +7858,16 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDApp.c
      ??ZDO_DeregisterForZdoCB?relay                 6
 
  
- 5 219 bytes in segment BANKED_CODE
+ 5 216 bytes in segment BANKED_CODE
    390 bytes in segment BANK_RELAYS
     12 bytes in segment XDATA_I
     12 bytes in segment XDATA_ID
      8 bytes in segment XDATA_ROM_C
-    54 bytes in segment XDATA_Z
+    53 bytes in segment XDATA_Z
  
- 5 621 bytes of CODE  memory
+ 5 618 bytes of CODE  memory
      0 bytes of CONST memory (+ 8 bytes shared)
-    66 bytes of XDATA memory
+    65 bytes of XDATA memory
 
 Errors: none
 Warnings: none

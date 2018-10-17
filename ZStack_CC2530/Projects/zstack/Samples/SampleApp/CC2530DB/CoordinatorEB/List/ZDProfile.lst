@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:11:49 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:23:19 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,8 +44,8 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
 #                          \ZStack_CC2530\Components\stack\zdo\ZDProfile.c    #
-#                          -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D           #
-#                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC             #
+#                          -D ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D         #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
 #                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #
@@ -345,14 +345,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDProfile.c
    \   00001A   ....         DW ??ZDO_ProcessActiveEPReq?relay
    \   00001C   0600         DW 6
    \   00001E   ....         DW ??ZDO_ProcessMatchDescReq?relay
-   \   000020   1100         DW 17
-   \   000022   ....         DW ??ZDO_ProcessUserDescReq?relay
-   \   000024   1400         DW 20
-   \   000026   ....         DW ??ZDO_ProcessUserDescSet?relay
-   \   000028   1500         DW 21
-   \   00002A   ....         DW ??ZDO_ProcessServerDiscReq?relay
-   \   00002C   FFFF         DW 65535
-   \   00002E   0000         DW 0H
+   \   000020   FFFF         DW 65535
+   \   000022   0000         DW 0H
     170          {
     171          #if ( RFD_RCVC_ALWAYS_ON==TRUE ) || ( ZG_BUILD_RTR_TYPE )
     172            // These aren't processed by sleeping end devices.
@@ -7041,7 +7035,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDProfile.c
      ZDP_TmpBuf                          2
      ZDP_TxOptions                       1
      zdoMsgCBs                           2
-     zdpMsgProcs                        48
+     zdpMsgProcs                        36
      fillAndSend                       186
      ?Subroutine28                      14
      ?Subroutine0                        3
@@ -7246,12 +7240,12 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\stack\zdo\ZDProfile.c
  
  6 492 bytes in segment BANKED_CODE
    204 bytes in segment BANK_RELAYS
-    49 bytes in segment CODE_C
+    37 bytes in segment CODE_C
      2 bytes in segment XDATA_I
      2 bytes in segment XDATA_ID
     84 bytes in segment XDATA_Z
  
- 6 747 bytes of CODE  memory
+ 6 735 bytes of CODE  memory
     86 bytes of XDATA memory
 
 Errors: none

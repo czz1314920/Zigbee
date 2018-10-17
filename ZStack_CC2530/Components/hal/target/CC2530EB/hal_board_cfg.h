@@ -455,7 +455,7 @@ st( \
 #if (defined ZAPP_P2) || (defined ZTOOL_P2)
 #define HAL_UART_DMA  2
 #else
-#define HAL_UART_DMA  1
+#define HAL_UART_DMA  0
 #endif
 #else
 #define HAL_UART_DMA  0

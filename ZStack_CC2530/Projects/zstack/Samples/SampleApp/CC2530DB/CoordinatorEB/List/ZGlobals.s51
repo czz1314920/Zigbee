@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        05/Oct/2018  11:11:44 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        17/Oct/2018  17:23:21 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,8 +44,8 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbe /
 //                          e\ZStack_CC2530\Components\stack\sys\ZGlobals.c   /
-//                          -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D          /
-//                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC            /
+//                          -D ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D        /
+//                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC          /
 //                          D:\github_storehouse\Zigbee\ZStack_CC2530\Project /
 //                          s\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB /
 //                          \List\ -lA D:\github_storehouse\Zigbee\ZStack_CC2 /
@@ -233,6 +233,7 @@
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         LOCFRAME XSTACK, 15, STACK
+        PUBLIC zgZdoDirectCB
         
         CFI Names cfiNames0
         CFI StackFrame CFA_SP SP IDATA
@@ -905,7 +906,13 @@ zgStartDelay:
 //  190 
 //  191 #if !defined MT_TASK
 //  192 // Flag to use verbose (i.e. "cc2480-style") direct MT callbacks in ZDProfile.c, ZDP_IncomingData().
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA8
 //  193 uint8 zgZdoDirectCB = FALSE;
+zgZdoDirectCB:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
 //  194 #endif
 //  195 
 //  196 // Min number of attempted transmissions for Channel Interference detection
@@ -2441,10 +2448,10 @@ zgSetItem:
 //   6 bytes in segment CODE_C
 //  41 bytes in segment XDATA_I
 //  41 bytes in segment XDATA_ID
-//  25 bytes in segment XDATA_Z
+//  26 bytes in segment XDATA_Z
 // 
 // 675 bytes of CODE  memory
-//  66 bytes of XDATA memory
+//  67 bytes of XDATA memory
 //
 //Errors: none
 //Warnings: none

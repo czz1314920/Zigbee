@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         05/Oct/2018  11:11:59 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:56:12 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,8 +44,8 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\github_storehouse\Zigbee #
 #                          \ZStack_CC2530\Components\mt\MT_TASK.c -D          #
-#                          ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC  #
-#                          -D LCD_SUPPORTED=DEBUG -lC                         #
+#                          ZTOOL_P1 -D xMT_TASK -D xMT_SYS_FUNC -D            #
+#                          xMT_ZDO_FUNC -D xLCD_SUPPORTED=DEBUG -lC           #
 #                          D:\github_storehouse\Zigbee\ZStack_CC2530\Projects #
 #                          \zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\L #
 #                          ist\ -lA D:\github_storehouse\Zigbee\ZStack_CC2530 #
@@ -402,7 +402,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_TASK.c
    \   0000C1   6480         XRL     A,#0x80
    \                     ??MT_ProcessEvent_7:
    \   0000C3   FB           MOV     R3,A
-   \   0000C4   806B         SJMP    ??MT_ProcessEvent_8
+   \   0000C4   802B         SJMP    ??MT_ProcessEvent_8
     120            }
     121          
     122            if ( events & MT_SECONDARY_INIT_EVENT )
@@ -435,7 +435,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_TASK.c
    \   0000DA   EE           MOV     A,R6
    \   0000DB   6402         XRL     A,#0x2
    \   0000DD   FA           MOV     R2,A
-   \   0000DE   8051         SJMP    ??MT_ProcessEvent_8
+   \   0000DE   8011         SJMP    ??MT_ProcessEvent_8
     133            }
     134          
     135          #if !defined( NONWK )
@@ -458,91 +458,55 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_TASK.c
     143            /* Handle MT_SYS_OSAL_START_TIMER callbacks */
     144          #if defined MT_SYS_FUNC
     145            if ( events & (MT_SYS_OSAL_EVENT_MASK))
-   \                     ??MT_ProcessEvent_12:
-   \   0000ED   EF           MOV     A,R7
-   \   0000EE   540F         ANL     A,#0xf
-   \   0000F0   603B         JZ      ??MT_ProcessEvent_13
     146            {
     147              if (events & MT_SYS_OSAL_EVENT_0)
-   \   0000F2   EF           MOV     A,R7
-   \   0000F3   5408         ANL     A,#0x8
-   \   0000F5   6009         JZ      ??MT_ProcessEvent_14
     148              {
     149                MT_SysOsalTimerExpired(0x00);
-   \   0000F7                ; Setup parameters for call to function MT_SysOsalTimerExpired
-   \   0000F7   7900         MOV     R1,#0x0
-   \   0000F9   12....       LCALL   ??MT_SysOsalTimerExpired?relay
     150                events ^= MT_SYS_OSAL_EVENT_0;
-   \   0000FC   7408         MOV     A,#0x8
-   \   0000FE   6F           XRL     A,R7
-   \   0000FF   FF           MOV     R7,A
     151              }
     152          
     153              if (events & MT_SYS_OSAL_EVENT_1)
-   \                     ??MT_ProcessEvent_14:
-   \   000100   EF           MOV     A,R7
-   \   000101   5404         ANL     A,#0x4
-   \   000103   6009         JZ      ??MT_ProcessEvent_15
     154              {
     155                MT_SysOsalTimerExpired(0x01);
-   \   000105                ; Setup parameters for call to function MT_SysOsalTimerExpired
-   \   000105   7901         MOV     R1,#0x1
-   \   000107   12....       LCALL   ??MT_SysOsalTimerExpired?relay
     156                events ^= MT_SYS_OSAL_EVENT_1;
-   \   00010A   7404         MOV     A,#0x4
-   \   00010C   6F           XRL     A,R7
-   \   00010D   FF           MOV     R7,A
     157              }
     158          
     159              if (events & MT_SYS_OSAL_EVENT_2)
-   \                     ??MT_ProcessEvent_15:
-   \   00010E   EF           MOV     A,R7
-   \   00010F   5402         ANL     A,#0x2
-   \   000111   6009         JZ      ??MT_ProcessEvent_16
     160              {
     161                MT_SysOsalTimerExpired(0x02);
-   \   000113                ; Setup parameters for call to function MT_SysOsalTimerExpired
-   \   000113   7902         MOV     R1,#0x2
-   \   000115   12....       LCALL   ??MT_SysOsalTimerExpired?relay
     162                events ^= MT_SYS_OSAL_EVENT_2;
-   \   000118   7402         MOV     A,#0x2
-   \   00011A   6F           XRL     A,R7
-   \   00011B   FF           MOV     R7,A
     163              }
     164          
     165              if (events & MT_SYS_OSAL_EVENT_3)
-   \                     ??MT_ProcessEvent_16:
-   \   00011C   EF           MOV     A,R7
-   \   00011D   5401         ANL     A,#0x1
-   \   00011F   6009         JZ      ??MT_ProcessEvent_17
     166              {
     167                MT_SysOsalTimerExpired(0x03);
-   \   000121                ; Setup parameters for call to function MT_SysOsalTimerExpired
-   \   000121   7903         MOV     R1,#0x3
-   \   000123   12....       LCALL   ??MT_SysOsalTimerExpired?relay
     168                events ^= MT_SYS_OSAL_EVENT_3;
-   \   000126   7401         MOV     A,#0x1
-   \   000128   6F           XRL     A,R7
-   \   000129   FF           MOV     R7,A
     169              }
     170          
     171              return events;
-   \                     ??MT_ProcessEvent_17:
-   \   00012A   EE           MOV     A,R6
-   \   00012B   80A4         SJMP    ??MT_ProcessEvent_10
     172            }
     173          #endif
     174          
     175            /* Discard or make more handlers */
     176            return 0;
-   \                     ??MT_ProcessEvent_13:
-   \   00012D   7A00         MOV     R2,#0x0
-   \   00012F   7B00         MOV     R3,#0x0
+   \                     ??MT_ProcessEvent_12:
+   \   0000ED   7A00         MOV     R2,#0x0
+   \   0000EF   7B00         MOV     R3,#0x0
    \                     ??MT_ProcessEvent_8:
-   \   000131   7F08         MOV     R7,#0x8
-   \   000133   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   0000F1   7F08         MOV     R7,#0x8
+   \   0000F3   02....       LJMP    ?BANKED_LEAVE_XDATA
     177          
     178          } /* MT_ProcessEvent() */
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??MT_TaskInit?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    MT_TaskInit
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??MT_ProcessEvent?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    MT_ProcessEvent
     179          
     180          /***************************************************************************************************
     181           * @fn      MT_ProcessIncomingCommand
@@ -630,60 +594,25 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_TASK.c
     263           *
     264           * @return  pointer the allocated memory or NULL if fail to allocate the memory
     265           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     266          uint8 *MT_TransportAlloc(uint8 cmd0, uint8 len)
-   \                     MT_TransportAlloc:
     267          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 0
-   \   000005   EA           MOV     A,R2
     268            uint8 *p;
     269          
     270            (void)cmd0;  // Intentionally unreferenced parameter
     271          
     272            /* Allocate a buffer of data length + SOP+CMD+FCS (5 bytes) */
     273            p = osal_msg_allocate(len + SPI_0DATA_MSG_LEN);
-   \   000006                ; Setup parameters for call to function osal_msg_allocate
-   \   000006   2405         ADD     A,#0x5
-   \   000008   FA           MOV     R2,A
-   \   000009   E4           CLR     A
-   \   00000A   3400         ADDC    A,#0x0
-   \   00000C   FB           MOV     R3,A
-   \   00000D   12....       LCALL   ??osal_msg_allocate?relay
-   \   000010   8A82         MOV     DPL,R2
-   \   000012   8B83         MOV     DPH,R3
     274          
     275            if (p)
-   \   000014   E582         MOV     A,DPL
-   \   000016   4583         ORL     A,DPH
-   \   000018   6007         JZ      ??MT_TransportAlloc_0
     276            {
     277              p++; /* Save space for SOP_VALUE, msg structure */
     278              return p;
-   \   00001A   A3           INC     DPTR
-   \   00001B   AA82         MOV     R2,DPL
-   \   00001D   AB83         MOV     R3,DPH
-   \   00001F   8004         SJMP    ??MT_TransportAlloc_1
     279            }
     280            else
     281            {
     282              return NULL;
-   \                     ??MT_TransportAlloc_0:
-   \   000021   7A00         MOV     R2,#0x0
-   \   000023   7B00         MOV     R3,#0x0
     283            }
-   \                     ??MT_TransportAlloc_1:
-   \   000025                REQUIRE ?Subroutine0
-   \   000025                ; // Fall through to label ?Subroutine0
     284          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine0:
-   \   000000   7F02         MOV     R7,#0x2
-   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
     285          
     286          /***************************************************************************************************
     287           * @fn      MT_TransportSend
@@ -694,164 +623,69 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\mt\MT_TASK.c
     292           *
     293           * @return  None
     294           ***************************************************************************************************/
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
     295          void MT_TransportSend(uint8 *pBuf)
-   \                     MT_TransportSend:
     296          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 0
     297            uint8 *msgPtr;
     298            uint8 dataLen = pBuf[0]; /* Data length is on byte #1 from the pointer */
-   \   000005   8A82         MOV     DPL,R2
-   \   000007   8B83         MOV     DPH,R3
-   \   000009   E0           MOVX    A,@DPTR
-   \   00000A   F9           MOV     R1,A
     299          
     300            /* Move back to the SOP */
     301            msgPtr = pBuf-1;
-   \   00000B   EA           MOV     A,R2
-   \   00000C   24FF         ADD     A,#-0x1
-   \   00000E   FE           MOV     R6,A
-   \   00000F   EB           MOV     A,R3
-   \   000010   34FF         ADDC    A,#-0x1
-   \   000012   FF           MOV     R7,A
     302          
     303            /* Insert SOP */
     304            msgPtr[0] = MT_UART_SOF;
-   \   000013   8E82         MOV     DPL,R6
-   \   000015   8F83         MOV     DPH,R7
-   \   000017   74FE         MOV     A,#-0x2
-   \   000019   F0           MOVX    @DPTR,A
     305          
     306            /* Insert FCS */
     307            msgPtr[SPI_0DATA_MSG_LEN - 1 + dataLen] = MT_UartCalcFCS (pBuf, (3 + dataLen));
-   \   00001A   8982         MOV     DPL,R1
-   \   00001C   8582..       MOV     ?V0 + 0,DPL
-   \   00001F                ; Setup parameters for call to function MT_UartCalcFCS
-   \   00001F   09           INC     R1
-   \   000020   09           INC     R1
-   \   000021   09           INC     R1
-   \   000022   12....       LCALL   ??MT_UartCalcFCS?relay
-   \   000025   EE           MOV     A,R6
-   \   000026   25..         ADD     A,?V0 + 0
-   \   000028   F582         MOV     DPL,A
-   \   00002A   EF           MOV     A,R7
-   \   00002B   3400         ADDC    A,#0x0
-   \   00002D   F583         MOV     DPH,A
-   \   00002F   A3           INC     DPTR
-   \   000030   A3           INC     DPTR
-   \   000031   A3           INC     DPTR
-   \   000032   A3           INC     DPTR
-   \   000033   E9           MOV     A,R1
-   \   000034   F0           MOVX    @DPTR,A
     308          
     309            /* Send to UART */
     310          #ifdef MT_UART_DEFAULT_PORT
     311            HalUARTWrite(MT_UART_DEFAULT_PORT, msgPtr, dataLen + SPI_0DATA_MSG_LEN);
-   \   000035                ; Setup parameters for call to function HalUARTWrite
-   \   000035   E5..         MOV     A,?V0 + 0
-   \   000037   2405         ADD     A,#0x5
-   \   000039   FC           MOV     R4,A
-   \   00003A   E4           CLR     A
-   \   00003B   3400         ADDC    A,#0x0
-   \   00003D   FD           MOV     R5,A
-   \   00003E   EE           MOV     A,R6
-   \   00003F   FA           MOV     R2,A
-   \   000040   EF           MOV     A,R7
-   \   000041   FB           MOV     R3,A
-   \   000042   7900         MOV     R1,#0x0
-   \   000044   12....       LCALL   ??HalUARTWrite?relay
     312          #endif
     313          
     314            /* Deallocate */
     315            osal_msg_deallocate(msgPtr);
-   \   000047                ; Setup parameters for call to function osal_msg_deallocate
-   \   000047   EE           MOV     A,R6
-   \   000048   FA           MOV     R2,A
-   \   000049   EF           MOV     A,R7
-   \   00004A   FB           MOV     R3,A
-   \   00004B   12....       LCALL   ??osal_msg_deallocate?relay
     316          }
-   \   00004E   80..         SJMP    ?Subroutine0
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_TaskInit?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_TaskInit
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_ProcessEvent?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_ProcessEvent
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_TransportAlloc?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_TransportAlloc
-
-   \                                 In  segment BANK_RELAYS, align 1
-   \                     ??MT_TransportSend?relay:
-   \   000000   12....       LCALL   ?BDISPATCH
-   \   000003   ......       DC24    MT_TransportSend
     317          #endif /* MT_TASK */
     318          /***************************************************************************************************
     319           ***************************************************************************************************/
 
    Maximum stack usage in bytes:
 
-     Function                    ISTACK PSTACK XSTACK
-     --------                    ------ ------ ------
-     MT_ProcessEvent                 1      0     16
-       -> osal_msg_receive           0      0     32
-       -> MTProcessAppRspMsg         0      0     32
-       -> MT_ProcessDebugStr         0      0     32
-       -> MT_UartCalcFCS             0      0     32
-       -> HalUARTWrite               0      0     32
-       -> MT_ProcessDebugMsg         0      0     32
-       -> MT_ProcessIncoming         0      0     32
-       -> osal_msg_deallocate        0      0     32
-       -> MT_Init                    0      0     32
-       -> MT_AfExec                  0      0     32
-       -> MT_SysOsalTimerExpired     0      0     32
-       -> MT_SysOsalTimerExpired     0      0     32
-       -> MT_SysOsalTimerExpired     0      0     32
-       -> MT_SysOsalTimerExpired     0      0     32
-     MT_TaskInit                     0      0      9
-       -> MT_UartInit                0      0     18
-       -> MT_UartRegisterTaskID      0      0     18
-       -> osal_set_event             0      0     18
-     MT_TransportAlloc               0      0     10
-       -> osal_msg_allocate          0      0     20
-     MT_TransportSend                1      0     10
-       -> MT_UartCalcFCS             0      0     20
-       -> HalUARTWrite               0      0     20
-       -> osal_msg_deallocate        0      0     20
+     Function                   ISTACK PSTACK XSTACK
+     --------                   ------ ------ ------
+     MT_ProcessEvent                1      0     16
+       -> osal_msg_receive          0      0     32
+       -> MTProcessAppRspMsg        0      0     32
+       -> MT_ProcessDebugStr        0      0     32
+       -> MT_UartCalcFCS            0      0     32
+       -> HalUARTWrite              0      0     32
+       -> MT_ProcessDebugMsg        0      0     32
+       -> MT_ProcessIncoming        0      0     32
+       -> osal_msg_deallocate       0      0     32
+       -> MT_Init                   0      0     32
+       -> MT_AfExec                 0      0     32
+     MT_TaskInit                    0      0      9
+       -> MT_UartInit               0      0     18
+       -> MT_UartRegisterTaskID     0      0     18
+       -> osal_set_event            0      0     18
 
 
    Segment part sizes:
 
-     Function/Label            Bytes
-     --------------            -----
-     MT_TaskID                    1
-     MT_TaskInit                 33
-     MT_ProcessEvent            310
-     MT_TransportAlloc           37
-     ?Subroutine0                 5
-     MT_TransportSend            80
-     ??MT_TaskInit?relay          6
-     ??MT_ProcessEvent?relay      6
-     ??MT_TransportAlloc?relay    6
-     ??MT_TransportSend?relay     6
+     Function/Label          Bytes
+     --------------          -----
+     MT_TaskID                  1
+     MT_TaskInit               33
+     MT_ProcessEvent          246
+     ??MT_TaskInit?relay        6
+     ??MT_ProcessEvent?relay    6
 
  
- 465 bytes in segment BANKED_CODE
-  24 bytes in segment BANK_RELAYS
+ 279 bytes in segment BANKED_CODE
+  12 bytes in segment BANK_RELAYS
    1 byte  in segment XDATA_Z
  
- 489 bytes of CODE  memory
+ 291 bytes of CODE  memory
    1 byte  of XDATA memory
 
 Errors: none
