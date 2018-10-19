@@ -14,6 +14,7 @@
 #include "hal_led.h"
 #include "hal_key.h"
 #include "MT_UART.h"
+#include "MT.h"
 
 /*********************************************************************
  * MACROS
@@ -90,6 +91,7 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys );
 void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pckt );
 void SampleApp_SendPeriodicMessage( void );
 void SampleApp_SendFlashMessage( uint16 flashTime );
+void SampleApp_SerialCMD(mtOSALSerialData_t *cmdMsg);
 
 /*********************************************************************
  * NETWORK LAYER CALLBACKS
@@ -234,6 +236,10 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
             // Device is no longer in the network
           }
           break;
+
+          case CMD_SERIAL_MSG:
+             SampleApp_SerialCMD((mtOSALSerialData_t *)MSGpkt);
+             break;
 
         default:
           break;
@@ -451,6 +457,58 @@ void SampleApp_SendFlashMessage( uint16 flashTime )
   {
     // Error occurred in request to send.
   }
+}
+
+void SampleApp_SerialCMD(mtOSALSerialData_t *cmdMsg)
+{
+    uint8 i,len,*str=NULL; //len 有用数据长度
+/********************************************************************/
+  unsigned char seg7table[16] = {
+    /* 0       1       2       3       4       5       6      7*/
+    0xc0,   0xf9,   0xa4,   0xb0,   0x99,   0x92,   0x82,   0xf8,
+    /* 8       9      A        B       C       D       E      F*/
+    0x80,   0x90,   0x88,   0x83,   0xc6,   0xa1,   0x86,   0x8e };
+    //P0DIR
+  P0DIR |= 0x10;
+  P1DIR = 0xff;
+  P0 |= (0x1<<4);
+  /********************************************************************/
+
+
+    str=cmdMsg->msg; //指向数据开头
+    len=*str; //msg 里的第 1 个字节代表后面的数据长度
+/********打印出串口接收到的数据，用于提示*********/
+    for(i=1;i<=len;i++)
+    {
+
+       if('0'<=*(str+1)&&*(str+1)<='9')
+       {
+         P1=seg7table[*(str+1)-'0'];
+         HalUARTWrite(0,str+i,1 );
+         HalLedSet (HAL_LED_2, HAL_LED_MODE_OFF);
+         HalLedBlink(HAL_LED_1,5,50,1000);
+       }
+       else if('A'<=*(str+1)&&*(str+1)<='F' || 'a'<=*(str+1)&&*(str+1)<='f')
+       {
+         if('A'<=*(str+1)&&*(str+1)<='F')
+          P1=seg7table[*(str+1)-'A'+10];
+         else
+           P1=seg7table[*(str+1)-'a'+10];
+         HalUARTWrite(0,str+i,1 );
+         HalLedSet (HAL_LED_1, HAL_LED_MODE_OFF);
+         HalLedBlink(HAL_LED_2,5,50,1000);
+       }
+       else
+       {
+         HalUARTWrite(0,"error",5);
+         P1=0xFF;
+       }
+    }
+    HalUARTWrite(0,"\n",1 );//换行
+
+
+    P0DIR &= ~(0x10);
+    P0 &= ~(0x1<<4);
 }
 
 /*********************************************************************

@@ -350,7 +350,7 @@ void HalKeyPoll (void)
   /* Invoke Callback if new keys were depressed */
   if (keys && (pHalKeyProcessFunction))
   {
-    (pHalKeyProcessFunction) (keys, HAL_KEY_STATE_NORMAL);
+    (pHalKeyProcessFunction) (keys, HAL_KEY_STATE_NORMAL); //OnBoard_KeyCallback
   }
 }
 

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        17/Oct/2018  17:23:17 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        19/Oct/2018  17:24:03 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -1132,7 +1132,7 @@ HalKeyPoll:
         ORL     A,R3
         JZ      ??HalKeyPoll_2
 //  352   {
-//  353     (pHalKeyProcessFunction) (keys, HAL_KEY_STATE_NORMAL);
+//  353     (pHalKeyProcessFunction) (keys, HAL_KEY_STATE_NORMAL); //OnBoard_KeyCallback
         ; Setup parameters for indirect call
         MOV     R2,#0x0
         MOV     DPTR,#pHalKeyProcessFunction

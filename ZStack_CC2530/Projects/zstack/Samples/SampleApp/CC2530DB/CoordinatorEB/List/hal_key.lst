@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         17/Oct/2018  17:23:17 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         19/Oct/2018  17:24:03 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -704,7 +704,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Components\hal\target\CC2530EB\hal_key
    \   000027   4B           ORL     A,R3
    \   000028   6010         JZ      ??HalKeyPoll_2
     352            {
-    353              (pHalKeyProcessFunction) (keys, HAL_KEY_STATE_NORMAL);
+    353              (pHalKeyProcessFunction) (keys, HAL_KEY_STATE_NORMAL); //OnBoard_KeyCallback
    \   00002A                ; Setup parameters for indirect call
    \   00002A   7A00         MOV     R2,#0x0
    \   00002C   90....       MOV     DPTR,#pHalKeyProcessFunction
