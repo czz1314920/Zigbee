@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         19/Oct/2018  17:24:02 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         26/Oct/2018  15:13:48 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -808,19 +808,19 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
    \   000022   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
     314              //P0DIR
     315            P0DIR |= 0x10;
-   \   000025   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \   000025   12....       LCALL   ?Subroutine6 & 0xFFFF
     316            P1DIR = 0xff;
     317            P0 |= (0x1<<4);
     318          
     319          
     320            KEYVALUE++;
-   \                     ??CrossCallReturnLabel_11:
+   \                     ??CrossCallReturnLabel_10:
    \   000028   90....       MOV     DPTR,#??KEYVALUE
    \   00002B   E0           MOVX    A,@DPTR
    \   00002C   04           INC     A
    \   00002D   F0           MOVX    @DPTR,A
-    321            if(KEYVALUE==4) KEYVALUE=1;
-   \   00002E   6404         XRL     A,#0x4
+    321            if(KEYVALUE==10) KEYVALUE=1;
+   \   00002E   640A         XRL     A,#0xa
    \   000030   7003         JNZ     ??SampleApp_HandleKeys_0
    \   000032   7401         MOV     A,#0x1
    \   000034   F0           MOVX    @DPTR,A
@@ -899,8 +899,8 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
     357            {
     358               P1 = seg7table[KEYVALUE];
    \   00006F   90....       MOV     DPTR,#??KEYVALUE
-   \   000072   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_9:
+   \   000072   12....       LCALL   ?Subroutine3 & 0xFFFF
+   \                     ??CrossCallReturnLabel_3:
    \   000075   28           ADD     A,R0
    \   000076   F582         MOV     DPL,A
    \   000078   E583         MOV     A,DPH
@@ -921,7 +921,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
    \   00008D   12....       LCALL   ?Subroutine4 & 0xFFFF
     362                 HalLedBlink(HAL_LED_2,2,50,1000);
     363               }
-   \                     ??CrossCallReturnLabel_5:
+   \                     ??CrossCallReturnLabel_6:
    \   000090   7902         MOV     R1,#0x2
    \   000092   8007         SJMP    ??SampleApp_HandleKeys_6
     364               else
@@ -934,7 +934,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
     367                 HalLedBlink(HAL_LED_1,2,50,1000);
     368               }
     369            }
-   \                     ??CrossCallReturnLabel_6:
+   \                     ??CrossCallReturnLabel_7:
    \   000099   7901         MOV     R1,#0x1
    \                     ??SampleApp_HandleKeys_6:
    \   00009B   12....       LCALL   ??HalLedBlink?relay
@@ -953,40 +953,31 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine4:
-   \   000000   12....       LCALL   ?Subroutine8 & 0xFFFF
-   \                     ??CrossCallReturnLabel_13:
+   \   000000   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_16:
    \   000003   7A02         MOV     R2,#0x2
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
    \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003                REQUIRE ??Subroutine9_0
-   \   000003                ; // Fall through to label ??Subroutine9_0
+   \   000003                REQUIRE ??Subroutine10_0
+   \   000003                ; // Fall through to label ??Subroutine10_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine9_0:
+   \                     ??Subroutine10_0:
    \   000000   7F02         MOV     R7,#0x2
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
+   \                     ?Subroutine6:
    \   000000   43FD10       ORL     0xfd,#0x10
    \   000003   75FEFF       MOV     0xfe,#-0x1
    \   000006   D284         SETB    0x80.4
    \   000008   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine6:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   F8           MOV     R0,A
-   \   000002   85..82       MOV     DPL,?XSP + 0
-   \   000005   85..83       MOV     DPH,?XSP + 1
-   \   000008   E582         MOV     A,DPL
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
+   \                     ?Subroutine9:
    \   000000   12....       LCALL   ??HalLedSet?relay
    \   000003                ; Setup parameters for call to function HalLedBlink
    \   000003                ; Setup parameters for call to function HalLedBlink
@@ -996,6 +987,15 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
    \   000005   7D03         MOV     R5,#0x3
    \   000007   7B32         MOV     R3,#0x32
    \   000009   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   F8           MOV     R0,A
+   \   000002   85..82       MOV     DPL,?XSP + 0
+   \   000005   85..83       MOV     DPH,?XSP + 1
+   \   000008   E582         MOV     A,DPL
+   \   00000A   22           RET
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
    \                     ??KEYVALUE:
@@ -1091,7 +1091,7 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
     402            }
     403          }
    \                     ??SampleApp_MessageMSGCB_1:
-   \   000051   02....       LJMP    ??Subroutine9_0 & 0xFFFF
+   \   000051   02....       LJMP    ??Subroutine10_0 & 0xFFFF
     404          
     405          /*********************************************************************
     406           * @fn      SampleApp_SendPeriodicMessage
@@ -1271,51 +1271,47 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
    \   000020   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
     471              //P0DIR
     472            P0DIR |= 0x10;
-   \   000023   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \   000023   12....       LCALL   ?Subroutine6 & 0xFFFF
     473            P1DIR = 0xff;
     474            P0 |= (0x1<<4);
     475            /********************************************************************/
     476          
     477          
     478              str=cmdMsg->msg; //指向数据开头
-   \                     ??CrossCallReturnLabel_12:
+   \                     ??CrossCallReturnLabel_11:
    \   000026   8A82         MOV     DPL,R2
    \   000028   8B83         MOV     DPH,R3
    \   00002A   A3           INC     DPTR
    \   00002B   A3           INC     DPTR
    \   00002C   E0           MOVX    A,@DPTR
-   \   00002D   F8           MOV     R0,A
-   \   00002E   A3           INC     DPTR
-   \   00002F   E0           MOVX    A,@DPTR
-   \   000030   F9           MOV     R1,A
-   \   000031   E8           MOV     A,R0
-   \   000032   FE           MOV     R6,A
-   \   000033   E9           MOV     A,R1
-   \   000034   FF           MOV     R7,A
+   \   00002D   F5..         MOV     ?V0 + 0,A
+   \   00002F   A3           INC     DPTR
+   \   000030   E0           MOVX    A,@DPTR
+   \   000031   F5..         MOV     ?V0 + 1,A
     479              len=*str; //msg 里的第 1 个字节代表后面的数据长度
-   \   000035   8E82         MOV     DPL,R6
-   \   000037   8F83         MOV     DPH,R7
-   \   000039   E0           MOVX    A,@DPTR
-   \   00003A   F5..         MOV     ?V0 + 1,A
+   \   000033   85..82       MOV     DPL,?V0 + 0
+   \   000036   F583         MOV     DPH,A
+   \   000038   E0           MOVX    A,@DPTR
+   \   000039   FF           MOV     R7,A
     480          /********打印出串口接收到的数据，用于提示*********/
     481              for(i=1;i<=len;i++)
-   \   00003C   75..01       MOV     ?V0 + 0,#0x1
-   \   00003F   8012         SJMP    ??SampleApp_SerialCMD_0
+   \   00003A   7E01         MOV     R6,#0x1
+   \   00003C   8011         SJMP    ??SampleApp_SerialCMD_0
     482              {
     483          
-    484                 if('0'<=*(str+1)&&*(str+1)<='9')
+    484                 if('0'<=*(str+i)&&*(str+i)<='9')
     485                 {
-    486                   P1=seg7table[*(str+1)-'0'];
+    486                   P1=seg7table[*(str+i)-'0'];
     487                   HalUARTWrite(0,str+i,1 );
     488                   HalLedSet (HAL_LED_2, HAL_LED_MODE_OFF);
     489                   HalLedBlink(HAL_LED_1,5,50,1000);
     490                 }
-    491                 else if('A'<=*(str+1)&&*(str+1)<='F' || 'a'<=*(str+1)&&*(str+1)<='f')
+    491                 else if('A'<=*(str+i)&&*(str+i)<='F' || 'a'<=*(str+i)&&*(str+i)<='f')
     492                 {
-    493                   if('A'<=*(str+1)&&*(str+1)<='F')
-    494                    P1=seg7table[*(str+1)-'A'+10];
+    493                   if('A'<=*(str+i)&&*(str+i)<='F')
+    494                    P1=seg7table[*(str+i)-'A'+10];
     495                   else
-    496                     P1=seg7table[*(str+1)-'a'+10];
+    496                     P1=seg7table[*(str+i)-'a'+10];
     497                   HalUARTWrite(0,str+i,1 );
     498                   HalLedSet (HAL_LED_1, HAL_LED_MODE_OFF);
     499                   HalLedBlink(HAL_LED_2,5,50,1000);
@@ -1324,138 +1320,123 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
     502                 {
     503                   HalUARTWrite(0,"error",5);
    \                     ??SampleApp_SerialCMD_1:
-   \   000041                ; Setup parameters for call to function HalUARTWrite
-   \   000041   7C05         MOV     R4,#0x5
-   \   000043   7D00         MOV     R5,#0x0
-   \   000045   7A..         MOV     R2,#`?<Constant "error">` & 0xff
-   \   000047   7B..         MOV     R3,#(`?<Constant "error">` >> 8) & 0xff
-   \   000049   7900         MOV     R1,#0x0
-   \   00004B   12....       LCALL   ??HalUARTWrite?relay
+   \   00003E                ; Setup parameters for call to function HalUARTWrite
+   \   00003E   7C05         MOV     R4,#0x5
+   \   000040   7D00         MOV     R5,#0x0
+   \   000042   7A..         MOV     R2,#`?<Constant "error">` & 0xff
+   \   000044   7B..         MOV     R3,#(`?<Constant "error">` >> 8) & 0xff
+   \   000046   7900         MOV     R1,#0x0
+   \   000048   12....       LCALL   ??HalUARTWrite?relay
     504                   P1=0xFF;
-   \   00004E   7590FF       MOV     0x90,#-0x1
+   \   00004B   7590FF       MOV     0x90,#-0x1
     505                 }
    \                     ??SampleApp_SerialCMD_2:
-   \   000051   05..         INC     ?V0 + 0
+   \   00004E   0E           INC     R6
    \                     ??SampleApp_SerialCMD_0:
-   \   000053   E5..         MOV     A,?V0 + 1
-   \   000055   C3           CLR     C
-   \   000056   95..         SUBB    A,?V0 + 0
-   \   000058   4071         JC      ??SampleApp_SerialCMD_3
-   \   00005A   8E82         MOV     DPL,R6
-   \   00005C   8F83         MOV     DPH,R7
-   \   00005E   A3           INC     DPTR
-   \   00005F   E0           MOVX    A,@DPTR
-   \   000060   24D0         ADD     A,#-0x30
-   \   000062   C3           CLR     C
-   \   000063   940A         SUBB    A,#0xa
-   \   000065   8E82         MOV     DPL,R6
-   \   000067   8F83         MOV     DPH,R7
-   \   000069   A3           INC     DPTR
-   \   00006A   E0           MOVX    A,@DPTR
-   \   00006B   501D         JNC     ??SampleApp_SerialCMD_4
-   \   00006D   F8           MOV     R0,A
-   \   00006E   85..82       MOV     DPL,?XSP + 0
-   \   000071   85..83       MOV     DPH,?XSP + 1
-   \   000074   E582         MOV     A,DPL
-   \   000076   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_2:
-   \   000079   24D0         ADD     A,#-0x30
-   \   00007B   12....       LCALL   ?Subroutine2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_0:
-   \   00007E   7902         MOV     R1,#0x2
-   \   000080   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_7:
-   \   000083   7901         MOV     R1,#0x1
-   \                     ??SampleApp_SerialCMD_5:
-   \   000085   12....       LCALL   ??HalLedBlink?relay
-   \   000088   80C7         SJMP    ??SampleApp_SerialCMD_2
-   \                     ??SampleApp_SerialCMD_4:
-   \   00008A   24BF         ADD     A,#-0x41
-   \   00008C   C3           CLR     C
-   \   00008D   9406         SUBB    A,#0x6
-   \   00008F   400D         JC      ??SampleApp_SerialCMD_6
-   \   000091   8E82         MOV     DPL,R6
-   \   000093   8F83         MOV     DPH,R7
-   \   000095   A3           INC     DPTR
-   \   000096   E0           MOVX    A,@DPTR
-   \   000097   249F         ADD     A,#-0x61
-   \   000099   C3           CLR     C
-   \   00009A   9406         SUBB    A,#0x6
-   \   00009C   50A3         JNC     ??SampleApp_SerialCMD_1
-   \                     ??SampleApp_SerialCMD_6:
-   \   00009E   8E82         MOV     DPL,R6
-   \   0000A0   8F83         MOV     DPH,R7
-   \   0000A2   A3           INC     DPTR
-   \   0000A3   E0           MOVX    A,@DPTR
-   \   0000A4   24BF         ADD     A,#-0x41
-   \   0000A6   C3           CLR     C
-   \   0000A7   9406         SUBB    A,#0x6
-   \   0000A9   8E82         MOV     DPL,R6
-   \   0000AB   8F83         MOV     DPH,R7
-   \   0000AD   A3           INC     DPTR
-   \   0000AE   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_10:
-   \   0000B1   5007         JNC     ??SampleApp_SerialCMD_7
-   \   0000B3   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_3:
-   \   0000B6   24C9         ADD     A,#-0x37
-   \   0000B8   8005         SJMP    ??SampleApp_SerialCMD_8
-   \                     ??SampleApp_SerialCMD_7:
-   \   0000BA   12....       LCALL   ?Subroutine3 & 0xFFFF
-    506              }
+   \   00004F   EF           MOV     A,R7
+   \   000050   C3           CLR     C
+   \   000051   9E           SUBB    A,R6
+   \   000052   4074         JC      ??SampleApp_SerialCMD_3
+   \   000054   8E..         MOV     ?V0 + 2,R6
+   \   000056   E5..         MOV     A,?V0 + 0
+   \   000058   25..         ADD     A,?V0 + 2
+   \   00005A   F582         MOV     DPL,A
+   \   00005C   E5..         MOV     A,?V0 + 1
+   \   00005E   3400         ADDC    A,#0x0
+   \   000060   F583         MOV     DPH,A
+   \   000062   E0           MOVX    A,@DPTR
+   \   000063   24D0         ADD     A,#-0x30
+   \   000065   C3           CLR     C
+   \   000066   940A         SUBB    A,#0xa
+   \   000068   5021         JNC     ??SampleApp_SerialCMD_4
+   \   00006A   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_12:
+   \   00006D   12....       LCALL   ?Subroutine3 & 0xFFFF
    \                     ??CrossCallReturnLabel_4:
-   \   0000BD   24A9         ADD     A,#-0x57
-   \                     ??SampleApp_SerialCMD_8:
-   \   0000BF   12....       LCALL   ?Subroutine2 & 0xFFFF
-   \                     ??CrossCallReturnLabel_1:
-   \   0000C2   7901         MOV     R1,#0x1
-   \   0000C4   12....       LCALL   ?Subroutine5 & 0xFFFF
+   \   000070   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_0:
+   \   000073   24D0         ADD     A,#-0x30
+   \   000075   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_14:
+   \   000078   7900         MOV     R1,#0x0
+   \   00007A   12....       LCALL   ??HalUARTWrite?relay
+   \   00007D                ; Setup parameters for call to function HalLedSet
+   \   00007D   7A00         MOV     R2,#0x0
+   \   00007F   7902         MOV     R1,#0x2
+   \   000081   12....       LCALL   ?Subroutine5 & 0xFFFF
    \                     ??CrossCallReturnLabel_8:
-   \   0000C7   7902         MOV     R1,#0x2
-   \   0000C9   80BA         SJMP    ??SampleApp_SerialCMD_5
+   \   000084   7901         MOV     R1,#0x1
+   \                     ??SampleApp_SerialCMD_5:
+   \   000086   12....       LCALL   ??HalLedBlink?relay
+   \   000089   80C3         SJMP    ??SampleApp_SerialCMD_2
+   \                     ??SampleApp_SerialCMD_4:
+   \   00008B   E0           MOVX    A,@DPTR
+   \   00008C   24BF         ADD     A,#-0x41
+   \   00008E   C3           CLR     C
+   \   00008F   9406         SUBB    A,#0x6
+   \   000091   4008         JC      ??SampleApp_SerialCMD_6
+   \   000093   E0           MOVX    A,@DPTR
+   \   000094   249F         ADD     A,#-0x61
+   \   000096   C3           CLR     C
+   \   000097   9406         SUBB    A,#0x6
+   \   000099   50A3         JNC     ??SampleApp_SerialCMD_1
+   \                     ??SampleApp_SerialCMD_6:
+   \   00009B   E0           MOVX    A,@DPTR
+   \   00009C   24BF         ADD     A,#-0x41
+   \   00009E   C3           CLR     C
+   \   00009F   9406         SUBB    A,#0x6
+   \   0000A1   12....       LCALL   ?Subroutine3 & 0xFFFF
+   \                     ??CrossCallReturnLabel_5:
+   \   0000A4   5007         JNC     ??SampleApp_SerialCMD_7
+   \   0000A6   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_1:
+   \   0000A9   24C9         ADD     A,#-0x37
+   \   0000AB   8005         SJMP    ??SampleApp_SerialCMD_8
+   \                     ??SampleApp_SerialCMD_7:
+   \   0000AD   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_2:
+   \   0000B0   24A9         ADD     A,#-0x57
+   \                     ??SampleApp_SerialCMD_8:
+   \   0000B2   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_15:
+   \   0000B5   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_13:
+   \   0000B8   7900         MOV     R1,#0x0
+   \   0000BA   12....       LCALL   ??HalUARTWrite?relay
+   \   0000BD                ; Setup parameters for call to function HalLedSet
+   \   0000BD   7A00         MOV     R2,#0x0
+   \   0000BF   7901         MOV     R1,#0x1
+   \   0000C1   12....       LCALL   ?Subroutine5 & 0xFFFF
+    506              }
+   \                     ??CrossCallReturnLabel_9:
+   \   0000C4   7902         MOV     R1,#0x2
+   \   0000C6   80BE         SJMP    ??SampleApp_SerialCMD_5
     507              HalUARTWrite(0,"\n",1 );//换行
    \                     ??SampleApp_SerialCMD_3:
-   \   0000CB                ; Setup parameters for call to function HalUARTWrite
-   \   0000CB   7C01         MOV     R4,#0x1
-   \   0000CD   7D00         MOV     R5,#0x0
-   \   0000CF   7A..         MOV     R2,#`?<Constant "\\n">` & 0xff
-   \   0000D1   7B..         MOV     R3,#(`?<Constant "\\n">` >> 8) & 0xff
-   \   0000D3   7900         MOV     R1,#0x0
-   \   0000D5   12....       LCALL   ??HalUARTWrite?relay
+   \   0000C8                ; Setup parameters for call to function HalUARTWrite
+   \   0000C8   7C01         MOV     R4,#0x1
+   \   0000CA   7D00         MOV     R5,#0x0
+   \   0000CC   7A..         MOV     R2,#`?<Constant "\\n">` & 0xff
+   \   0000CE   7B..         MOV     R3,#(`?<Constant "\\n">` >> 8) & 0xff
+   \   0000D0   7900         MOV     R1,#0x0
+   \   0000D2   12....       LCALL   ??HalUARTWrite?relay
     508          
     509          
     510              P0DIR &= ~(0x10);
-   \   0000D8   53FDEF       ANL     0xfd,#0xef
+   \   0000D5   53FDEF       ANL     0xfd,#0xef
     511              P0 &= ~(0x1<<4);
-   \   0000DB   C284         CLR     0x80.4
+   \   0000D8   C284         CLR     0x80.4
     512          }
-   \   0000DD   7410         MOV     A,#0x10
-   \   0000DF   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000E2   02....       LJMP    ?Subroutine0 & 0xFFFF
-   \   0000E5                REQUIRE P0DIR
-   \   0000E5                REQUIRE P1DIR
-   \   0000E5                REQUIRE _A_P0
-   \   0000E5                REQUIRE _A_P1
+   \   0000DA   7410         MOV     A,#0x10
+   \   0000DC   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000DF   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   0000E2                REQUIRE P0DIR
+   \   0000E2                REQUIRE P1DIR
+   \   0000E2                REQUIRE _A_P0
+   \   0000E2                REQUIRE _A_P1
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine5:
-   \   000000   12....       LCALL   ?Subroutine8 & 0xFFFF
-   \                     ??CrossCallReturnLabel_14:
-   \   000003   7A05         MOV     R2,#0x5
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine3:
-   \   000000   28           ADD     A,R0
-   \   000001   F8           MOV     R0,A
-   \   000002   E583         MOV     A,DPH
-   \   000004   3400         ADDC    A,#0x0
-   \   000006   F9           MOV     R1,A
-   \   000007   E8           MOV     A,R0
-   \   000008   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine2:
+   \                     ?Subroutine8:
    \   000000   F582         MOV     DPL,A
    \   000002   E9           MOV     A,R1
    \   000003   34FF         ADDC    A,#-0x1
@@ -1466,19 +1447,34 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
    \   00000A                ; Setup parameters for call to function HalUARTWrite
    \   00000A   7C01         MOV     R4,#0x1
    \   00000C   7D00         MOV     R5,#0x0
-   \   00000E   85....       MOV     ?V0 + 2,?V0 + 0
-   \   000011   EE           MOV     A,R6
-   \   000012   25..         ADD     A,?V0 + 2
-   \   000014   FA           MOV     R2,A
-   \   000015   EF           MOV     A,R7
-   \   000016   3400         ADDC    A,#0x0
-   \   000018   FB           MOV     R3,A
-   \   000019   7900         MOV     R1,#0x0
-   \   00001B   12....       LCALL   ??HalUARTWrite?relay
-   \   00001E                ; Setup parameters for call to function HalLedSet
-   \   00001E                ; Setup parameters for call to function HalLedSet
-   \   00001E   7A00         MOV     R2,#0x0
-   \   000020   22           RET
+   \   00000E   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine7:
+   \   000000   E5..         MOV     A,?V0 + 0
+   \   000002   25..         ADD     A,?V0 + 2
+   \   000004   FA           MOV     R2,A
+   \   000005   E5..         MOV     A,?V0 + 1
+   \   000007   3400         ADDC    A,#0x0
+   \   000009   FB           MOV     R3,A
+   \   00000A   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine5:
+   \   000000   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_17:
+   \   000003   7A05         MOV     R2,#0x5
+   \   000005   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   28           ADD     A,R0
+   \   000001   F8           MOV     R0,A
+   \   000002   E583         MOV     A,DPH
+   \   000004   3400         ADDC    A,#0x0
+   \   000006   F9           MOV     R1,A
+   \   000007   E8           MOV     A,R0
+   \   000008   22           RET
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??SampleApp_Init?relay:
@@ -1655,18 +1651,19 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
      SampleApp_HandleKeys                              168
      ?Subroutine4                                        6
      ?Subroutine1                                        3
-     ??Subroutine9_0                                     5
-     ?Subroutine7                                        9
-     ?Subroutine6                                       11
-     ?Subroutine8                                       10
+     ??Subroutine10_0                                    5
+     ?Subroutine6                                        9
+     ?Subroutine9                                       10
+     ?Subroutine3                                       11
      KEYVALUE                                            1
      SampleApp_MessageMSGCB                             84
      SampleApp_SendPeriodicMessage                      68
      SampleApp_SendFlashMessage                        115
-     SampleApp_SerialCMD                               229
+     SampleApp_SerialCMD                               226
+     ?Subroutine8                                       15
+     ?Subroutine7                                       11
      ?Subroutine5                                        6
-     ?Subroutine3                                        9
-     ?Subroutine2                                       33
+     ?Subroutine2                                        9
      ??SampleApp_Init?relay                              6
      ??SampleApp_ProcessEvent?relay                      6
      ??SampleApp_HandleKeys?relay                        6
@@ -1682,13 +1679,13 @@ D:\github_storehouse\Zigbee\ZStack_CC2530\Projects\zstack\Samples\SampleApp\Sour
      ?<Constant "\n">                                    2
 
  
- 1 152 bytes in segment BANKED_CODE
+ 1 142 bytes in segment BANKED_CODE
     42 bytes in segment BANK_RELAYS
      4 bytes in segment SFR_AN
     77 bytes in segment XDATA_ROM_C
     54 bytes in segment XDATA_Z
  
- 1 194 bytes of CODE  memory
+ 1 184 bytes of CODE  memory
     77 bytes of CONST memory
      0 bytes of DATA  memory (+ 4 bytes shared)
     54 bytes of XDATA memory

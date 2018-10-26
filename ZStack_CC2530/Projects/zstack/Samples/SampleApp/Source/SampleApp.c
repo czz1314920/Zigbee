@@ -318,7 +318,7 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys )
 
 
   KEYVALUE++;
-  if(KEYVALUE==4) KEYVALUE=1;
+  if(KEYVALUE==10) KEYVALUE=1;
 
 
   (void)shift;  // Intentionally unreferenced parameter
@@ -481,19 +481,19 @@ void SampleApp_SerialCMD(mtOSALSerialData_t *cmdMsg)
     for(i=1;i<=len;i++)
     {
 
-       if('0'<=*(str+1)&&*(str+1)<='9')
+       if('0'<=*(str+i)&&*(str+i)<='9')
        {
-         P1=seg7table[*(str+1)-'0'];
+         P1=seg7table[*(str+i)-'0'];
          HalUARTWrite(0,str+i,1 );
          HalLedSet (HAL_LED_2, HAL_LED_MODE_OFF);
          HalLedBlink(HAL_LED_1,5,50,1000);
        }
-       else if('A'<=*(str+1)&&*(str+1)<='F' || 'a'<=*(str+1)&&*(str+1)<='f')
+       else if('A'<=*(str+i)&&*(str+i)<='F' || 'a'<=*(str+i)&&*(str+i)<='f')
        {
-         if('A'<=*(str+1)&&*(str+1)<='F')
-          P1=seg7table[*(str+1)-'A'+10];
+         if('A'<=*(str+i)&&*(str+i)<='F')
+          P1=seg7table[*(str+i)-'A'+10];
          else
-           P1=seg7table[*(str+1)-'a'+10];
+           P1=seg7table[*(str+i)-'a'+10];
          HalUARTWrite(0,str+i,1 );
          HalLedSet (HAL_LED_1, HAL_LED_MODE_OFF);
          HalLedBlink(HAL_LED_2,5,50,1000);
